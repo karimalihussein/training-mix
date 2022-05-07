@@ -27,6 +27,7 @@ class ViewConcertListingTest extends TestCase
             'state' => 'ON',
             'zip' => '17916',
             'additional_information' => 'For tickets, call (555) 555-5555.',
+            'published_at' => Carbon::parse('now')
         ]);
 
         $response = $this->get('/concerts/'.$concert->id);
@@ -39,5 +40,28 @@ class ViewConcertListingTest extends TestCase
         $response->assertSee('123 Example Lane');
         $response->assertSee('Laraville, ON 17916');
         $response->assertSee('For tickets, call (555) 555-5555.');
+
+        $concert->delete();
+
     }
+
+
+    /** @test */
+    function user_cannot_view_unpublished_concert_listing()
+    {
+        $concert = Concert::factory()->create([
+                   'published_at' => null
+        ]);
+
+        $response = $this->get('/concerts/'.$concert->id);
+
+        $response->assertStatus(404);
+
+        $concert->delete();
+
+       
+
+    }
+
+    
 }

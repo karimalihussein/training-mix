@@ -20,15 +20,16 @@ class ConcertFactory extends Factory
     {
         
         return [
-            'title'                  => 'Example Band',
-            'subtitle'               => 'with the fake opacity',
-            'date'                   => Carbon::parse('+2 weeks'),
-            'ticket_price'           => 2000,
-            'venue'                  => 'The Example Theatre',
-            'venue_address'          => '123 example Lane',
-            'city'                   => 'Ismailia',
-            'state'                  => 'Ismailia',
-            'zip'                    => 90210,
+            'title'                  =>  $this->faker->sentence(),
+            'subtitle'               =>  $this->faker->sentence(),
+            'date'                   =>  $this->faker->dateTimeBetween('-1 month', '+1 month'),
+            'ticket_price'           =>  $this->faker->numberBetween(100, 1000000),
+            'venue'                  =>  $this->faker->streetName(),
+            'venue_address'          =>  $this->faker->streetAddress(),
+            'city'                   =>  $this->faker->city(),
+            'state'                  =>  $this->faker->state(),
+            'zip'                    =>  $this->faker->postcode(),
+            'published_at'           =>  $this->faker->dateTimeBetween('-1 month', '+1 month'),
             'additional_information' => 'For tickets, call (555) 555-5555.',
         ];
     }

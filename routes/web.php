@@ -1,9 +1,17 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\PayOrderController;
+use App\Http\Controllers\PostController;
+use App\Postcard;
+use App\PostcardSendingService;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ConcertsController;
-use App\Models\Concert;
-use Carbon\Carbon;
+use Illuminate\Support\LazyCollection;
+use Illuminate\Support\Str;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,20 +25,56 @@ use Carbon\Carbon;
 */
 
 Route::get('/', function () {
+    // return Response::errorJson('karim ali hussein');
+    // dd(str::partNumber('123456789'));
     return view('welcome');
 });
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
+require __DIR__.'/auth.php';
 
-Route::get('/concerts/{id}', [ConcertsController::class, 'show']);
-
-
-Route::get('dummydata', function(){
-    //   \App\Models\Concert::factory()->count(30)->create(); 
-    $concert =  Concert::factory()->create([
-        'date' => Carbon::parse('2017-12-31 8:00pm'),
-     ]);
-     return $concert->formatted_date;
+Route::group(['middleware' => ['auth','cache.response:5']], function () {
+         Route::resource('pages', PageController::class);
 });
 
 
+Route::get('payment-gatway', [PayOrderController::class, 'store'])->name('payment-gatway');
+
+
+Route::get('postcards', function(){
+    $post = new PostcardSendingService('USA', 10, 10);
+    $post->hello('Hello World', 'test@test.com');
+  
+});
+
+
+Route::get('facades', function(){
+  return  $post = Postcard::hello('Hello World', 'test@gmail.com');
+  
+});
+
+
+// Route::resource('customers', CustomerController::class);
+
+Route::get('lazy', function(){
+        $collation = LazyCollection::times(100000)->map(function ($number){
+                return pow(2,$number);
+        })
+        ->all();
+        return "done";
+       
+});
+
+Route::get('generator', function(){
+            function happyFunction($string){
+                yield $string;
+            }
+     return get_class(happyFunction('test'));
+});
+
+Route::get('about', function(){
+    return "about page";
+});

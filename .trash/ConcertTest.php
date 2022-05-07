@@ -8,17 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class ConcertTest extends TestCase
 {
-   /** @test */
-//   public function can_get_formated_date()
-//    {
  
-//          $concert =  Concert::factory()->create([
-//             'date' => Carbon::parse('2017-12-31 8:00pm'),
-//          ]);
-
-//          $this->assertEquals('December 31, 2017', $concert->formatted_date);
-//    }
-
 
     /** @test */
     public function cat_get_formated_start_time()
@@ -38,6 +28,5 @@ class ConcertTest extends TestCase
 
          $this->assertEquals('The Red Chord', $concert->title);
          
-
     }
 }

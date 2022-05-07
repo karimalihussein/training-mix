@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('state');
             $table->string('zip');
             $table->text('additional_information')->nullable();
+            $table->datetime('published_at')->nullable();
             $table->timestamps();
         });
     }

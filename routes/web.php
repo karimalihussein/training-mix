@@ -4,6 +4,9 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PayOrderController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\UserController;
 use App\Postcard;
 use App\PostcardSendingService;
 use Illuminate\Support\Collection;
@@ -11,6 +14,8 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\LazyCollection;
 use Illuminate\Support\Str;
+use App\Services\Reports\ReportDownloadService;
+
 
 
 /*
@@ -78,3 +83,17 @@ Route::get('generator', function(){
 Route::get('about', function(){
     return "about page";
 });
+
+Route::resource('products', ProductController::class);
+
+// Route::get("open-closed-principle", function(){
+//     $report = new ReportDownloadService();
+// return    $report->downloadReport("username", "pdf");
+
+
+    
+
+// });
+
+Route::get('open-closed-principle', [ReportController::class, 'download']);
+Route::get('users', [UserController::class, 'index']);

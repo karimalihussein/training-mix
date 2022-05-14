@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class User extends Authenticatable
 {
@@ -21,6 +22,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'employee_type',
+        'start_date'
     ];
 
     /**
@@ -41,6 +44,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * appends to the attributes array
+     */
+    protected $appends = [
+        'salary',
+    ];
     
 
     /**
@@ -51,5 +61,29 @@ class User extends Authenticatable
     public function image()
     {
         return $this->morphOne(Image::class, 'imageable');
+    }
+
+    public function name() : Attribute
+    {
+        return new Attribute(
+            get: fn ($value) => strtoupper($value),
+            set: fn ($value) => $value,
+        );
+    }
+
+    /**
+     * Calculate the salary of the user
+     * @var float
+     * @return float
+     */
+    public function getSalaryAttribute() : float
+    {
+        $positions = [
+            'developer' => 'App\\Calculators\\DeveloperSalaryCalculator',
+            'manager' => 'App\\Calculators\\ManagerSalaryCalculator',
+            'sales' => 'App\\Calculators\\SalesSalaryCalculator',
+        ];
+
+      return (new $positions[$this->employee_type])->calculate($this->start_date);
     }
 }

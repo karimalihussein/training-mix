@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PayOrderController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
 use App\Postcard;
 use App\PostcardSendingService;
@@ -97,3 +99,12 @@ Route::resource('products', ProductController::class);
 
 Route::get('open-closed-principle', [ReportController::class, 'download']);
 Route::get('users', [UserController::class, 'index']);
+
+
+
+Route::get('uploads', [UploadController::class, 'index'])->name('uploads.index');
+Route::post('uploads', [UploadController::class, 'store'])->name('uploads.store');
+route::get('store-data', [UploadController::class, 'storeData'])->name('uploads.storeData');
+
+
+

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PostController;
 use Illuminate\Http\Request;
@@ -32,3 +33,5 @@ Route::get('dd', function(){
 
 Route::apiResource('customers', CustomerController::class);
 Route::apiResource('posts', PostController::class);
+
+Route::post('achievements', [AchievementController::class, 'store'])->name('achievements.store');

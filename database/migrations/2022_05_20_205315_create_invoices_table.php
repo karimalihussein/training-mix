@@ -15,9 +15,8 @@ return new class extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('invoice_number');
-            $table->date('invoice_date');
-            $table->string('customer_name');
+            $table->foreignId('order_id')->constrained();
+            $table->unsignedInteger('invoice_number')->nullable();
             $table->timestamps();
         });
     }

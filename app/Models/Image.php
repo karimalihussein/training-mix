@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Image extends Model
 {
@@ -14,19 +15,20 @@ class Image extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'imageable_id',
-        'imageable_type',
-        'url',
-    ];
+     protected $fillable = [
+            'id',
+            'resource_type',
+            'resource_id',
+            'path'
+     ];
 
-    /**
-     * Imageable relationship
-     * 
-     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
-     */
-    public function imageable()
-    {
-        return $this->morphTo();
-    }
+
+     public function resource() : MorphTo
+     {
+         return $this->morphTo();
+     }
+
+
+
+
 }

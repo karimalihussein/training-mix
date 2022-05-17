@@ -86,4 +86,9 @@ class User extends Authenticatable
 
       return (new $positions[$this->employee_type])->calculate($this->start_date);
     }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

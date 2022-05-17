@@ -9,7 +9,7 @@ class Invoice extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['invoice_number', 'invoice_date', 'customer_name'];
+    protected $fillable = ['invoice_number', 'invoice_date', 'customer_name', 'order_id'];
 
     protected $dates = ['invoice_date'];
 
@@ -24,7 +24,7 @@ class Invoice extends Model
 
         self::creating(function($invoice) {
             // Uncomment this line if you wish to use it instead of the service
-            // $invoice->invoice_number = self::max('invoice_number') + 1;
+            $invoice->invoice_number = self::max('invoice_number') + 1;
         });
     }
 

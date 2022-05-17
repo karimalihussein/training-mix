@@ -6,6 +6,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\PayOrderController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
@@ -108,3 +109,5 @@ route::get('store-data', [UploadController::class, 'storeData'])->name('uploads.
 
 
 
+// Route::get('purchases',
+Route::resource('purchases', PurchaseController::class);

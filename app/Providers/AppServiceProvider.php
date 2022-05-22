@@ -4,10 +4,12 @@ namespace App\Providers;
 
 use App\Http\Middleware\CasheResponeMiddleware;
 use App\Mixins\StrMixins;
+use App\Models\Office;
 use App\PostcardSendingService;
 use App\Services\CreditPaymentGatway;
 use App\Services\PaymentGatway;
 use App\Services\PaymentGatwayContract;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
@@ -54,5 +56,9 @@ class AppServiceProvider extends ServiceProvider
          
             ];
         });
+
+        Relation::enforceMorphMap([
+                'office' => Office::class,
+        ]);
     }
 }

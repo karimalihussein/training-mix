@@ -13,6 +13,17 @@ class Reservation extends Model
     const STATUS_ACTIVE = 1;
     const STATUS_CANCELLED = 2;
 
+    protected $fillable = [
+        'user_id',
+        'office_id',
+        'status',
+        'start_date',
+        'end_date',
+        'wifi_password',
+    ];
+
+
+
     protected $casts = [
         'price'         => 'integer',
         'status'        => 'integer',

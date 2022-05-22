@@ -26,6 +26,7 @@ class ReservationFactory extends Factory
             'status' => Reservation::STATUS_ACTIVE,
             'start_date' => now()->addDay()->format('Y-m-d'),
             'end_date' => now()->addDays(5)->format('Y-m-d'),
+            'wifi_password' => $this->faker->password,
         ];
     }
 }

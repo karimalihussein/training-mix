@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AchievementController;
+use App\Http\Controllers\Integrations\Payments\HyperpayController;
 use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\V2\InvoiceController;
@@ -22,4 +23,30 @@ Route::get('tags', TagController::class);
 Route::post('achievements', [AchievementController::class, 'store'])->name('achievements.store');
 Route::post('invoices/{order}', [InvoiceController::class, 'store']);
 Route::get('offices', [OfficeController::class, 'index']);
+
+Route::get('offices/{office}', [OfficeController::class, 'show']);
+
+Route::post('offices', [OfficeController::class, 'store'])->middleware(['auth:sanctum', 'verified']);
+
+
+
+
+
+
+
+Route::group(['prefix' => 'integrations'], function () {
+
+    Route::group(['prefix' => 'payments'], function () {
+
+        Route::group(['prefix' => 'hyperpay'], function () {
+
+            Route::get('checkout', [HyperpayController::class, 'checkout']);
+            Route::get('callback', [HyperpayController::class, 'callback'])->name('integrations/payments/hyperpay/callback');
+
+        });
+
+    });
+
+});
+
 

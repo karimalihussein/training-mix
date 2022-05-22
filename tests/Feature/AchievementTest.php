@@ -2,12 +2,14 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class AchievementTest extends TestCase
 {
+    use RefreshDatabase;
 
     public function when_createing_achievement_some_fields_are_required()
     {
@@ -29,10 +31,11 @@ class AchievementTest extends TestCase
      */
     public function test_api_can_create_achievement()
     {
+        $user = User::factory()->create();
 
         $response = $this->json('POST', '/api/achievements', [
             'name'        => 'test',
-            'user_id'     => 1,
+            'user_id'     => $user->id,
             'datails'     => 'test',
         ]);
 

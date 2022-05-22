@@ -1,7 +1,7 @@
 <?php
 
 $data = [
-    'entityId' => '8ac7a4c8805fe6cc0180600c9d850020',
+    'entityId' => '',
     'amount' => 01.00,
     'currency' => 'SAR',
     'paymentType' => 'DB',
@@ -23,6 +23,6 @@ $url = 'https://eu-test.oppwa.com/v1/checkouts';
 
 
 
-$response = Http::withToken('OGFjN2E0Yzg4MDVmZTZjYzAxODA2MDBjMWZlYjAwMWN8UWIyQzVOZWd3QQ')->post($url, $data);
+$response = Http::withToken('')->post($url, $data);
 $response = $response->json();
 return $response;

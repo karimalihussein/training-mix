@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use App\Models\User;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -58,7 +59,8 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Relation::enforceMorphMap([
-                'office' => Office::class,
+                'office'         => Office::class,
+                'user'           => User::class,
         ]);
     }
 }

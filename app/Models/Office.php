@@ -19,14 +19,18 @@ class Office extends Model
     const APPROVAL_APPROVED = 2;
 
     protected $fillable = [
-        'name',
-        'address',
+        'title',
+        'description',
         'lat',
         'lng',
         'approval_status',
         'hidden',
         'price_per_day',
         'monthly_discount',
+        'user_id',
+        'address_line1',
+        'address_line2',
+
     ];
 
     protected $casts = [

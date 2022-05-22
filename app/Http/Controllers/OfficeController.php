@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Resources\OfficeResource;
 use App\Models\Office;
 use App\Models\Reservation;
+use App\Models\Validators\OfficeValidator;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class OfficeController extends Controller
@@ -54,34 +57,67 @@ class OfficeController extends Controller
 
     public function store() : JsonResource
     {
-        $attributes = validator(request()->all(),
-        [
-            'title'           =>     ['required', 'string'],
-            'description'     =>     ['required', 'string'],
-            'address'         =>     ['required', 'string'],
-            'lat'             =>     ['required', 'numeric'],
-            'lng'             =>     ['required', 'numeric'],
-            'address_line1'   =>     ['required', 'string'],
-            'address_line2'   =>     ['nullable', 'string'],
-            'hidden'          =>     ['required', 'boolean'],
-            'price_per_Day'   =>     ['required', 'integer', 'min:100'],
-            'monthly_discount'=>    ['nullable', 'integer', 'min:0'],
-            'tags'            =>     ['required', 'array',],
-            'tags.*'          =>     ['required', 'integer', Rule::exists('tags', 'id')],
+        if(!auth()->user()->tokenCan('office.create'))
+        {
+            abort(Response::HTTP_FORBIDDEN, 'You are not allowed to create an office');
+        }
 
-            // 'description' => 'required|string|max:255',
-            // 'address' => 'required|string|max:255',
-            // 'lat' => 'required|numeric',
-            // 'lng' => 'required|numeric',
-            // 'user_id' => 'required|exists:users,id',
-            // 'images' => 'required|array',
-            // 'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            // 'tags' => 'required|array',
-            // 'tags.*' => 'required|string|max:255',
-        ])->validate();
-
-        return $attributes;
        
+        $attributes = (new OfficeValidator())->validate($office = new Office(),request()->all());
+
+
+        $attributes['approval_status'] = Office::APPROVAL_PENDING;
+        $attributes['user_id'] = auth()->user()->id;
+
+       
+       $office = DB::transaction(function()use($office,$attributes){
+                $office->fill(
+                        Arr::except($attributes, ['tags'])
+                )->save();
+                if(isset($attributes['tags']))
+                {
+                    $office->tags()->attach($attributes['tags']); 
+                }
+                return $office;
+        });
+
+
+        return OfficeResource::make(
+            $office->load(['tags', 'images', 'user'])
+        );
+       
+    }
+
+
+    public function update(Office $office) : JsonResource
+    {
+        if(!auth()->user()->tokenCan('office.update'))
+        {
+            abort(Response::HTTP_FORBIDDEN, 'You are not allowed to update an office');
+        }
+
+        $this->authorize('update', $office);
+        
+
+       
+        $attributes = (new OfficeValidator())->validate($office,request()->all());
+
+
+         DB::transaction(function()use($office,$attributes){
+                 $office->update(
+                        Arr::except($attributes, ['tags'])
+                );
+
+                if(isset($attributes['tags']))
+                {
+                    $office->tags()->sync($attributes['tags']);
+                }
+        });
+
+
+        return OfficeResource::make(
+            $office->load(['tags', 'images', 'user'])
+        );
     }
    
 }

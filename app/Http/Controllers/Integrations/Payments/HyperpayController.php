@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Integrations\Payments;
 
+use App\Billing\HyperPayBilling;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -22,7 +23,9 @@ class HyperpayController extends Controller
         $amount = 10;
         $brand = 'VISA'; 
         
-        $data = LaravelHyperpay::checkout($trackable, $user, $amount, $brand, $request);
+        $data = LaravelHyperpay::addBilling(new HyperPayBilling($request))->checkout($trackable, $user, $amount, $brand, $request);
+        
+
         $res = (json_decode(json_encode($data->original), true));
         return view('integrations.payments.hyperpay.checkout', compact('res'));
 

@@ -15,7 +15,7 @@ class Office extends Model
 {
     use HasFactory, SoftDeletes;
 
-    const APPROVAL_PENDING = 1;
+    const APPROVAL_PENDING  = 1;
     const APPROVAL_APPROVED = 2;
 
     protected $fillable = [
@@ -30,6 +30,7 @@ class Office extends Model
         'user_id',
         'address_line1',
         'address_line2',
+        'featured_image_id'
 
     ];
 
@@ -84,6 +85,11 @@ class Office extends Model
     public function tags() : BelongsToMany
     {
         return $this->belongsToMany(Tag::class, 'offices_tags');
+    }
+
+    public function featuredImage(): BelongsTo
+    {
+        return $this->belongsTo(Image::class, 'featured_image_id');
     }
 
 

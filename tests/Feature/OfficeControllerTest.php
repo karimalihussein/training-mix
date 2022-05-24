@@ -9,6 +9,7 @@ use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class OfficeControllerTest extends TestCase
@@ -248,15 +249,98 @@ class OfficeControllerTest extends TestCase
          public function test_create_new_office()
          {
               $user = User::factory()->create();
+              $tag = Tag::factory()->create();
+              $tag2 = Tag::factory()->create();
 
               $this->actingAs($user);
 
               $response =      $this->postJson('/api/offices', [
-                            'title'     => 'test office',
+                            'title'             => 'test office',
+                            'description'       => 'test description',
+                            'lat'               => '30.59258882022191',
+                            'lng'               => '32.27597631110485',
+                            'address_line1'     => 'test address',
+                            'price_per_day'     => 10_000,
+                            'monthly_discount'  => 5,
+                            'tags'              => [$tag->id, $tag2->id]
             ]);
-            dd($response);
+            
+            $response->assertCreated()
+            ->assertJsonPath('data.user.id', $user->id)
+            ->assertJsonPath('data.title', 'test office')
+            ->assertJsonPath('data.approval_status', Office::APPROVAL_PENDING)
+            ;
+            
+
+            $this->assertDatabaseHas('offices', ['title' => 'test office']);
          
          }
+
+
+         /**
+          * it does not allow to create a new office if scope is not provided
+          * @test
+          * @return void
+          */
+            public function test_it_does_not_allow_to_create_a_new_office_if_scope_is_not_provided()
+            {
+                $user = User::factory()->create();
+                Sanctum::actingAs($user, ['office.create']);
+                $response = $this->postJson('/api/offices');
+                $this->assertNotEquals(403, $response->status());
+            }
+
+
+            /**
+             * test for update office
+             * @test
+             * @return void
+             */
+             public function test_can_update_an_office()
+             {
+                $user = User::factory()->create();
+                $tags = Tag::factory(3)->create();
+                $office = Office::factory()->for($user)->create();
+        
+                $office->tags()->attach($tags);
+        
+                $this->actingAs($user);
+        
+                $anotherTag = Tag::factory()->create();
+        
+                $response = $this->putJson('/api/offices/'.$office->id, [
+                    'title' => 'Amazing Office',
+                    'tags' => [$tags[0]->id, $anotherTag->id]
+                ]);
+        
+                $response->assertOk()
+                    ->assertJsonCount(2, 'data.tags')
+                    ->assertJsonPath('data.tags.0.id', $tags[0]->id)
+                    ->assertJsonPath('data.tags.1.id', $anotherTag->id)
+                    ->assertJsonPath('data.title', 'Amazing Office');
+             }
+
+
+             /**
+              * test office policy for updating office not belonging to the user
+              * @test
+              * @return void
+              */
+
+              public function test_office_policy_for_updating_office_not_belonging_to_the_user()
+              {
+                  $user = User::factory()->create();
+                  $office = Office::factory()->create();
+                  $this->actingAs($user);
+                  $response = $this->putJson('/api/offices/'.$office->id, [
+                      'title'             => 'test office updated22222',
+                  ]);
+          
+                  $response->assertStatus(403);
+
+              
+              }
+          
       
      
 

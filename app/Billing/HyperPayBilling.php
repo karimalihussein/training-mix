@@ -54,8 +54,8 @@ class HyperPayBilling implements BillingInterface
     {
         $billing = [
             'billing.street1' => '',
-            'billing.city'    => '',
-            'billing.state'  => '',
+            'billing.city' => '',
+            'billing.state' => '',
             'billing.country' => '',
             'billing.postcode' => ''
         ];

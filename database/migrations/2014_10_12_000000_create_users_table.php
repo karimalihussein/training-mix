@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('employee_type')->default('manager');
             $table->date('start_date')->nullable();
+            $table->boolean('is_admin')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

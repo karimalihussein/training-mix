@@ -7,14 +7,19 @@ use App\Models\Office;
 use App\Models\Reservation;
 use App\Models\Tag;
 use App\Models\User;
+use App\Notifications\OfficePendingApproval;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Http\UploadedFile;
+
 
 class OfficeControllerTest extends TestCase
 {
-    // use RefreshDatabase;
+    use RefreshDatabase;
     /**
      * A basic feature test example.
      *
@@ -248,7 +253,10 @@ class OfficeControllerTest extends TestCase
        */
          public function test_create_new_office()
          {
-              $user = User::factory()->create();
+              $user = User::factory()->create(['is_admin' => true]);
+
+              Notification::fake();
+
               $tag = Tag::factory()->create();
               $tag2 = Tag::factory()->create();
 
@@ -273,6 +281,11 @@ class OfficeControllerTest extends TestCase
             
 
             $this->assertDatabaseHas('offices', ['title' => 'test office']);
+
+            Notification::assertSentTo(
+                $user,
+                OfficePendingApproval::class
+            );
          
          }
 
@@ -337,10 +350,142 @@ class OfficeControllerTest extends TestCase
                       'title'             => 'test office updated22222',
                   ]);
           
-                  $response->assertStatus(403);
+                  $response->assertStatus(Response::HTTP_FORBIDDEN);
 
               
               }
+
+
+              /**
+               * marks the office as unpublished if updated main columns
+               * @test
+               * @return void
+               */
+                public function test_marks_the_office_as_unpublished_if_updated_main_columns()
+                {
+                     $user = User::factory()->create(['is_admin' => true]);
+                     Notification::fake();
+                     $office = Office::factory()->for($user)->create();
+                     $this->actingAs($user);
+    
+                     $response = $this->putJson('/api/offices/'.$office->id, [
+                          'title'             => 'dirty dirty',
+                          'lat'               => '30.59258882022191',
+                     ]);
+                
+                     $response->assertOk();
+                     $this->assertDatabaseHas('offices', ['id' => $office->id, 'approval_status' => Office::APPROVAL_PENDING]);
+                     Notification::assertSentTo($user, OfficePendingApproval::class);
+                }
+
+
+                /**
+                 * TEST FOR DELETE OFFICE THATS BELONGING TO THE USER
+                 * @test
+                 * @return void
+                 */
+                public function test_delete_office_that_belongs_to_the_user()
+                {
+                    $user = User::factory()->create();
+                    $office = Office::factory()->for($user)->create();
+                    $this->actingAs($user);
+                    $response = $this->delete('/api/offices/'.$office->id);
+                    $response->assertOk();
+                    $this->assertSoftDeleted($office);
+                    
+                }
+
+
+                /**
+                 * TEST FOR DELETE OFFICE THATS HAVE reservations 
+                 * @test
+                 * @return void
+                 */
+                public function test_delete_office_that_have_reservations()
+                {
+                    $user = User::factory()->create();
+                    $office = Office::factory()->for($user)->create();
+                    $reservation = Reservation::factory()->for($office)->create();
+                    $this->actingAs($user);
+                    $response = $this->deleteJson('/api/offices/'.$office->id);
+                    // $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+                    $response->assertUnprocessable();
+                    $this->assertModelExists($office);
+                    $this->assertDatabaseHas('offices', ['id' => $office->id, 'deleted_at' => null]);
+                }
+
+
+
+                /**
+                 * list offices including hidden and unapproved if filtering by the current logged in user
+                 * @test
+                 * @return void
+                 */
+                public function test_list_offices_including_hidden_and_unapproved_if_filtering_by_the_current_logged_in_user()
+                {
+                    $user = User::factory()->create();
+                    $office = Office::factory(3)->for($user)->create();
+                    $office2 = Office::factory()->for($user)->create(['approval_status' => Office::APPROVAL_PENDING]);
+                    $office3 = Office::factory()->for($user)->create(['hidden' => true]);
+                    
+                    $this->actingAs($user);
+
+
+                    $response = $this->getJson('/api/offices?user_id='.$user->id);
+
+                    $response->assertOk()
+                    ->assertJsonCount(5, 'data');
+
+                }
+
+
+                /**
+                 * update an office with image
+                 * @test
+                 * @return void
+                 */
+                public function test_update_an_office_with_image()
+                {
+                    $user = User::factory()->create();
+                    $office = Office::factory()->for($user)->create();
+                    $this->actingAs($user);
+                    $image = $office->images()->create(['path' => 'image.jpg']);
+
+                    $response = $this->putJson('/api/offices/'.$office->id, [
+                        'title' => 'Amazing Office',
+                        'featured_image_id' => $image->id
+                    ]);
+
+                    $response->assertOk()
+                    ->assertJsonPath('data.featured_image_id', $image->id); 
+
+                }
+
+                /**
+                 * testing it dosent update the featured image if the image is not in the office
+                 * @test
+                 * @return void
+                 */
+                public function test_it_doesnt_update_the_featured_image_if_the_image_is_not_in_the_office()
+                {
+                    $user = User::factory()->create();
+                    $office = Office::factory()->for($user)->create();
+                    $office2 = Office::factory()->for($user)->create();
+                    $this->actingAs($user);
+                    $image = $office2->images()->create(['path' => 'image.jpg']);
+
+                    $response = $this->putJson('/api/offices/'.$office->id, [
+                        'title' => 'Amazing Office',
+                        'featured_image_id' => $image->id
+                    ]);
+
+                    $response->assertUnprocessable()->assertInvalid('featured_image_id');
+
+                 
+
+                }
+
+                
           
       
      

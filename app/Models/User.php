@@ -24,7 +24,8 @@ class User extends Authenticatable
         'email',
         'password',
         'employee_type',
-        'start_date'
+        'start_date',
+        'is_admin'
     ];
 
     /**
@@ -44,6 +45,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'is_admin' => 'boolean',
     ];
 
     /**

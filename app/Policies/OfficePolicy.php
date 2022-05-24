@@ -17,4 +17,10 @@ class OfficePolicy
     }
 
 
+    public function delete(User $user, Office $office)
+    {
+        return $user->id == $office->user_id;
+    }
+
+
 }

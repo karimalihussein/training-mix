@@ -20,6 +20,7 @@ class Reservation extends Model
         'start_date',
         'end_date',
         'wifi_password',
+        'price'
     ];
 
 
@@ -40,6 +41,25 @@ class Reservation extends Model
     public function office(): BelongsTo
     {
         return $this->belongsTo(Office::class);
+    }
+
+
+    public function scopeBetweenDates($query, $start, $end)
+    {
+        $query->where(function($query)use($start, $end){
+             $query->whereBetween('start_date', [$start, $end])
+                    ->orWhereBetween('end_date', [$start, $end])
+                    ->orWhere(function($query)use ($start, $end){
+                        $query->where('start_date', '<', $start)
+                                ->where('end_date', '>', $end);
+                    });
+        });
+    }
+
+    public function scopeActiveBetween($query, $start, $end)
+    {
+        $query->whereStatus(self::STATUS_ACTIVE)
+            ->betweenDates($start, $end);
     }
 
 }

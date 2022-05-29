@@ -56,26 +56,30 @@ class UserReservationControllerTest extends TestCase
         $startDate = '2022-03-03';
         $endDate = '2022-04-04';
         // within the date range
-     $reservation1 =    Reservation::factory()->for($user)->create([
-            'start_date' => '2022-03-01',
-            'end_date' => '2022-03-15',
-        ]);
+     $reservations =    Reservation::factory()->for($user)->createMany(
+            [
+                [
+                    'start_date'   => '2022-03-01',
+                    'end_date'     => '2022-03-15',
+            ],
+            [
+                'start_date'   => '2022-03-15',
+                'end_date'     => '2022-03-31',
+            ],
+       
 
-      $reservation2 =  Reservation::factory()->for($user)->create([
-            'start_date' => '2022-03-16',
-            'end_date' => '2022-03-31',
-        ]);
+   
+            [
+                'start_date'   => '2022-04-01',
+                'end_date'     => '2022-04-05',
+            ]
+            ]
 
-        // out side the date range
-        Reservation::factory()->for($user)->create([
-            'start_date' => '2022-04-15',
-            'end_date' => '2022-05-01',
-        ]);
+        );
 
-        Reservation::factory()->create([
-            'start_date' => '2022-04-01',
-            'end_date' => '2022-04-02',
-        ]);
+
+
+
 
 
 
@@ -89,9 +93,10 @@ class UserReservationControllerTest extends TestCase
         //     DB::getQueryLog()
         // );
         
-        $response->assertJsonCount(2, 'data')
-        ->assertJsonPath('data.0.id', $reservation1->id)
-        ->assertJsonPath('data.1.id', $reservation2->id);
+        $response->assertJsonCount(3, 'data');
+
+        $this->assertEquals($reservations->pluck('id')->toArray(), $response->json('data.*.id'));
+        
        
     }
 
@@ -143,5 +148,58 @@ class UserReservationControllerTest extends TestCase
         $response->assertJsonCount(1, 'data')
         ->assertJsonPath('data.0.id', $reservation1->id);
 
+    }
+
+
+    /**
+     * test for store reservations
+     * @test
+     * @return void
+     */
+    public function test_store_reservation()
+    {
+        $user = User::factory()->create();
+        $office = Office::factory()->create([
+            'price_per_day'      => 1_000,
+            'monthly_discount'   => 10,
+        ]);
+
+        $this->actingAs($user);
+
+        $response = $this->post('/api/reservations', [
+            'start_date'    =>   now()->addDays(1)->format('Y-m-d'),
+            'end_date'      =>   now()->addDays(41)->format('Y-m-d'),
+            'office_id'     => $office->id,
+        ]);
+        
+
+        $response->assertCreated();
+
+        $response->assertJsonPath('data.price', 36900)
+        ->assertJsonPath('data.user_id', $user->id)
+        ->assertJsonPath('data.office_id', $office->id)
+
+        ->assertJsonPath('data.status',  Reservation::STATUS_ACTIVE);
+        
+    }
+    
+    /**
+     * it cannot make reservations on non existing office
+     * @test
+     * @return void
+     */
+    public function test_cannot_make_reservation_on_non_existing_office()
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user);
+
+        $response = $this->post('/api/reservations', [
+            'start_date'    =>   now()->addDays(1)->format('Y-m-d'),
+            'end_date'      =>   now()->addDays(41)->format('Y-m-d'),
+            'office_id'     => 999,
+        ]);
+
+       $response->assertUnprocessable(); 
     }
 }

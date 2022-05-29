@@ -4,14 +4,17 @@ namespace Tests\Feature;
 
 use App\Models\Office;
 use App\Models\User;
+use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class OfficeImageTest extends TestCase
 {
+    use LazilyRefreshDatabase;
    /**
     * api test for  storing images for an office
     * @test
@@ -23,7 +26,7 @@ class OfficeImageTest extends TestCase
 
         $user = User::factory()->create();
 
-        $this->actingAs($user);
+        Sanctum::actingAs($user, ['*']);
         
         $office = Office::factory()->for($user)->create();
 
@@ -60,7 +63,7 @@ class OfficeImageTest extends TestCase
             'path' => 'office_image.jpg'
         ]);
 
-        $this->actingAs($user);
+        Sanctum::actingAs($user, ['*']);
 
         $response = $this->deleteJson("/api/offices/{$office->id}/images/{$image->id}");
 
@@ -87,7 +90,7 @@ class OfficeImageTest extends TestCase
             'path' => 'office_image.jpg'
         ]);
 
-        $this->actingAs($user);
+        Sanctum::actingAs($user, ['*']);
 
         $response = $this->deleteJson("/api/offices/{$office->id}/images/{$image->id}");
 
@@ -115,7 +118,7 @@ class OfficeImageTest extends TestCase
 
         $office->update(['featured_image_id' => $image->id]);
 
-        $this->actingAs($user);
+        Sanctum::actingAs($user, ['*']);
 
         $response = $this->deleteJson("/api/offices/{$office->id}/images/{$image->id}");
 
@@ -146,9 +149,11 @@ class OfficeImageTest extends TestCase
             'path' => 'office_image.jpg'
         ]);
 
-        $this->actingAs($user);
+        Sanctum::actingAs($user, ['*']);
 
         $response = $this->deleteJson("/api/offices/{$another_office->id}/images/{$image->id}");
+
+        
 
         $response->assertUnprocessable();
 

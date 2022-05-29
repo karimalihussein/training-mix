@@ -8,6 +8,7 @@ use App\Models\Reservation;
 use App\Models\Tag;
 use App\Models\User;
 use App\Notifications\OfficePendingApproval;
+use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Laravel\Sanctum\Sanctum;
@@ -19,7 +20,7 @@ use Illuminate\Http\UploadedFile;
 
 class OfficeControllerTest extends TestCase
 {
-    use RefreshDatabase;
+    use LazilyRefreshDatabase;
     /**
      * A basic feature test example.
      *
@@ -260,7 +261,8 @@ class OfficeControllerTest extends TestCase
               $tag = Tag::factory()->create();
               $tag2 = Tag::factory()->create();
 
-              $this->actingAs($user);
+              Sanctum::actingAs($user, ['*']);
+              
 
               $response =      $this->postJson('/api/offices', [
                             'title'             => 'test office',
@@ -317,7 +319,7 @@ class OfficeControllerTest extends TestCase
         
                 $office->tags()->attach($tags);
         
-                $this->actingAs($user);
+                Sanctum::actingAs($user, ['*']);
         
                 $anotherTag = Tag::factory()->create();
         
@@ -344,7 +346,7 @@ class OfficeControllerTest extends TestCase
               {
                   $user = User::factory()->create();
                   $office = Office::factory()->create();
-                  $this->actingAs($user);
+                  Sanctum::actingAs($user, ['*']);
 
                   $response = $this->putJson('/api/offices/'.$office->id, [
                       'title'             => 'test office updated22222',
@@ -366,7 +368,7 @@ class OfficeControllerTest extends TestCase
                      $user = User::factory()->create(['is_admin' => true]);
                      Notification::fake();
                      $office = Office::factory()->for($user)->create();
-                     $this->actingAs($user);
+                     Sanctum::actingAs($user, ['*']);
     
                      $response = $this->putJson('/api/offices/'.$office->id, [
                           'title'             => 'dirty dirty',
@@ -388,7 +390,7 @@ class OfficeControllerTest extends TestCase
                 {
                     $user = User::factory()->create();
                     $office = Office::factory()->for($user)->create();
-                    $this->actingAs($user);
+                    Sanctum::actingAs($user, ['*']);
                     $response = $this->delete('/api/offices/'.$office->id);
                     $response->assertOk();
                     $this->assertSoftDeleted($office);
@@ -406,7 +408,7 @@ class OfficeControllerTest extends TestCase
                     $user = User::factory()->create();
                     $office = Office::factory()->for($user)->create();
                     $reservation = Reservation::factory()->for($office)->create();
-                    $this->actingAs($user);
+                    Sanctum::actingAs($user, ['*']);
                     $response = $this->deleteJson('/api/offices/'.$office->id);
                     // $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
                     $response->assertUnprocessable();
@@ -428,7 +430,7 @@ class OfficeControllerTest extends TestCase
                     $office2 = Office::factory()->for($user)->create(['approval_status' => Office::APPROVAL_PENDING]);
                     $office3 = Office::factory()->for($user)->create(['hidden' => true]);
                     
-                    $this->actingAs($user);
+                    Sanctum::actingAs($user, ['*']);
 
 
                     $response = $this->getJson('/api/offices?user_id='.$user->id);
@@ -448,7 +450,7 @@ class OfficeControllerTest extends TestCase
                 {
                     $user = User::factory()->create();
                     $office = Office::factory()->for($user)->create();
-                    $this->actingAs($user);
+                    Sanctum::actingAs($user, ['*']);
                     $image = $office->images()->create(['path' => 'image.jpg']);
 
                     $response = $this->putJson('/api/offices/'.$office->id, [
@@ -471,7 +473,7 @@ class OfficeControllerTest extends TestCase
                     $user = User::factory()->create();
                     $office = Office::factory()->for($user)->create();
                     $office2 = Office::factory()->for($user)->create();
-                    $this->actingAs($user);
+                    Sanctum::actingAs($user, ['*']);
                     $image = $office2->images()->create(['path' => 'image.jpg']);
 
                     $response = $this->putJson('/api/offices/'.$office->id, [
@@ -480,6 +482,7 @@ class OfficeControllerTest extends TestCase
                     ]);
 
                     $response->assertUnprocessable()->assertInvalid('featured_image_id');
+                    $this->assertNotSoftDeleted($office);
 
                  
 

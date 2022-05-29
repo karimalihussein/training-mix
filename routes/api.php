@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\AchievementController;
+use App\Http\Controllers\HostReservationController;
 use App\Http\Controllers\Integrations\Payments\HyperpayController;
 use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\OfficeImageController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\TestContoller;
+use App\Http\Controllers\UserReservationController;
 use App\Http\Controllers\V2\InvoiceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +36,9 @@ Route::put('offices/{office}', [OfficeController::class, 'update'])->middleware(
 Route::delete('offices/{office}', [OfficeController::class, 'delete'])->middleware(['auth:sanctum', 'verified']);
 Route::post('/offices/{office}/images', [OfficeImageController::class, 'store'])->middleware(['auth:sanctum', 'verified']);
 Route::delete('/offices/{office}/images/{image}', [OfficeImageController::class, 'delete'])->middleware(['auth:sanctum', 'verified']);
+
+Route::get('reservations', [UserReservationController::class, 'index'])->middleware(['auth:sanctum', 'verified']);
+Route::get('/host/reservations', [HostReservationController::class, 'index'])->middleware(['auth:sanctum', 'verified']);
 
 
 

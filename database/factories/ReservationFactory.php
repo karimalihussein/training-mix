@@ -29,4 +29,12 @@ class ReservationFactory extends Factory
             'wifi_password' => $this->faker->password,
         ];
     }
+
+    public function cancelled(): Factory
+    {
+        return $this->state([
+            'status' => Reservation::STATUS_CANCELLED,
+        ]);
+        
+    }
 }

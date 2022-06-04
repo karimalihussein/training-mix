@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Http\Middleware\CasheResponeMiddleware;
 use App\Mixins\StrMixins;
 use App\Models\Office;
+use App\Models\Post;
 use App\PostcardSendingService;
 use App\Services\CreditPaymentGatway;
 use App\Services\PaymentGatway;
@@ -61,6 +62,7 @@ class AppServiceProvider extends ServiceProvider
         Relation::enforceMorphMap([
                 'office'         => Office::class,
                 'user'           => User::class,
+                'post'           => Post::class,
         ]);
     }
 }

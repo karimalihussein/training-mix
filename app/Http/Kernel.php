@@ -3,9 +3,10 @@
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
-
+use Allyson\MultiEnv\Concerns\BootstrappersTrait;
 class Kernel extends HttpKernel
 {
+    use BootstrappersTrait;
     /**
      * The application's global HTTP middleware stack.
      *

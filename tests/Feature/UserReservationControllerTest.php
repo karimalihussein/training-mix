@@ -200,6 +200,53 @@ class UserReservationControllerTest extends TestCase
             'office_id'     => 999,
         ]);
 
-       $response->assertUnprocessable(); 
+    //    dd($response->json());
+        $response->assertStatus(302);
     }
+
+    /*
+    * it cannot make reservation on office that belongs To User
+    * @test
+    * @return void
+    */
+    public function test_cannot_make_reservation_on_office_that_belongs_to_user()
+    {
+        $user = User::factory()->create();
+        $office = Office::factory()->for($user)->create();
+
+        $this->actingAs($user);
+
+        $response = $this->post('/api/reservations', [
+            'start_date'    =>   now()->addDays(1)->format('Y-m-d'),
+            'end_date'      =>   now()->addDays(41)->format('Y-m-d'),
+            'office_id'     => $office->id,
+        ]);
+
+        $response->assertStatus(302);
+  
+    }
+
+    /**
+     * it cannot make reservation thats conflicting
+     * @test
+     * @return void
+     */
+    // public function test_cannot_make_reservation_that_conflicting()
+    // {
+    //     $user = User::factory()->create();
+    //     $office = Office::factory()->create();
+    //     $this->actingAs($user);
+
+    //     $reservation = Reservation::factory()->for($user)->for($office)->create([
+    //         'start_date'    =>   now()->addDays(1)->format('Y-m-d'),
+    //         'end_date'      =>   now()->addDays(41)->format('Y-m-d'),
+    //     ]);
+
+    //     // dd($reservation);
+ 
+
+    //     // $response->assertStatus(302);
+
+    //     // dd($response->dd());
+    // }
 }

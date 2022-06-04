@@ -13,29 +13,45 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * The path to the "home" route for your application.
      *
-     * This is used by Laravel authentication to redirect users after login.
+     * Typically, users are redirected here after authentication.
      *
      * @var string
      */
-    public const HOME = '/dashboard';
+    public const HOME = '/home';
 
     /**
-     * Define your route model bindings, pattern filters, etc.
+     * Define your route model bindings, pattern filters, and other route configuration.
      *
      * @return void
      */
     public function boot()
     {
         $this->configureRateLimiting();
-
-        $this->routes(function () {
-            Route::middleware('api')
-                ->prefix('api')
-                ->group(base_path('routes/api.php'));
-
+        $this->mapWebRoutes();
+        $this->mapApiRoutes();
+     
+    }
+    protected function mapWebRoutes()
+    {
+        foreach ($this->centralDomains() as $domain) {
             Route::middleware('web')
+                ->domain($domain)
+                ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
-        });
+        }
+    }
+    protected function mapApiRoutes()
+    {
+        foreach ($this->centralDomains() as $domain) {
+            Route::prefix('api')
+                ->domain($domain)
+                ->middleware('api')
+                ->namespace($this->namespace)
+                ->group(base_path('routes/api.php'));
+        }
+    }
+    protected function centralDomains(): array{
+        return config('tenancy.central_domains');
     }
 
     /**

@@ -16,6 +16,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    'test_url'  => env('TEST_URL', 'http://test.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -178,6 +179,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\TelescopeServiceProvider::class,
         App\Providers\RepositoriesServiesProvider::class,
+        App\Providers\TenancyServiceProvider::class, 
+
 
     ],
 

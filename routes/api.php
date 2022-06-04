@@ -3,9 +3,12 @@
 use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\HostReservationController;
 use App\Http\Controllers\Integrations\Payments\HyperpayController;
+use App\Http\Controllers\Integrations\TwilioPhoneCallController;
 use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\OfficeImageController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\Tenant\Auth\RegisterTenantController;
 use App\Http\Controllers\TestContoller;
 use App\Http\Controllers\UserReservationController;
 use App\Http\Controllers\V2\InvoiceController;
@@ -45,6 +48,7 @@ Route::post('reservations', [UserReservationController::class, 'store'])->middle
 
 
 
+Route::post('posts', [PostController::class, 'store'])->middleware(['auth:sanctum', 'verified']);
 
 
 
@@ -53,9 +57,7 @@ Route::post('reservations', [UserReservationController::class, 'store'])->middle
 Route::group(['prefix' => 'integrations'], function () {
 
     Route::group(['prefix' => 'payments'], function () {
-
         Route::group(['prefix' => 'hyperpay'], function () {
-
             Route::get('checkout', [HyperpayController::class, 'checkout']);
             Route::get('callback', [HyperpayController::class, 'callback'])->name('integrations/payments/hyperpay/callback');
 
@@ -63,6 +65,17 @@ Route::group(['prefix' => 'integrations'], function () {
 
     });
 
+    Route::group(['prefix' => 'twilio'], function () {
+        Route::get('call', [TwilioPhoneCallController::class, 'index']);
+    });
+
 });
+
+
+
+Route::post('register', RegisterTenantController::class);
+
+
+Route::get('test', TestContoller::class);
 
 

@@ -9,6 +9,10 @@ class Post extends Model
 {
     use HasFactory;
 
+    const ACTIVE_STATUS = 1;
+
+    const INACTIVE_STATUS = 2;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -48,6 +52,7 @@ class Post extends Model
     public function tags()
     {
         return $this->morphToMany(Tag::class, 'taggable');
+
     }
 
 

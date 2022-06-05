@@ -27,6 +27,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::get('tags', TagController::class);
+Route::get('test', TestContoller::class);
 
 Route::post('achievements', [AchievementController::class, 'store'])->name('achievements.store');
 Route::post('invoices/{order}', [InvoiceController::class, 'store']);
@@ -76,6 +77,5 @@ Route::group(['prefix' => 'integrations'], function () {
 Route::post('register', RegisterTenantController::class);
 
 
-Route::get('test', TestContoller::class);
 
 

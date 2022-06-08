@@ -179,7 +179,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\TelescopeServiceProvider::class,
         App\Providers\RepositoriesServiesProvider::class,
-        App\Providers\TenancyServiceProvider::class, 
+        App\Providers\TenancyServiceProvider::class,
+        \Torann\LaravelRepository\RepositoryServiceProvider::class,
 
 
 

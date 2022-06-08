@@ -17,14 +17,6 @@ abstract class Filter
 
 
         return $this->applyFilter($builder);
-        
-
-
-
-
-        
-            
-      
     }
 
     protected abstract function applyFilter($builder);

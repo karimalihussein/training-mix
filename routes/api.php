@@ -14,6 +14,7 @@ use App\Http\Controllers\UserReservationController;
 use App\Http\Controllers\V2\InvoiceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UsersController;
 
 
 
@@ -79,3 +80,4 @@ Route::post('register', RegisterTenantController::class);
 
 
 
+Route::apiResource('users', UsersController::class);

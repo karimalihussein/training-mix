@@ -16,6 +16,7 @@
         "laravel/tinker": "^2.7",
         "spatie/laravel-settings": "^2.4",
         "stancl/tenancy": "^3.5",
+        "torann/laravel-repository": "^0.6.2",
         "twilio/sdk": "^6.37"
     },
     "require-dev": {

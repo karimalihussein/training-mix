@@ -2,7 +2,7 @@ ENV_NAME="NAME Env A from the environment"
 
 APP_NAME=${ENV_NAME}
 APP_ENV="ENV A"
-APP_DEBUG=false
+APP_DEBUG=true
 APP_URL=http://demo1.training-mix.test
 
 ENV_NAME_A=.envA

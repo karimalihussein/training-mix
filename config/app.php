@@ -181,6 +181,8 @@ return [
         App\Providers\RepositoriesServiesProvider::class,
         App\Providers\TenancyServiceProvider::class,
         \Torann\LaravelRepository\RepositoryServiceProvider::class,
+        \Torann\GeoIP\GeoIPServiceProvider::class,
+        Stevebauman\Location\LocationServiceProvider::class
 
 
 
@@ -199,6 +201,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'GeoIP' => \Torann\GeoIP\Facades\GeoIP::class,
 
     ])->toArray(),
 

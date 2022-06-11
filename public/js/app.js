@@ -5082,6 +5082,12 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"];
 alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].start();
 
+__webpack_require__(/*! ./formio */ "./resources/js/formio/index.js");
+
+__webpack_require__(/*! ./formio */ "./resources/js/formio/index.js");
+
+__webpack_require__(/*! ./formio */ "./resources/js/formio/index.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -5112,6 +5118,595 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/formio/builder-sidebar.js":
+/*!************************************************!*\
+  !*** ./resources/js/formio/builder-sidebar.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  simpleFields: {
+    title: 'Basic',
+    "default": true,
+    weight: 0,
+    components: {
+      textfield: true,
+      textarea: true,
+      number: true,
+      checkbox: true,
+      select: true,
+      selectboxes: true,
+      radio: true,
+      file: true,
+      button: true
+    }
+  },
+  advancedFields: {
+    title: 'Widgets',
+    weight: 5,
+    components: {
+      url: true,
+      email: true,
+      phone: true,
+      address: true,
+      datetime: true,
+      day: true,
+      time: true,
+      currency: true,
+      survey: true,
+      signature: true // hidden: true,
+
+    }
+  },
+  customLayout: {
+    title: 'Layout',
+    "default": false,
+    weight: 10,
+    components: {
+      html: false,
+      content: true,
+      columns: true,
+      fieldset: true,
+      panel: true,
+      table: true,
+      well: true
+    }
+  },
+  basic: false,
+  advanced: false,
+  layout: false,
+  data: false,
+  premium: false
+});
+
+/***/ }),
+
+/***/ "./resources/js/formio/custom-templates.js":
+/*!*************************************************!*\
+  !*** ./resources/js/formio/custom-templates.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  /**
+   * This is the bar you see on-hover in the builder that has the edit, copy, delete, etc icons.
+   *
+   * The customazation here removes the 'Edit JSON' icon, which isn't a useful option for the target audience.
+   *
+   * @see https://github.com/formio/formio.js/blob/master/src/templates/bootstrap/builderComponent/form.ejs
+   */
+  builderComponent: {
+    form: function form(ctx) {
+      var template = '<div class="builder-component" ref="dragComponent">';
+
+      if (!ctx.disableBuilderActions) {
+        template += "\n                    <div class=\"component-btn-group\" data-noattach=\"true\">\n                      <div class=\"btn btn-xxs btn-danger component-settings-button component-settings-button-remove\" ref=\"removeComponent\">\n                        <i class=\"".concat(ctx.iconClass('remove'), "\"></i>\n                      </div>\n                      <div class=\"btn btn-xxs btn-default component-settings-button component-settings-button-copy\" ref=\"copyComponent\">\n                        <i class=\"").concat(ctx.iconClass('copy'), "\"></i>\n                      </div>\n                      <div class=\"btn btn-xxs btn-default component-settings-button component-settings-button-paste\" ref=\"pasteComponent\">\n                        <i class=\"").concat(ctx.iconClass('save'), "\"></i>\n                      </div>\n                      <div class=\"btn btn-xxs btn-default component-settings-button component-settings-button-move\" ref=\"moveComponent\">\n                        <i class=\"").concat(ctx.iconClass('move'), "\"></i>\n                      </div>\n                      <div class=\"btn btn-xxs btn-secondary component-settings-button component-settings-button-edit\", ref=\"editComponent\">\n                        <i class=\"").concat(ctx.iconClass('cog'), "\"></i>\n                      </div>\n                    </div>\n                ");
+      }
+
+      template += ctx.html;
+      template += '</div>';
+      return template.trim();
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/formio/defaults.js":
+/*!*****************************************!*\
+  !*** ./resources/js/formio/defaults.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* provided dependency */ var process = __webpack_require__(/*! process/browser.js */ "./node_modules/process/browser.js");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  /**
+   * Merges user-supplied editForm options into the system default editOptions.
+   *
+   * This is a difficult problem, because the data looks like this:
+   *  {
+   *      textarea: [
+   *          {
+   *              key: 'display',
+   *              ignore: false,
+   *              components: [
+   *                  { key: 'foo', ignore: false },
+   *              ],
+   *          }
+   *      ],
+   *  }
+   *
+   * Doing a recursive merge will fall flat on its face when you hit either array, since a general-purpose
+   * recursive or deep merge will merge array key 0 together with the other array key 0, regardless of the key.
+   *
+   * This algorithm is key-aware and merges properly (ish).
+   *
+   * @param object Default options for editForm
+   * @param optionsToMerge User-specified options.editForm
+   * @returns {*}
+   */
+  configMerge: function configMerge(object, optionsToMerge) {
+    var path = ''; // First level is key:value, unwrap it
+
+    _.each(optionsToMerge, function (component, componentName) {
+      // Now we're inside the tree
+      _.each(component, function (prop, idx) {
+        var mergeInto = _.findIndex(_.get(object, componentName), function (comp) {
+          return comp.key === prop.key;
+        });
+
+        if (mergeInto > -1) {
+          path = componentName + '.' + mergeInto;
+
+          _.set(object, path, _.mergeWith(_.get(object, path), prop, function (objValue, srcValue, key) {
+            // @TODO this is going to have the same problem: the components have keys -- make this recursive?
+            // Although I haven't run into a situation like this yet...so might be OK?
+            return key === 'components' ? _.concat(objValue, prop.components) : undefined;
+          }));
+        } else {
+          object[componentName].push(prop);
+        }
+      });
+    });
+
+    return object;
+  },
+
+  /**
+   * Global defaults applied to all field types
+   */
+  global: function global() {
+    return _.mapValues(Formio.Components.components, function () {
+      return [
+      /**
+       * Ignoring the API tab stops the logic that auto-generates the field key.
+       * This is undesirable -- you end up with a form made of textField1, textField2,
+       * textField3, etc.
+       */
+      {
+        key: 'api',
+        ignore: false,
+        components: [{
+          "html": "<p>This is the internal name for the field. You do not need to set this, but it may be useful to know when setting up conditional fields or building reports.</p>",
+          "label": "Content",
+          "refreshOnChange": false,
+          "key": "content",
+          "type": "content",
+          "input": false,
+          "tableView": false
+        }, {
+          key: 'key',
+          ignore: false,
+          disabled: true
+        }, {
+          key: 'tags',
+          ignore: true
+        }, {
+          key: 'properties',
+          ignore: true
+        }]
+      }, {
+        key: 'logic',
+        ignore: true
+      }, {
+        key: 'layout',
+        ignore: true
+      }, {
+        key: 'display',
+        ignore: false,
+        components: [{
+          key: 'customClass',
+          ignore: true
+        }, {
+          key: 'hidden',
+          ignore: true
+        }, {
+          key: 'mask',
+          ignore: true
+        }, // this is the 'Hide Input' checkbox, NOT the input mask field
+        {
+          key: 'tableView',
+          ignore: true
+        }, // specific to how you view this in the Form.io server admin UI
+        {
+          key: 'modalEdit',
+          ignore: true
+        } // specific to how you view this in the Form.io server admin UI (I think)
+        ]
+      }, {
+        key: 'data',
+        ignore: false,
+        components: [{
+          key: 'dataType',
+          ignore: true
+        }, {
+          key: 'persistent',
+          ignore: true
+        }, {
+          key: 'protected',
+          ignore: true
+        }, {
+          key: 'dbIndex',
+          ignore: true
+        }, {
+          key: 'encrypted',
+          ignore: true
+        }, {
+          key: 'redrawOn',
+          ignore: true
+        }, {
+          key: 'customDefaultValuePanel',
+          ignore: true
+        }, {
+          key: 'calculateValuePanel',
+          ignore: false
+        }, {
+          key: 'calculateServer',
+          ignore: true
+        }, {
+          key: 'allowCalculateOverride',
+          ignore: true
+        }, {
+          key: 'inputFormat',
+          ignore: true
+        }]
+      }, {
+        key: 'validation',
+        ignore: false,
+        components: [{
+          key: 'unique',
+          ignore: true
+        }, {
+          key: 'custom-validation-js',
+          ignore: true
+        }, {
+          key: 'json-validation-json',
+          ignore: true
+        }]
+      }];
+    });
+  },
+
+  /**
+   * Defaults for specific field types
+   */
+  specificFields: {
+    textarea: [{
+      key: 'display',
+      ignore: false,
+      components: [{
+        key: 'editor',
+        defaultValue: 'quill',
+        disabled: true
+      }, // do not set hidden, it won't change if you do that
+      {
+        key: 'wysiwyg',
+        ignore: true
+      }]
+    }, {
+      key: 'data',
+      ignore: false,
+      components: [{
+        key: 'inputFormat',
+        defaultValue: 'html',
+        disabled: true
+      }]
+    }],
+    email: [{
+      key: 'data',
+      ignore: false,
+      components: [{
+        key: 'inputFormat',
+        ignore: true
+      }]
+    }, {
+      key: 'validation',
+      ignore: false,
+      components: [{
+        key: 'kickbox',
+        ignore: true
+      }]
+    }],
+    address: [{
+      key: 'provider',
+      ignore: false,
+      components: [{
+        key: 'provider',
+        defaultValue: 'nominatim',
+        disabled: true
+      }, {
+        key: 'manualModeViewString',
+        ignore: true
+      }]
+    }],
+    datetime: [{
+      key: 'date',
+      ignore: false,
+      components: [{
+        key: 'datePicker.disable',
+        ignore: true
+      } // feature is broken, so it has been disabled
+      ]
+    }, {
+      key: 'data',
+      ignore: false,
+      components: [{
+        key: 'customOptions',
+        ignore: true
+      }, {
+        key: 'defaultDate',
+        ignore: true
+      } // depends on JS eval. it can work (this JS is client-side-only), but it seems dangerous.
+      ]
+    }],
+    select: [{
+      key: 'data',
+      ignore: false,
+      components: [{
+        key: 'dataSrc',
+        defaultValue: 'values',
+        disabled: true
+      }, {
+        key: 'idPath',
+        ignore: true
+      }, {
+        key: 'template',
+        ignore: true
+      }, {
+        key: 'refreshOn',
+        ignore: true
+      }, {
+        key: 'refreshOnBlur',
+        ignore: true
+      }, {
+        key: 'clearOnRefresh',
+        ignore: true
+      }, {
+        key: 'customOptions',
+        ignore: true
+      }]
+    }],
+    time: [{
+      key: 'data',
+      ignore: false,
+      components: [{
+        key: 'dataFormat',
+        ignore: true
+      }]
+    }],
+    file: [{
+      key: 'file',
+      ignore: false,
+      components: [{
+        key: 'url',
+        defaultValue: '/dynamic-forms/storage/url',
+        disabled: true
+      }, {
+        key: 'fileKey',
+        ignore: true
+      }, {
+        key: 'privateDownload',
+        ignore: true
+      }, {
+        key: 'options',
+        ignore: true
+      }, {
+        key: 'dir',
+        ignore: true
+      }, {
+        key: 'fileNameTemplate',
+        ignore: true
+      }, {
+        key: 'uploadOnly',
+        ignore: true
+      }, {
+        key: 'fileTypes',
+        ignore: true
+      }, {
+        key: 'image',
+        ignore: true
+      }, {
+        key: 'webcam',
+        ignore: true
+      }]
+    }]
+  },
+
+  /**
+   * Builder dropdown values cannot be modified by overriding defaults.
+   *
+   * This modifies the Button editForm directly & globally, which seems to be
+   * the only approach that works.
+   *
+   * It also modifies the behaviour of the 'saveState' additional field, state,
+   * which was not possible from the overrides either.
+   */
+  globalButtonCustomization: function globalButtonCustomization() {
+    var editForm = Formio.Components.components.button.editForm();
+    Formio.Utils.getComponent(editForm.components, 'action').data.values = [{
+      label: 'Submit',
+      value: 'submit'
+    }, {
+      label: 'Save Draft',
+      value: 'saveState'
+    }];
+    var stateField = Formio.Utils.getComponent(editForm.components, 'state');
+    stateField.defaultValue = 'draft';
+    stateField.type = 'hidden';
+
+    Formio.Components.components.button.editForm = function () {
+      return editForm;
+    };
+  },
+
+  /**
+   * Builder dropdown values cannot be modified by overriding defaults.
+   *
+   * This modifies the File editForm directly & globally, which seems to be
+   * the only approach that works.
+   *
+   */
+  globalFileCustomization: function globalFileCustomization() {
+    var editForm = Formio.Components.components.file.editForm();
+    var StorageValues = [{
+      label: "S3",
+      value: "s3"
+    }, {
+      label: "Local",
+      value: "url"
+    }];
+
+    if (process.env.MIX_STORAGE_DEFAULT_VALUE === 's3') {
+      StorageValues = [{
+        label: "S3",
+        value: "s3"
+      }];
+    }
+
+    if (process.env.MIX_STORAGE_DEFAULT_VALUE === 'url') {
+      StorageValues = [{
+        label: "Local",
+        value: "url"
+      }];
+    }
+
+    Formio.Utils.getComponent(editForm.components, 'storage').data.values = StorageValues;
+    Formio.Utils.getComponent(editForm.components, 'storage').dataSrc = 'values';
+
+    Formio.Components.components.file.editForm = function () {
+      return editForm;
+    };
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/formio/index.js":
+/*!**************************************!*\
+  !*** ./resources/js/formio/index.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+Object(function webpackMissingModule() { var e = new Error("Cannot find module 'formiojs'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var _defaults__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./defaults */ "./resources/js/formio/defaults.js");
+/* harmony import */ var _custom_templates__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./custom-templates */ "./resources/js/formio/custom-templates.js");
+/* harmony import */ var _builder_sidebar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./builder-sidebar */ "./resources/js/formio/builder-sidebar.js");
+
+
+
+
+/*
+* We explicitly do NOT support JS evaluation stuff, so disable all of it.
+* This is a limitation of our backend: some of these scripts (probably; assuming)
+* need to run server-side too, to ensure the client isn't doing shenanigans.
+*/
+
+FormioUtils.Evaluator.noeval = true; // -------------------------------------------------------------------------
+// If you want to load custom code (like additional components), do it here!
+// -------------------------------------------------------------------------
+
+/**
+ * Runs global customizations for the Button and File component's editForm that were not possible
+ * with the typical way of adjusting editForms.
+ */
+
+_defaults__WEBPACK_IMPORTED_MODULE_1__["default"].globalButtonCustomization();
+_defaults__WEBPACK_IMPORTED_MODULE_1__["default"].globalFileCustomization();
+/**
+ * Apply any custom templates.
+ */
+
+_.forOwn(_custom_templates__WEBPACK_IMPORTED_MODULE_2__["default"], function (template, name) {
+  return Formio.Templates.current[name] = template;
+});
+/**
+ * Make the default builder sidebar config available for use in script tags.
+ */
+
+
+window.DynamicFormsBuilderSidebar = _builder_sidebar__WEBPACK_IMPORTED_MODULE_3__["default"];
+/**
+ * Disable editForm (the modal that pops up when you add/edit a field in the Builder) options that
+ * we do not want to support.
+ *
+ * There are two reasons we do not want to support an option:
+ *
+ *    1. It's too technical for the target audience (don't present choices they don't care about)
+ *    2. It is not supported in the backend (yet, or ever)
+ *
+ * This is achieved by decorating the Formio.builder method with one that sets the editForm options.
+ * To developers working in Blade, this will seem to be happening magically, and will not inhibit their
+ * ability to work with the Formio.builder() method per Form.io's docs.
+ */
+
+var origFormioBuilder = Formio.builder;
+
+Formio.builder = function (element, form, options) {
+  options = options || {
+    editForm: {}
+  };
+  options.editForm = _defaults__WEBPACK_IMPORTED_MODULE_1__["default"].configMerge(_defaults__WEBPACK_IMPORTED_MODULE_1__["default"].configMerge(_defaults__WEBPACK_IMPORTED_MODULE_1__["default"].global(), _defaults__WEBPACK_IMPORTED_MODULE_1__["default"].specificFields), options.editForm);
+
+  if (!options.builder) {
+    options.builder = _builder_sidebar__WEBPACK_IMPORTED_MODULE_3__["default"];
+  }
+
+  return origFormioBuilder(element, form, options);
+};
+/**
+ * Hijack the creation of forms so we can inject our fileService w/ the URLs set correctly.
+ */
+
+
+var origFormioCreateForm = Formio.createForm;
+
+Formio.createForm = function (element, form, options) {
+  options = options || {};
+  var fileService = new Formio();
+  fileService.formUrl = '/dynamic-forms';
+  options.fileService = fileService;
+  return origFormioCreateForm(element, form, options);
+};
 
 /***/ }),
 

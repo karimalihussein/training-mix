@@ -15,6 +15,7 @@ use App\Http\Controllers\V2\InvoiceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\LocationController;
 
 
 
@@ -81,3 +82,6 @@ Route::post('register', RegisterTenantController::class);
 
 
 Route::apiResource('users', UsersController::class);
+
+
+Route::get('location', LocationController::class);

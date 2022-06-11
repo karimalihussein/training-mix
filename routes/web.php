@@ -111,3 +111,12 @@ route::get('store-data', [UploadController::class, 'storeData'])->name('uploads.
 
 // Route::get('purchases',
 Route::resource('purchases', PurchaseController::class);
+
+
+
+Route::get('reset', function (){
+    Artisan::call('route:clear');
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+    Artisan::call('config:cache');
+});

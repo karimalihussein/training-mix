@@ -174,7 +174,7 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\TelescopeServiceProvider::class,
@@ -182,7 +182,7 @@ return [
         App\Providers\TenancyServiceProvider::class,
         \Torann\LaravelRepository\RepositoryServiceProvider::class,
         \Torann\GeoIP\GeoIPServiceProvider::class,
-        Stevebauman\Location\LocationServiceProvider::class
+        Stevebauman\Location\LocationServiceProvider::class,
 
 
 
@@ -202,6 +202,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'GeoIP' => \Torann\GeoIP\Facades\GeoIP::class,
+
 
     ])->toArray(),
 

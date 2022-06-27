@@ -51,13 +51,10 @@ services:
         ports:
         - "8082:80"
         environment:
-            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}' #(Required) set the password for the root superuser account.
-            PMA_HOST: mysql   # define the address/hostname of the mysql server eg mysql container name.
-            PMA_USER: '${DB_USERNAME}' # this is the root user to login on startup
-            PMA_PASSWORD: '${DB_PASSWORD}' # use the root password to login on startup.
-            # Create a new user on startup (optional)
-            # MYSQL_USER: newuser
-            # MYSQL_PASSWORD: mypassword
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+            PMA_HOST: mysql 
+            PMA_USER: '${DB_USERNAME}' 
+            PMA_PASSWORD: '${DB_PASSWORD}'
         networks:
             - sail
     redis:

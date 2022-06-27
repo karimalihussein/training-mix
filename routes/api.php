@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\CenterController;
+use App\Http\Controllers\CenterDetailsController;
 use App\Http\Controllers\HostReservationController;
 use App\Http\Controllers\Integrations\Payments\HyperpayController;
 use App\Http\Controllers\Integrations\TwilioPhoneCallController;
@@ -92,4 +93,8 @@ Route::get('location', LocationController::class);
 // Route::get('centers',[CenterController::class, 'readfile']);
 
 
-Route::get('people', [PersonController::class, 'index']);
+// Route::get('people', [PersonController::class, 'index']);
+
+
+Route::get('centers/details', [CenterDetailsController::class, 'index']);
+Route::get('centers/details-read', [CenterDetailsController::class, 'read']);

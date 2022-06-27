@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\PeopleXlJob;
 use App\Jobs\SalesCsvProcess;
 use App\Models\Sale;
 use Illuminate\Http\Request;
@@ -10,7 +11,7 @@ class UploadController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
 
@@ -115,6 +116,22 @@ class UploadController extends Controller
             'total_profit',
         ];
         return $fillables;
+    }
+
+
+    public function storeData2()
+    {
+        $path = public_path('json/test/');
+        $files = glob($path . "*");
+        foreach ($files as $file) {
+            $data = array_map('str_getcsv', file($file));
+            $data = json_decode(file_get_contents($file), true);
+            PeopleXlJob::dispatch($data);
+            unlink($file);
+        }
+
+        return "done";
+       
     }
         
         

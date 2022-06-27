@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AchievementController;
+use App\Http\Controllers\CenterController;
 use App\Http\Controllers\HostReservationController;
 use App\Http\Controllers\Integrations\Payments\HyperpayController;
 use App\Http\Controllers\Integrations\TwilioPhoneCallController;
@@ -16,9 +17,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\LocationController;
-
-
-
+use App\Http\Controllers\PersonController;
+use App\Http\Controllers\UploadController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -30,6 +30,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('tags', TagController::class);
 Route::get('test', TestContoller::class);
+Route::get('storeData', [UploadController::class, 'storeData2']);
 
 Route::post('achievements', [AchievementController::class, 'store'])->name('achievements.store');
 Route::post('invoices/{order}', [InvoiceController::class, 'store']);
@@ -85,3 +86,10 @@ Route::apiResource('users', UsersController::class);
 
 
 Route::get('location', LocationController::class);
+
+
+// Route::get('centers',[CenterController::class, 'index']);
+// Route::get('centers',[CenterController::class, 'readfile']);
+
+
+Route::get('people', [PersonController::class, 'index']);

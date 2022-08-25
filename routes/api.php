@@ -20,6 +20,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\UploadController;
+use App\Http\Controllers\WhatsappController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -28,7 +29,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
-
+Route::get('whatsapp', [WhatsappController::class, 'index']);
 Route::get('tags', TagController::class);
 Route::get('test', TestContoller::class);
 Route::get('storeData', [UploadController::class, 'storeData2']);

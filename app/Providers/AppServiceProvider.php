@@ -6,6 +6,8 @@ use App\Http\Middleware\CasheResponeMiddleware;
 use App\Mixins\StrMixins;
 use App\Models\Office;
 use App\Models\Post;
+use App\Models\Series;
+use App\Models\Step;
 use App\PostcardSendingService;
 use App\Services\CreditPaymentGatway;
 use App\Services\PaymentGatway;
@@ -63,6 +65,8 @@ class AppServiceProvider extends ServiceProvider
                 'office'         => Office::class,
                 'user'           => User::class,
                 'post'           => Post::class,
+                'step'           => Step::class,
+                'series'         => Series::class,
         ]);
     }
 }

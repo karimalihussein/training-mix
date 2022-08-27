@@ -99,4 +99,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Office::class); 
     }
+
+
+    public function passwordHistories()
+    {
+        return $this->hasMany(PasswordHistory::class)->latest();
+    }
 }

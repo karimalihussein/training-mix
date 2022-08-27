@@ -18,9 +18,9 @@ class CustomerFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name,
-            'contract_at' => $this->faker->dateTimeBetween('-1 year', '+1 year'),
-            'active' => $this->faker->boolean,
+            'name' => fake()->name(),
+            'contract_at' => fake()->dateTimeBetween('-1 year', '+1 year'),
+            'active' => fake()->boolean(),
             'user_id' => function () {
                 return User::factory()->create()->id;
             },

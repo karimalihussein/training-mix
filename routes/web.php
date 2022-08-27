@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\ProfileUpdatePassword;
+use App\Http\Controllers\SeriesIndexController;
+use App\Http\Controllers\SeriesShowController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,4 +27,8 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 
+Route::get('/series', SeriesIndexController::class)->name('series.index');
+Route::get('series/{series:slug}', SeriesShowController::class);
 
+Route::get('profile', [ProfileUpdatePassword::class, 'index']);
+Route::post('profile/update-password', [ProfileUpdatePassword::class, 'updatePassword'])->name('profile.update-password');

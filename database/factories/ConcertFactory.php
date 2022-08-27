@@ -20,16 +20,16 @@ class ConcertFactory extends Factory
     {
         
         return [
-            'title'                  =>  $this->faker->sentence(),
-            'subtitle'               =>  $this->faker->sentence(),
-            'date'                   =>  $this->faker->dateTimeBetween('-1 month', '+1 month'),
-            'ticket_price'           =>  $this->faker->numberBetween(100, 1000000),
-            'venue'                  =>  $this->faker->streetName(),
-            'venue_address'          =>  $this->faker->streetAddress(),
-            'city'                   =>  $this->faker->city(),
-            'state'                  =>  $this->faker->state(),
-            'zip'                    =>  $this->faker->postcode(),
-            'published_at'           =>  $this->faker->dateTimeBetween('-1 month', '+1 month'),
+            'title'                  =>  fake()->sentence(),
+            'subtitle'               =>  fake()->sentence(),
+            'date'                   =>  fake()->dateTimeBetween('-1 month', '+1 month'),
+            'ticket_price'           =>  fake()->numberBetween(100, 1000000),
+            'venue'                  =>  fake()->streetName(),
+            'venue_address'          =>  fake()->streetAddress(),
+            'city'                   =>  fake()->city(),
+            'state'                  =>  fake()->state(),
+            'zip'                    =>  fake()->postcode(),
+            'published_at'           =>  fake()->dateTimeBetween('-1 month', '+1 month'),
             'additional_information' => 'For tickets, call (555) 555-5555.',
         ];
     }

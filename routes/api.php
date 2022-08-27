@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\PersonController;
+use App\Http\Controllers\SeriesShowController;
+use App\Http\Controllers\StepController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\WhatsappController;
 
@@ -35,7 +37,7 @@ Route::get('test', TestContoller::class);
 Route::get('storeData', [UploadController::class, 'storeData2']);
 
 Route::post('achievements', [AchievementController::class, 'store'])->name('achievements.store');
-Route::post('invoices/{order}', [InvoiceController::class, 'store']);
+Route::post('invoices/{order}', [InvoiceController::class, 'store'])->name('invoices.store');
 Route::get('offices', [OfficeController::class, 'index']);
 
 Route::get('offices/{office}', [OfficeController::class, 'show']);
@@ -54,7 +56,7 @@ Route::post('reservations', [UserReservationController::class, 'store'])->middle
 
 
 
-Route::post('posts', [PostController::class, 'store'])->middleware(['auth:sanctum', 'verified']);
+Route::post('posts', [PostController::class, 'store'])->middleware(['auth:sanctum', 'verified'])->name('posts.store');
 
 
 
@@ -99,3 +101,13 @@ Route::get('location', LocationController::class);
 
 Route::get('centers/details', [CenterDetailsController::class, 'index']);
 Route::get('centers/details-read', [CenterDetailsController::class, 'read']);
+
+
+
+Route::get("steps", [StepController::class, 'index']);
+Route::get("steps/create", [StepController::class, 'store']);
+Route::get("steps/refresh", [StepController::class, 'refresh']);
+
+
+
+

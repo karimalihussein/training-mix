@@ -13,7 +13,8 @@ class AchievementTest extends TestCase
 
     public function when_createing_achievement_some_fields_are_required()
     {
-        $res = $this->postJson('/api/achievements', []);
+        $url = route('achievements.store');
+        $res = $this->postJson($url, []);
         $res->assertStatus(422);
         $res->assertJsonStructure([
             'message',
@@ -32,8 +33,8 @@ class AchievementTest extends TestCase
     public function test_api_can_create_achievement()
     {
         $user = User::factory()->create();
-
-        $response = $this->json('POST', '/api/achievements', [
+        $url = route('achievements.store');
+        $response = $this->postJson($url, [
             'name'        => 'test',
             'user_id'     => $user->id,
             'datails'     => 'test',

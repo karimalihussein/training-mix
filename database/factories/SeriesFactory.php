@@ -4,10 +4,12 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+use Illuminate\Support\Str;
+
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Series>
  */
-class PostFactory extends Factory
+class SeriesFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,9 +19,8 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            'title'     => fake()->sentence(),
-            'content'   => fake()->paragraph(),
-            'active'    => fake()->randomElement([0, 1]),
+            'title' => $title = fake()->sentence(6),
+            'slug' => Str::slug($title, '-'),
         ];
     }
 }

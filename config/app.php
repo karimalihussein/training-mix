@@ -183,7 +183,7 @@ return [
         \Torann\LaravelRepository\RepositoryServiceProvider::class,
         \Torann\GeoIP\GeoIPServiceProvider::class,
         Stevebauman\Location\LocationServiceProvider::class,
-
+        Clockwork\Support\Laravel\ClockworkServiceProvider::class
 
 
     ],
@@ -202,6 +202,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'GeoIP' => \Torann\GeoIP\Facades\GeoIP::class,
+        'Clockwork' => Clockwork\Support\Laravel\Facade::class,
 
 
     ])->toArray(),

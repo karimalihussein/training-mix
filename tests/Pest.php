@@ -11,7 +11,7 @@
 |
 */
 
-uses(Tests\TestCase::class)->in('Pests');
+uses(Tests\TestCase::class)->in('Feature');
 
 /*
 |--------------------------------------------------------------------------

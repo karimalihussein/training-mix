@@ -24,6 +24,7 @@ class ArticleFactory extends Factory
             'description' => fake()->paragraph(),
             'image' => fake()->imageUrl(),
             'user_id' => UserFactory::new()->create()->id,
+            'published_at' => fake()->dateTimeBetween('-1 year', 'now')
         ];
     }
 }

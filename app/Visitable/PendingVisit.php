@@ -35,7 +35,7 @@ class PendingVisit
 
     public function withUser(?User $user = NULL)
     {
-        $this->attributes['data'] = $user?->id ?? auth()->id();
+        $this->attributes['user_id'] = $user?->id ?? auth()->id();
         return $this;
     }
 

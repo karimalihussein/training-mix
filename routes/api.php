@@ -3,6 +3,7 @@
 use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\CenterController;
 use App\Http\Controllers\CenterDetailsController;
+use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\HostReservationController;
 use App\Http\Controllers\Integrations\Payments\HyperpayController;
 use App\Http\Controllers\Integrations\TwilioPhoneCallController;
@@ -22,6 +23,7 @@ use App\Http\Controllers\PersonController;
 use App\Http\Controllers\SeriesShowController;
 use App\Http\Controllers\StepController;
 use App\Http\Controllers\UploadController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WhatsappController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -81,12 +83,12 @@ Route::group(['prefix' => 'integrations'], function () {
 
 
 
-Route::post('register', RegisterTenantController::class);
+// Route::post('register', RegisterTenantController::class);
 
 
 
 
-Route::apiResource('users', UsersController::class);
+Route::apiResource('users', UserController::class);
 
 
 Route::get('location', LocationController::class);
@@ -107,6 +109,8 @@ Route::get('centers/details-read', [CenterDetailsController::class, 'read']);
 Route::get("steps", [StepController::class, 'index']);
 Route::get("steps/create", [StepController::class, 'store']);
 Route::get("steps/refresh", [StepController::class, 'refresh']);
+
+Route::get('features', [FeatureController::class, 'index']);
 
 
 

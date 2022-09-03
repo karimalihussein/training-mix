@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\GihtubController;
 use App\Http\Controllers\ProfileUpdatePassword;
 use App\Http\Controllers\SeriesIndexController;
 use App\Http\Controllers\SeriesShowController;
@@ -27,6 +28,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+Route::get('auth/github/redirect', [GihtubController::class, 'redirectToProvider']);
+Route::get('auth/github/callback', [GihtubController::class, 'handleProviderCallback']);
 
 
 Route::get('/series', SeriesIndexController::class)->name('series.index');

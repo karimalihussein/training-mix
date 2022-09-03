@@ -17,6 +17,7 @@ use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -44,6 +45,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Model::unguard();
+        Model::preventLazyLoading(!app()->isProduction());
+        Model::handleLazyLoadingViolationUsing(
+            fn($model, $relation) => Logger("Lazy loading violation: {$model} {$relation}")
+        );
         $this->app->singleton(CasheResponeMiddleware::class);
         $this->app->singleton('Postcard', function ($app) {
             return new PostcardSendingService('us', 3,9);

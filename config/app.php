@@ -179,7 +179,6 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\TelescopeServiceProvider::class,
         App\Providers\RepositoriesServiesProvider::class,
-        App\Providers\TenancyServiceProvider::class,
         \Torann\LaravelRepository\RepositoryServiceProvider::class,
         \Torann\GeoIP\GeoIPServiceProvider::class,
         Stevebauman\Location\LocationServiceProvider::class,

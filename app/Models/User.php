@@ -9,10 +9,11 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Devinweb\LaravelHyperpay\Traits\ManageUserTransactions;
+use Bpuig\Subby\Traits\HasSubscriptions;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, ManageUserTransactions;
+    use HasApiTokens, HasFactory, Notifiable, ManageUserTransactions, HasSubscriptions;
     /**
      * The attributes that are mass assignable.
      *

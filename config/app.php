@@ -182,7 +182,8 @@ return [
         \Torann\LaravelRepository\RepositoryServiceProvider::class,
         \Torann\GeoIP\GeoIPServiceProvider::class,
         Stevebauman\Location\LocationServiceProvider::class,
-        Clockwork\Support\Laravel\ClockworkServiceProvider::class
+        Clockwork\Support\Laravel\ClockworkServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
 
 
     ],

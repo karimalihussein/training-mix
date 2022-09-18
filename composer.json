@@ -7,6 +7,7 @@
     "require": {
         "php": "^8.0.2",
         "beyondcode/laravel-websockets": "^1.13",
+        "botman/botman": "^2.7",
         "bpuig/laravel-subby": "^7.0",
         "devinweb/laravel-hyperpay": "^1.1",
         "gender-api/client": "^1.0",
@@ -35,7 +36,8 @@
         "torann/geoip": "^3.0",
         "torann/laravel-repository": "^0.6.2",
         "twilio/sdk": "^6.37",
-        "xaboy/form-builder": "~2.0"
+        "xaboy/form-builder": "~2.0",
+        "botman/driver-web": "^1.5"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

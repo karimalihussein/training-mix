@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\BotManController;
 use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\Documentation\ReferencesController;
 use App\Http\Controllers\GihtubController;
@@ -57,3 +58,8 @@ Route::get('npm-packages', [ReferencesController::class, 'getNpmPackages']);
 Route::get('articles', [ArticleController::class, 'index'])->name('articles.index')->middleware('subscribed:articles-management');
 
 // Route::get('plans', [PlanController::class, 'index'])->name('plans');
+
+Route::get('/chatbot', function () {
+    return view('chatbot.chatbot');
+});
+Route::match(['get', 'post'], '/botman', [BotManController::class, 'handle']);

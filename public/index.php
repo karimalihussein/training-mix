@@ -55,10 +55,3 @@ $response = $kernel->handle(
 $kernel->terminate($request, $response);
 
 
-if ($message == 'Hi') {
-    $this->askName($botman);
-}
-
-else{
-    $botman->reply("Write 'Hi' for testing...");
-}

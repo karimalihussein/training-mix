@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\BotManController;
+use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\Documentation\ReferencesController;
 use App\Http\Controllers\GihtubController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\ProfileUpdatePassword;
 use App\Http\Controllers\SeriesIndexController;
 use App\Http\Controllers\SeriesShowController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WebscrapingController;
 use Bpuig\Subby\Models\Plan;
 use Illuminate\Support\Facades\Route;
 
@@ -59,7 +61,7 @@ Route::get('articles', [ArticleController::class, 'index'])->name('articles.inde
 
 // Route::get('plans', [PlanController::class, 'index'])->name('plans');
 
-Route::get('/chatbot', function () {
-    return view('chatbot.chatbot');
-});
-Route::match(['get', 'post'], '/botman', [BotManController::class, 'handle']);
+Route::get('chatbot', ChatbotController::class)->name('chatbot');
+
+
+Route::get('webscraping', WebscrapingController::class)->name('webscraping');

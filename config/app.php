@@ -164,7 +164,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
+        Weidner\Goutte\GoutteServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -203,7 +203,7 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'GeoIP' => \Torann\GeoIP\Facades\GeoIP::class,
         'Clockwork' => Clockwork\Support\Laravel\Facade::class,
-
+        'Goutte' => Weidner\Goutte\GoutteFacade::class,
 
     ])->toArray(),
 

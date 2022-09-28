@@ -16,16 +16,35 @@ class BotManController extends Controller
     {
         $botman = app('botman');
    
-        $botman->hears('hi', function($botman) {
-            $botman->reply('Hello!');
-            $this->startConversation($botman);
+        $botman->hears('{message}', function($botman, $message) {
+   
+            if ($message == 'Hi') {
+                $this->askName($botman);
+            }
+            
+            else{
+                $botman->reply("Write 'Hi' for testing...");
+            }
+   
         });
    
         $botman->listen();
     }
+   
+    /**
+     * Place your BotMan logic here.
+     */
+    public function askName($botman)
+    {
+        $botman->ask('Hello! What is your Name?', function(Answer $answer) {
+   
+            $name = $answer->getText();
+   
+            $this->say('Nice to meet you '.$name);
+        });
+    }
 
-
-    public function startConversation(BotMan $bot)
+    public function askForDatabase()
     {
         $question = Question::create('Do you need a database?')
             ->fallback('Unable to create a new database')

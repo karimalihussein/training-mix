@@ -21,6 +21,5 @@ class WebscrapingController extends Controller
         $crawler->filter('.allCarsResult')->each(function ($node) {
           
         });
-
     }
 }   

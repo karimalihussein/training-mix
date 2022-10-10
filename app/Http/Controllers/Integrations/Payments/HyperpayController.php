@@ -13,8 +13,6 @@ class HyperpayController extends Controller
 {
     public function checkout(Request $request)
     {
-   
-
         $trackable = [
             'product_id'        => rand(1, 999999999),
             'product_type'      => 't-shirt'
@@ -25,7 +23,6 @@ class HyperpayController extends Controller
         $data = LaravelHyperpay::addBilling(new HyperPayBilling($request))->checkout($trackable, $user, $amount, $brand, $request);
         $res = (json_decode(json_encode($data->original), true));
         return view('integrations.payments.hyperpay.checkout', compact('res'));
-
     }
 
 

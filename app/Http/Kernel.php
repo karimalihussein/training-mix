@@ -3,10 +3,8 @@
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
-use Allyson\MultiEnv\Concerns\BootstrappersTrait;
 class Kernel extends HttpKernel
 {
-    use BootstrappersTrait;
     /**
      * The application's global HTTP middleware stack.
      *
@@ -65,5 +63,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'cache.response'    => \App\Http\Middleware\CasheResponeMiddleware::class,
+        'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
+        'subscribed' => \App\Http\Middleware\SubscribedMiddleware::class,
     ];
 }

@@ -9,15 +9,7 @@ use Tests\TestCase;
 
 class ProductTest extends TestCase
 {
-    /**
-     * test products routes
-     * @return void
-     */
-    public function test_products_route_return_ok()
-    {
-        $response = $this->get('/products');
-        $response->assertStatus(200);
-    }
+
 
     /**
      * product has a name
@@ -27,6 +19,5 @@ class ProductTest extends TestCase
     {
         $product = Product::factory()->create();
         $this->assertNotNull($product->name); 
-        
     }
 }

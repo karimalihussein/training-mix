@@ -164,7 +164,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
+        Weidner\Goutte\GoutteServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -179,11 +179,11 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\TelescopeServiceProvider::class,
         App\Providers\RepositoriesServiesProvider::class,
-        App\Providers\TenancyServiceProvider::class,
         \Torann\LaravelRepository\RepositoryServiceProvider::class,
         \Torann\GeoIP\GeoIPServiceProvider::class,
         Stevebauman\Location\LocationServiceProvider::class,
-
+        Clockwork\Support\Laravel\ClockworkServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
 
 
     ],
@@ -202,7 +202,8 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'GeoIP' => \Torann\GeoIP\Facades\GeoIP::class,
-
+        'Clockwork' => Clockwork\Support\Laravel\Facade::class,
+        'Goutte' => Weidner\Goutte\GoutteFacade::class,
 
     ])->toArray(),
 

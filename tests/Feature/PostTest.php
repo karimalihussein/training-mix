@@ -24,15 +24,15 @@ class PostTest extends TestCase
         
 
         $this->actingAs($user);
+
+        $url = route('posts.store');
         
-        $response = $this->postJson('/api/posts', [
+        $response = $this->postJson($url, [
                 'title'         => 'this is a post',
                 'content'       => 'this is a content',
                 'tags'          => $tags->pluck('id'),
         ]);
-
         $response->assertStatus(201);
-        
         $response->assertJsonPath('data.tags.0.id', $tags[0]->id)
         ->assertJsonPath('data.tags.1.id', $tags[1]->id)
         ->assertJsonPath('data.title', 'this is a post')

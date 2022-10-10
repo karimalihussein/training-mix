@@ -17,13 +17,14 @@ class ArticleFactory extends Factory
      */
     public function definition()
     {
-        $title = $this->faker->sentence();
+        $title = fake()->sentence();
         return [
             'title' => $title,
             'slug' => Str::slug($title, '-'),
-            'description' => $this->faker->paragraph(),
-            'image' => $this->faker->imageUrl(),
+            'description' => fake()->paragraph(),
+            'image' => fake()->imageUrl(),
             'user_id' => UserFactory::new()->create()->id,
+            'published_at' => fake()->dateTimeBetween('-1 year', 'now')
         ];
     }
 }

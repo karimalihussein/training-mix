@@ -6,6 +6,8 @@ use App\Http\Middleware\CasheResponeMiddleware;
 use App\Mixins\StrMixins;
 use App\Models\Office;
 use App\Models\Post;
+use App\Models\Series;
+use App\Models\Step;
 use App\PostcardSendingService;
 use App\Services\CreditPaymentGatway;
 use App\Services\PaymentGatway;
@@ -15,6 +17,7 @@ use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -42,6 +45,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Model::unguard();
+        Model::preventLazyLoading(!app()->isProduction());
+        Model::handleLazyLoadingViolationUsing(
+            fn($model, $relation) => Logger("Lazy loading violation: {$model} {$relation}")
+        );
         $this->app->singleton(CasheResponeMiddleware::class);
         $this->app->singleton('Postcard', function ($app) {
             return new PostcardSendingService('us', 3,9);
@@ -63,6 +71,8 @@ class AppServiceProvider extends ServiceProvider
                 'office'         => Office::class,
                 'user'           => User::class,
                 'post'           => Post::class,
+                'step'           => Step::class,
+                'series'         => Series::class,
         ]);
     }
 }

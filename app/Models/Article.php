@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Article extends Model
 {
     use HasFactory;
+    protected $table = 'articles';
 
     protected $fillable = [
         'title',
@@ -15,5 +16,19 @@ class Article extends Model
         'description',
         'image',
         'user_id',
+        'published_at'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    protected $dates = [
+        'published_at'
+    ];
+
+
+
+
 }

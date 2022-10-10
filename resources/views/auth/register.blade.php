@@ -53,6 +53,10 @@
                 <x-button class="ml-4">
                     {{ __('Register') }}
                 </x-button>
+
+                <x-button-link class="ml-4" href="/auth/github/redirect">
+                    {{ __('Use GitHub') }}
+                </x-button-link>
             </div>
         </form>
     </x-auth-card>

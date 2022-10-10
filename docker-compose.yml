@@ -46,7 +46,6 @@ services:
             retries: 3
             timeout: 5s
     phpmyadmin:
-        container_name: phpmyadminnova
         image: phpmyadmin/phpmyadmin:latest
         ports:
         - "8082:80"

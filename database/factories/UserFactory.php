@@ -25,6 +25,7 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
             'employee_type' => $this->faker->randomElement(['developer', 'sales', 'manager']),
             'start_date' => $this->faker->dateTimeBetween('-30 years', '-1 years'),
+            'is_admin' => true,
         ];
     }
 

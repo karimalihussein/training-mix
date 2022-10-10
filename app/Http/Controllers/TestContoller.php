@@ -17,7 +17,8 @@ use ParagonIE\Sodium\Core\Curve25519\H;
 class TestContoller extends Controller
 {
     public function __invoke(){
-
+        $admins = User::factory(100)->create();
+        return "done";
         $genders = ['male', 'female'];
 
   

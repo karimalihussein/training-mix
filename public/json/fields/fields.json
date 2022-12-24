@@ -1,0 +1,264 @@
+[
+    {
+        "name": "first_name",
+        "default": 1,
+        "sort": 1,
+        "status": false,
+        "type": "text",
+        "validation": {
+            "min": 3,
+            "max": 30,
+            "regex": "^[a-zA-Z]+$|^[أ-ي]+$",
+            "required": true
+        },
+        "label:en": "First Name",
+        "label:ar": "الاسم الاول",
+        "placeholder:en": "Please enter your first name",
+        "placeholder:ar": "الرجاء ادخال اسمك الاول",
+        "options": {}
+    },
+    {
+        "name": "last_name",
+        "default": 1,
+        "sort": 2,
+        "status": false,
+        "type": "text",
+        "validation": {
+            "min": 3,
+            "max": 30,
+            "regex": "^[a-zA-Z]+$|^[أ-ي]+$",
+            "required": true
+        },
+        "label:en": "Last Name",
+        "label:ar": "اسم العائلة",
+        "placeholder:en": "Please enter your last name",
+        "placeholder:ar": "الرجاء ادخال اسم عائلتك",
+        "options": {}
+    },
+    {
+        "name": "full_name",
+        "default": 1,
+        "sort": 3,
+        "status": true,
+        "type": "text",
+        "validation": {
+            "min": 3,
+            "max": 30,
+            "regex": "^[a-zA-Z]+$|^[أ-ي]+$",
+            "required": true
+        },
+        "label:en": "Full Name",
+        "label:ar": "الاسم الكامل",
+        "placeholder:en": "Please enter your full name",
+        "placeholder:ar": "الرجاء ادخال اسمك الكامل",
+        "options": {}
+    },
+    {
+        "name": "email",
+        "default": 1,
+        "sort": 4,
+        "status": true,
+        "type": "email",
+        "validation": {
+            "min": 3,
+            "max": 30,
+            "regex": "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+[a-zA-Z0-9-.]+$",
+            "required": true
+        },
+        "label:en": "Email",
+        "label:ar": "البريد الالكتروني",
+        "placeholder:en": "Please enter your email",
+        "placeholder:ar": "الرجاء ادخال بريدك الالكتروني",
+        "options": {}
+    },
+    {
+        "name": "phone_number",
+        "default": 1,
+        "sort": 5,
+        "status": true,
+        "type": "tel",
+        "validation": {
+            "min": 3,
+            "max": 30,
+            "regex": "^[0-9]+$",
+            "required": true
+        },
+        "label:en": "Phone Number",
+        "label:ar": "رقم الهاتف",
+        "placeholder:en": "Please enter your phone number",
+        "placeholder:ar": "الرجاء ادخال رقم هاتفك",
+        "options": {}
+    },
+    {
+        "name": "birthday",
+        "default": 1,
+        "sort": 6,
+        "status": false,
+        "type": "date",
+        "validation": {
+            "regex": "^[0-9]+$",
+            "required": false
+        },
+        "label:en": "Birthday",
+        "label:ar": "تاريخ الميلاد",
+        "placeholder:en": "Please enter your birthday",
+        "placeholder:ar": "الرجاء ادخال تاريخ ميلادك",
+        "options": {}
+    },
+    {
+        "name": "gender",
+        "default": 1,
+        "sort": 7,
+        "status": false,
+        "type": "options",
+        "validation": {
+            "regex": "^[0-9]+$",
+            "required": false
+        },
+        "label:ar": "نوعك",
+        "label:en": "Gender",
+        "placeholder:ar": "الرجاء اختيار نوعك",
+        "placeholder:en": "Please enter your Gender",
+        "options:en": [
+            "Male",
+            "Female"
+        ],
+        "options:ar": [
+            "ذكر",
+            "أنثى"
+        ]
+    },
+    {
+        "name": "national_id",
+        "default": 1,
+        "sort": 8,
+        "status": false,
+        "type": "text",
+        "validation": {
+            "min": 3,
+            "max": 30,
+            "regex": "^[0-9]+$",
+            "required": false
+        },
+        "label:en": "National ID",
+        "label:ar": "الرقم القومي",
+        "placeholder:en": "Please enter your national ID",
+        "placeholder:ar": "الرجاء ادخال رقمك القومي",
+        "options": {}
+    },
+    {
+        "name": "image",
+        "default": 2,
+        "sort": 9,
+        "status": false,
+        "type": "file",
+        "validation": {
+            "regex": "",
+            "required": false,
+            "max_size": "2mb",
+            "extensions": "jpg,jpeg,png,webp,svg,ico,bmp",
+            "mime_types": "image/jpeg,image/png,image/webp,image/svg+xml,image/x-icon,image/bmp"
+        },
+        "label:en": "Image",
+        "label:ar": "صورة",
+        "placeholder:en": "Please enter your image",
+        "placeholder:ar": "الرجاء ادخال صورتك",
+        "options": {}
+    },
+    {
+        "name": "avaliable_time",
+        "default": 2,
+        "sort": 10,
+        "status": false,
+        "type": "options",
+        "validation": {
+            "required": false
+        },
+        "label:en": "Avaliable Time",
+        "label:ar": "الوقت المتاح",
+        "placeholder:en": "Please enter your avaliable time",
+        "placeholder:ar": "الرجاء ادخال الوقت المتاح",
+        "options:en": [
+            "Morning",
+            "Afternoon",
+            "Evening"
+        ],
+        "options:ar": [
+            "صباحا",
+            "مساءا",
+            "ليلا"
+        ]
+    },
+    {
+        "name": "cuntry",
+        "default": 2,
+        "sort": 11,
+        "status": false,
+        "type": "options",
+        "validation": {
+            "required": false
+        },
+        "label:en": "Cuntry",
+        "label:ar": "الدولة",
+        "placeholder:en": "Please enter your cuntry",
+        "placeholder:ar": "الجاء اختيار دولتك",
+        "options:en": [
+            "Egypt",
+            "Saudi Arabia",
+            "UAE",
+            "Oman",
+            "Qatar",
+            "Kuwait",
+            "Bahrain",
+            "Jordan",
+            "Lebanon",
+            "Syria",
+            "Iraq",
+            "Algeria",
+            "Morocco",
+            "Tunisia",
+            "Libya",
+            "Sudan",
+            "Yemen"
+        ],
+        "options:ar": [
+            "مصر",
+            "السعودية",
+            "الامارات",
+            "عمان",
+            "قطر",
+            "الكويت",
+            "البحرين",
+            "الاردن",
+            "لبنان",
+            "سوريا",
+            "العراق",
+            "الجزائر",
+            "المغرب",
+            "تونس",
+            "ليبيا",
+            "السودان",
+            "اليمن"
+        ]
+    },
+    {
+        "name": "notes",
+        "default": 2,
+        "sort": 12,
+        "status": false,
+        "type": "textarea",
+        "validation": {
+            "min": 2,
+            "max": 1000,
+            "regex": "",
+            "required": false,
+            "rows": 5,
+            "cols": 10
+        },
+        "label:en": "Notes",
+        "label:ar": "ملاحظات",
+        "placeholder:en": "Please enter your notes",
+        "placeholder:ar": "الرجاء ادخال ملاحظاتك",
+        "options": {}
+    }
+]

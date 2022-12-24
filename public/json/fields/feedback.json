@@ -1,0 +1,21 @@
+[
+    {
+        "name": "feedback",
+        "default": 2,
+        "status": false,
+        "type": "textarea",
+        "label:en": "Feedback",
+        "label:ar": "التعليق",
+        "placeholder:en": "Please enter your feedback and suggestions",
+        "placeholder:ar": "يرجى إدخال تعليقاتك واقتراحاتك",
+        "validation": {
+            "min": 2,
+            "max": 1000,
+            "regex": "",
+            "required": false,
+            "rows": 5,
+            "cols": 10
+        },
+        "options": {}
+    }
+]

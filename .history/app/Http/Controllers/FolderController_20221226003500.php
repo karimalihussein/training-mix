@@ -18,12 +18,6 @@ class FolderController extends Controller
     {
         $folder = Folder::first();
         $user = User::first();
-        $folder
-        ->addMediaFromRequest('image')
-        ->sanitizingFileName(function($fileName) {
-            return strtolower(str_replace(['#', '/', '\\', ' '], '-', $fileName));
-        })
-        ->usingFileName(time().'.'.$request->file('image')->getClientOriginalExtension())
-        ->toMediaCollection('folders');
+
     }
 }

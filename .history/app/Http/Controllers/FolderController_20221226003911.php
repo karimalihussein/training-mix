@@ -23,7 +23,9 @@ class FolderController extends Controller
         ->sanitizingFileName(function($fileName) {
             return strtolower(str_replace(['#', '/', '\\', ' '], '-', $fileName));
         })
-        ->usingFileName(time().'.'.$request->file('image')->getClientOriginalExtension())
+        
+
         ->toMediaCollection('folders');
+    
     }
 }

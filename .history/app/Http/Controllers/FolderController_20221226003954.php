@@ -25,5 +25,6 @@ class FolderController extends Controller
         })
         ->usingFileName(time().'.'.$request->file('image')->getClientOriginalExtension())
         ->toMediaCollection('folders');
+    
     }
 }

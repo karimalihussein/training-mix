@@ -30,6 +30,7 @@
         "meilisearch/meilisearch-php": "^0.24.2",
         "nahid/talk": "^2.4",
         "netflie/whatsapp-cloud-api": "^1.2",
+        "opcodesio/log-viewer": "^1.7",
         "phpoffice/phpspreadsheet": "^1.23",
         "predis/predis": "^1.0",
         "qoraiche/laravel-mail-editor": "^4.0",

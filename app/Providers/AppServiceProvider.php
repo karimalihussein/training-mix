@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Http\Middleware\CasheResponeMiddleware;
 use App\Mixins\StrMixins;
+use App\Models\Folder;
 use App\Models\Office;
 use App\Models\Post;
 use App\Models\Series;
@@ -75,6 +76,7 @@ class AppServiceProvider extends ServiceProvider
                 'post'           => Post::class,
                 'step'           => Step::class,
                 'series'         => Series::class,
+                'folder'         => Folder::class
         ]);
         Gate::define('admin', fn(User $user) => $user->is_admin);
         Blade::if('admin', fn() => auth()->user()?->can('admin'));

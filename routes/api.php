@@ -4,6 +4,7 @@ use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\Api\PostsController;
 use App\Http\Controllers\Api\RegistrationController;
 use App\Http\Controllers\FeatureController;
+use App\Http\Controllers\FolderController;
 use App\Http\Controllers\GihtubController;
 use App\Http\Controllers\HostReservationController;
 use App\Http\Controllers\Integrations\Payments\HyperpayController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\Integrations\TwilioPhoneCallController;
 use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\OfficeImageController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\SimpleController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserReservationController;
 use App\Http\Controllers\V2\InvoiceController;
@@ -74,4 +76,9 @@ Orion::resource('posts', PostsController::class);
 
 Route::post('registeration', RegistrationController::class);
 
+Route::get('simple', SimpleController::class);
 
+
+
+
+Route::post('folders', FolderController::class);

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('employee_type')->default('manager');
             $table->date('start_date')->nullable();
             $table->boolean('is_admin')->default(false);
+            $table->string('profile')->nullable();
             // $table->foreignId('last_login_id')->constrainted('logins')->nullable();
             $table->rememberToken();
             $table->timestamps();

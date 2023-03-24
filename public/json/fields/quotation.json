@@ -1,0 +1,35 @@
+[
+    {
+        "name": "quotation",
+        "default": 2,
+        "status": true,
+        "type": "options",
+        "label:en": "Quotation",
+        "label:ar": "التسعير",
+        "options:en": [
+            "interested",
+            "not interested",
+            "not sure",
+            "High price",
+            "Bad quality",
+            "Bad Product",
+            "Bad Service",
+            "Maybe later",
+            "Other" 
+        ],
+        "options:ar": [
+            "مهتم",
+            "غير مهتم",
+            "غير متأكد",
+            "سعر عالي",
+            "منتج سيئ",
+            "جودة سيئة",
+            "خدمة سيئة",
+            "ربما لاحقا",
+            "سبب اخر"
+        ],
+        "validation": {
+            "required": false
+        }
+    }
+]

@@ -1,0 +1,553 @@
+[{
+    "name": "list-roles",
+    "display_name": {
+        "en": "List Roles",
+        "ar": "عرض الصلاحيات"
+    }
+},
+{
+    "name": "create-roles",
+    "display_name": {
+        "en": "Create Roles",
+        "ar": "إنشاء صلاحيات"
+    }
+},
+{
+    "name": "edit-roles",
+    "display_name": {
+        "en": "Edit Roles",
+        "ar": "تعديل صلاحيات"
+        
+    }
+},
+{
+    "name": "delete-roles",
+    "display_name": {
+        "en": "Delete Roles",
+        "ar": "حذف صلاحيات"
+    }
+},
+{
+    "name": "list-products",
+    "display_name": {
+        "en" : "Products And Services List",
+        "ar" : "عرض المنتجات والخدمات"
+    }
+},
+{
+    "name": "create-products",
+    "display_name": {
+        "en" : "Create Products And Services",
+        "ar" : "إنشاء منتجات وخدمات"
+    }
+},
+{
+    "name": "edit-products",
+    "display_name": {
+        "en" : "Edit Products And Services",
+        "ar" : "تعديل منتجات وخدمات"
+    }
+},
+{
+    "name": "delete-products",
+    "display_name": {
+        "en" : "Delete Products And Services",
+        "ar" : "حذف منتجات وخدمات"
+    }
+},
+{
+    "name": "show-products-profile",
+    "display_name": {
+        "en" : "Show Products And Services Profile",
+        "ar" : "عرض ملف منتجات وخدمات"
+    }
+},
+{
+    "name": "show-trashed-products",
+    "display_name": {
+        "en" : "Show Trashed Products And Services",
+        "ar" : "عرض المنتجات والخدمات المحذوفة"
+    }
+},
+{
+    "name": "list-branches",
+    "display_name": {
+        "en" : "Branches List",
+        "ar" : "عرض الفروع"
+    }
+},
+{
+    "name": "create-branches",
+    "display_name": {
+        "en" : "Create Branches",
+        "ar" : "إنشاء فروع"
+    }
+},
+{
+    "name": "edit-branches",
+    "display_name": {
+        "en" : "Edit Branches",
+        "ar" : "تعديل فروع"
+    }
+},
+{
+    "name": "delete-branches",
+    "display_name": {
+        "en" : "Delete Branches",
+        "ar" : "حذف فروع"
+    }
+},
+{
+    "name": "restore-branches",
+    "display_name": {
+        "en" : "Restore Branches",
+        "ar" : "استعادة فروع"
+    }
+}
+,
+{
+    "name": "show-branches-profile",
+    "display_name": {
+        "en" : "Show Branches Profile",
+        "ar" : "عرض صفحة الفرع"
+    }
+},
+{
+    "name": "list-agents",
+    "display_name": {
+        "en" : "Agents List",
+        "ar" : "عرض الوكلاء"
+    }
+},
+{
+    "name": "create-agents",
+    "display_name": {
+        "en" : "Create Agents",
+        "ar" : "إنشاء وكلاء"
+    }
+},
+{
+    "name": "edit-agents",
+    "display_name": {
+        "en" : "Edit Agents",
+        "ar" : "تعديل وكلاء"
+    }
+},
+{
+    "name": "delete-agents",
+    "display_name": {
+        "en" : "Delete Agents",
+        "ar" : "حذف وكلاء"
+    }
+},
+{
+    "name": "show-trashed-branches",
+    "display_name": {
+        "en" : "Show Trashed Branches",
+        "ar" : "عرض الفروع المحذوفة"
+    }
+},
+{
+    "name": "view-agent-profile",
+    "display_name": {
+        "en" : "View Agent Profile",
+        "ar" : "عرض صفحة الوكيل"
+    }
+},{
+    "name": "list-leads",
+    "display_name": {
+        "en" : "Leads List",
+        "ar" : "عرض العملاء"
+    }
+},
+{
+    "name": "edit-leads",
+    "display_name": {
+        "en" : "Edit Leads",
+        "ar" : "تعديل العملاء"
+    }
+},
+{
+    "name": "delete-leads",
+    "display_name": {
+        "en" : "Delete Leads",
+        "ar" : "حذف العملاء"
+    }
+},
+{
+    "name": "profile-leads",
+    "display_name": {
+        "en" : "Display Lead Profile",
+        "ar" : "عرض صفحة العميل"
+    }
+},
+{
+    "name": "save-call-data-leads",
+    "display_name": {
+        "en" : "Save Call Data",
+        "ar" : "حفظ بيانات المكالمة"
+    }
+},
+{
+    "name": "assign-reminders",
+    "display_name": {
+        "en" : "Assign Reminders",
+        "ar" : "تعيين التذكيرات"
+    }
+},
+{
+    "name": "create-web-forms-fields",
+    "display_name": {
+        "en"  : "Create Public Forms Fields",
+        "ar"  : "إنشاء حقول تسجيل للصفحات العامة"
+    }
+},
+{
+    "name": "edit-web-forms-fields",
+    "display_name": {
+        "en"  : "Edit Public Forms Fields",
+        "ar"  : "تعديل حقول تسجيل للصفحات العامة"
+    }
+},
+{
+    "name": "delete-web-forms-fields",
+    "display_name": {
+        "en"  : "Delete Public Forms Fields",
+        "ar"  : "حذف حقول تسجيل للصفحات العامة"
+    }
+},{
+    "name": "list-leads-statuses",
+    "display_name": {
+        "en"  : "List Leads Statuses",
+        "ar"  : "عرض حالات العملاء"
+    }
+},
+{
+    "name": "make-calls",
+    "display_name": {
+        "en"  : "Make Calls For Leads",
+        "ar"  : "إجراء مكالمات للعملاء"
+    }
+}
+,{
+    "name": "create-leads-statuses",
+    "display_name": {
+        "en"  : "Create Leads Statuses",
+        "ar"  : "إنشاء حالات العملاء"
+    }
+},{
+    "name": "edit-leads-statuses",
+    "display_name": {
+        "en"  : "Edit Leads Statuses",
+        "ar"  : "تعديل حالات العملاء"
+    }
+},{
+    "name": "delete-leads-statuses",
+    "display_name": {
+        "en"  : "Delete Leads Statuses",
+        "ar"  : "حذف حالات العملاء"
+    }
+},
+{
+    "name": "list-web-forms",
+    "display_name": {
+        "en": "Public Forms List",
+        "ar": "عرض تفاصيل النماذج العامة"
+    }
+},
+{
+    "name": "create-web-forms",
+    "display_name": {
+        "en": "Create Public Forms",
+        "ar": "إنشاء النماذج العامة"
+    }
+},
+{
+    "name": "edit-web-forms",
+    "display_name": {
+        "en": "Edit Public Forms",
+        "ar": "تعديل النماذج العامة"
+    }
+},
+{
+    "name": "delete-web-forms",
+    "display_name": {
+        "en": "Delete Public Forms",
+        "ar": "حذف النماذج العامة"
+    }
+},
+{
+    "name": "view-public-form-profile",
+    "display_name": {
+        "en": "View Public Form Profile",
+        "ar": "عرض صفحة النماذج العامة"
+    }
+},
+{
+    "name": "create-projects",
+    "display_name": {
+        "en": "Create Projects",
+        "ar": "إنشاء المشاريع"
+    }
+},
+{
+    "name": "edit-projects",
+    "display_name": {
+        "en": "Edit Projects",
+        "ar": "تعديل المشاريع"
+    }
+},
+{
+    "name": "delete-projects",
+    "display_name": {
+        "en": "Delete Projects",
+        "ar": "حذف المشاريع"
+    }
+},
+{
+    "name": "list-projects",
+    "display_name": {
+        "en": "Projects List",
+        "ar": "عرض المشاريع"
+    }
+},
+{
+    "name": "show-projects",
+    "display_name": {
+        "en": "Show Projects",
+        "ar": "عرض تفاصيل المشاريع"
+    }
+},
+{
+    "name": "create-tasks",
+    "display_name": {
+        "en": "Create Tasks",
+        "ar": "إنشاء المهام"
+    }
+},
+{
+    "name": "edit-tasks",
+    "display_name": {
+        "en": "Edit Tasks",
+        "ar": "تعديل المهام"
+    }
+},
+{
+    "name": "delete-tasks",
+    "display_name": {
+        "en": "Delete Tasks",
+        "ar": "حذف المهام"
+    }
+},
+{
+    "name": "show-tasks",
+    "display_name": {
+        "en": "Show Tasks",
+        "ar": "عرض تفاصيل المهام"
+    }
+},{
+    "name": "list-groups",
+    "display_name": {
+        "en": "Groups List",
+        "ar": "عرض المجموعات"
+    }
+},{
+    "name": "create-groups",
+    "display_name": {
+        "en": "Create Groups",
+        "ar": "إنشاء المجموعات"
+    }
+},{
+    "name": "edit-groups",
+    "display_name": {
+        "en": "Edit Groups",
+        "ar": "تعديل المجموعات"
+    }
+},{
+    "name": "delete-groups",
+    "display_name": {
+        "en": "Delete Groups",
+        "ar": "حذف المجموعات"
+    }
+},{
+    "name": "show-groups",
+    "display_name": {
+        "en": "Show Groups",
+        "ar": "عرض تفاصيل المجموعات"
+    }
+},{
+    "name": "list-taxes",
+    "display_name": {
+        "en": "Taxes List",
+        "ar": "عرض الضرائب"
+    }
+},{
+    "name": "create-taxes",
+    "display_name": {
+        "en": "Create Taxes",
+        "ar": "إنشاء الضرائب"
+    }
+},{
+    "name": "edit-taxes",
+    "display_name": {
+        "en": "Edit Taxes",
+        "ar": "تعديل الضرائب"
+    }
+},
+{
+    "name": "delete-taxes",
+    "display_name": {
+        "en": "Delete Taxes",
+        "ar": "حذف الضرائب"
+    }
+},
+{
+    "name": "list-invoices",
+    "display_name": {
+        "en": "Invoices List",
+        "ar": "عرض الفواتير"
+    }
+},
+{
+    "name": "create-invoices",
+    "display_name": {
+        "en": "Create Invoices",
+        "ar": "إنشاء الفواتير"
+    }
+},
+{
+    "name": "edit-invoices",
+    "display_name": {
+        "en": "Edit Invoices",
+        "ar": "تعديل الفواتير"
+    }
+},
+{
+    "name": "delete-invoices",
+    "display_name": {
+        "en": "Delete Invoices",
+        "ar": "حذف الفواتير"
+    }
+},
+{
+    "name": "show-invoices",
+    "display_name": {
+        "en": "Show Invoices",
+        "ar": "عرض تفاصيل الفواتير"
+    }
+},
+{
+    "name": "list-transactions",
+    "display_name": {
+        "en": "Transactions List",
+        "ar": "عرض المعاملات المالية" 
+    }
+},
+{
+    "name": "create-transactions",
+    "display_name": {
+        "en": "Create Transactions",
+        "ar": "إنشاء المعاملات المالية"
+    }
+},
+{
+    "name": "pay-invoices",
+    "display_name": {
+        "en": "Pay Invoices",
+        "ar": "دفع الفواتير"
+    }
+},{
+    "name": "list-languages",
+    "display_name": {
+        "en": "List Languages",
+        "ar": "عرض اللغات"
+    }
+},{
+    "name": "list-settings",
+    "display_name": {
+        "en": "List Settings",
+        "ar": "عرض الإعدادات"
+    }
+},{
+    "name": "edit-settings",
+    "display_name": {
+        "en": "Edit Settings",
+        "ar": "تعديل الإعدادات"
+    }
+},{
+    "name": "list-categories",
+    "display_name": {
+        "en": "List Categories",
+        "ar": "عرض الفئات"
+    }
+},
+{
+    "name": "create-categories",
+    "display_name": {
+        "en": "Create Categories",
+        "ar": "إنشاء الفئات"
+    }
+},
+{
+    "name": "edit-categories",
+    "display_name": {
+        "en": "Edit Categories",
+        "ar": "تعديل الفئات"
+    }
+},{
+    "name": "delete-categories",
+    "display_name": {
+        "en": "Delete Categories",
+        "ar": "حذف الفئات"
+    }
+},{
+    "name": "list-brands",
+    "display_name": {
+        "en": "List Brands",
+        "ar": "عرض العلامات التجارية"
+    }
+},{
+    "name": "create-brands",
+    "display_name": {
+        "en": "Create Brands",
+        "ar": "إنشاء العلامات التجارية"
+    }
+},{
+    "name": "edit-brands",
+    "display_name": {
+        "en": "Edit Brands",
+        "ar": "تعديل العلامات التجارية"
+    }
+},{
+    "name": "delete-brands",
+    "display_name": {
+        "en": "Delete Brands",
+        "ar": "حذف العلامات التجارية"
+    }
+},{
+    "name": "list-clients",
+    "display_name": {
+        "en": "List Clients",
+        "ar": "عرض العملاء"
+    }
+},{
+    "name": "edit-clients",
+    "display_name": {
+        "en": "Edit Clients",
+        "ar": "تعديل العملاء"
+    }
+},{
+    "name": "create-clients",
+    "display_name": {
+        "en": "Create Clients",
+        "ar": "إنشاء العملاء"
+    }
+},{
+    "name": "delete-clients",
+    "display_name": {
+        "en": "Delete Clients",
+        "ar": "حذف العملاء"
+    }
+}
+
+]

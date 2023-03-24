@@ -1,0 +1,21 @@
+[
+    {
+        "name": "complaint",
+        "default": 2,
+        "type": "textarea",
+        "label:en": "Complaint",
+        "label:ar": "الشكوي",
+        "placeholder:en": "Please enter your complaint",
+        "placeholder:ar": "الرجاء إدخال الشكوى",
+        "validation": {
+            "min": 2,
+            "max": 1000,
+            "regex": "",
+            "required": false,
+            "rows": 5,
+            "cols": 10
+        },
+        "status": false,
+        "options": {}
+    }
+]

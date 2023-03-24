@@ -1,0 +1,54 @@
+[
+    {
+        "name": "cuntry",
+        "default": 2,
+        "sort": 11,
+        "status": false,
+        "type": "options",
+        "validation": {
+            "required": false
+        },
+        "label:en": "Cuntry",
+        "label:ar": "الدولة",
+        "placeholder:en": "Please enter cuntry",
+        "placeholder:ar": "الرجاء ادخال الدولة",
+        "options:en": [
+            "Egypt",
+            "Saudi Arabia",
+            "UAE",
+            "Oman",
+            "Qatar",
+            "Kuwait",
+            "Bahrain",
+            "Jordan",
+            "Lebanon",
+            "Syria",
+            "Iraq",
+            "Algeria",
+            "Morocco",
+            "Tunisia",
+            "Libya",
+            "Sudan",
+            "Yemen"
+        ],
+        "options:ar": [
+            "مصر",
+            "السعودية",
+            "الامارات",
+            "عمان",
+            "قطر",
+            "الكويت",
+            "البحرين",
+            "الاردن",
+            "لبنان",
+            "سوريا",
+            "العراق",
+            "الجزائر",
+            "المغرب",
+            "تونس",
+            "ليبيا",
+            "السودان",
+            "اليمن"
+        ]
+    }
+]

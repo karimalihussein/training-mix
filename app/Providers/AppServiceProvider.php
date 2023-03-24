@@ -18,6 +18,8 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Gate;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -74,5 +76,7 @@ class AppServiceProvider extends ServiceProvider
                 'step'           => Step::class,
                 'series'         => Series::class,
         ]);
+        Gate::define('admin', fn(User $user) => $user->is_admin);
+        Blade::if('admin', fn() => auth()->user()?->can('admin'));
     }
 }

@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Post extends Model
 {
-    use HasFactory;
-
+    use HasFactory, Searchable;
+    
     const ACTIVE_STATUS = 1;
 
     const INACTIVE_STATUS = 2;
@@ -53,6 +54,13 @@ class Post extends Model
     {
         return $this->morphToMany(Tag::class, 'taggable');
 
+    }
+    /**
+     * Get the name of the index associated with the model.
+     */
+    public function searchableAs(): string
+    {
+        return 'posts_index';
     }
 
 

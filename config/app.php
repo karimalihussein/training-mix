@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => settings('app_name', 'Laravel'),
     'test_url'  => env('TEST_URL', 'http://test.com'),
 
     /*

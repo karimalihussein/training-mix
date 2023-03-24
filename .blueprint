@@ -1,0 +1,29 @@
+models:
+    Achievement: { name: string, user_id: integer, datails: text }
+    Article: { title: string, slug: string, description: 'text nullable', image: 'string nullable', user_id: 'biginteger unsigned', published_at: 'datetime nullable' }
+    Category: { name: string, parent_id: 'biginteger unsigned nullable' }
+    Center: { name: string, count: 'integer default:0' }
+    Comment: { commentable_id: 'biginteger unsigned', commentable_type: string, content: string }
+    Concert: { title: string, subtitle: string, date: datetime, ticket_price: 'float:8,2', venue: string, venue_address: string, city: string, state: string, zip: string, additional_information: 'text nullable', published_at: 'datetime nullable' }
+    Customer: { user_id: 'biginteger unsigned', name: string, contract_at: 'datetime nullable', active: 'smallinteger unsigned' }
+    Feature: { title: string, status: 'boolean default:1' }
+    Image: { resource_type: string, resource_id: 'biginteger unsigned', path: string }
+    Invoice: { order_id: 'biginteger unsigned', invoice_number: 'integer unsigned nullable' }
+    Login: { user_id: 'biginteger unsigned', ip_address: string, user_agent: string, created_at: datetime }
+    Office: { user_id: 'biginteger unsigned', featured_image_id: 'biginteger unsigned nullable', title: string, description: text, lat: 'decimal:11,8', lng: 'decimal:11,8', address_line1: text, address_line2: 'text nullable', approval_status: 'boolean default:1', hidden: 'boolean default:0', price_per_day: integer, monthly_discount: 'integer default:0' }
+    Order: { user_id: 'biginteger unsigned', details: text, status: 'integer unsigned default:1' }
+    PasswordHistory: { user_id: 'biginteger unsigned', password: string }
+    Person: { name: string, gender: string }
+    Post: { title: string, content: text, active: 'smallinteger unsigned default:1' }
+    Product: { name: string, type: string, price: 'decimal:8,2' }
+    Purchase: { first_name: string, last_name: string, email: string, city: string, address: string, zip_code: string }
+    Reply: { thread_id: 'biginteger unsigned', user_id: 'biginteger unsigned', body: text }
+    Reservation: { user_id: 'biginteger unsigned', office_id: 'biginteger unsigned', price: integer, status: 'boolean default:1', start_date: date, end_date: date, wifi_password: 'text nullable' }
+    Sale: { region: string, country: string, item_type: string, sales_channel: string, order_priority: string, order_date: string, order_id: integer, ship_date: string, units_sold: string, unit_price: string, unit_cost: string, total_revenue: string, total_cost: string, total_profit: string }
+    Series: { title: string, slug: string }
+    Step: { title: string, '`order`': 'float:8,2' }
+    Tag: { name: string }
+    Thread: { user_id: 'biginteger unsigned', category_id: 'biginteger unsigned', title: string, body: 'text nullable' }
+    Transaction: { id: string, user_id: integer, checkout_id: string, status: string, amount: 'float:8,2', currency: string, data: 'json nullable', trackable_data: json, brand: string }
+    User: { name: string, email: string, email_verified_at: 'datetime nullable', password: string, employee_type: 'string default:manager', start_date: 'date nullable', is_admin: 'boolean default:0', remember_token: 'string:100 nullable' }
+    Visit: { visitable_type: string, visitable_id: 'biginteger unsigned', data: json }

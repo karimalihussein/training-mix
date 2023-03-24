@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\AchievementController;
-
+use App\Http\Controllers\Api\PostsController;
+use App\Http\Controllers\Api\RegistrationController;
 use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\GihtubController;
 use App\Http\Controllers\HostReservationController;
@@ -16,8 +17,10 @@ use App\Http\Controllers\V2\InvoiceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StepController;
+use App\Http\Controllers\TestContoller;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WhatsappController;
+use Orion\Facades\Orion;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -64,5 +67,11 @@ Route::get("steps", [StepController::class, 'index']);
 Route::get("steps/create", [StepController::class, 'store']);
 Route::get("steps/refresh", [StepController::class, 'refresh']);
 Route::get('features', [FeatureController::class, 'index']);
+Route::get('test', [TestContoller::class, '__invoke']);
+
+
+Orion::resource('posts', PostsController::class);
+
+Route::post('registeration', RegistrationController::class);
 
 

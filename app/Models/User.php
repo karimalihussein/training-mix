@@ -9,11 +9,11 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Devinweb\LaravelHyperpay\Traits\ManageUserTransactions;
-use Bpuig\Subby\Traits\HasSubscriptions;
-
+use Laravel\Scout\Searchable;
+use Octopy\Impersonate\Concerns\Impersonate;
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, ManageUserTransactions, HasSubscriptions;
+    use HasApiTokens, HasFactory, Notifiable, ManageUserTransactions, Impersonate;
     /**
      * The attributes that are mass assignable.
      *
@@ -54,11 +54,11 @@ class User extends Authenticatable
     protected $appends = [
         // 'salary',
     ];
-    
+
 
     /**
      * Image relationship
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\MorphOne
      */
     public function image()
@@ -95,9 +95,9 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
-    public function offices() 
+    public function offices()
     {
-        return $this->hasMany(Office::class); 
+        return $this->hasMany(Office::class);
     }
 
 
@@ -155,4 +155,11 @@ class User extends Authenticatable
         ])->with('lastLogin');
     }
 
+    /**
+     * Get the name of the index associated with the model.
+     */
+    public function searchableAs(): string
+    {
+        return 'users_index';
+    }
 }

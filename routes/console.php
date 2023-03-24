@@ -2,6 +2,7 @@
 
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
+use Symfony\Component\Process\Process;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,16 @@ use Illuminate\Support\Facades\Artisan;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
+
+Artisan::command('tail {file=storage/logs/laravel.log} {--only=}', function () {
+    $command = 'tail -f "$FILE" | grep "$ONLY"';
+    Process::fromShellCommandline($command)
+        ->setTty(true)
+        ->setTimeout(null)
+        ->run(null, [
+            'FILE' => $this->argument('file'),
+            'ONLY' => $this->option('only'),
+        ]);
+})->purpose('Tail a file');
+
+

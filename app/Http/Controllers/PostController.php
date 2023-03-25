@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\PostResource;
 use App\Models\Post;
+use App\Models\User;
 use App\Models\Validators\PostValidator;
 use App\QueryFilters\Active;
 use App\QueryFilters\MaxCount;
@@ -16,29 +17,15 @@ use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
-   
-    public function __construct(RepositoryInterface $postRepository)
+    public function index(Request $request)
     {
-        $this->postRepository = $postRepository;
-    }
-
-    public function index()
-    {
-        $posts = $this->postRepository->all();
-        return $posts;
-        // $posts = Post::query();
-        // $posts = app(Pipeline::class)->send(Post::query())
-        // ->through([
-        //     Active::class,
-        //     Sort::class,
-        //     MaxCount::class
-        // ])
-        // ->thenReturn();
-
-  
-        // $posts = $posts->get();
-        
-        // return view('posts.index', compact('posts'));
+        $posts = Post::select('id','title', 'user_id', 'content' ,'active', 'created_at')
+        ->with('user:id,name')
+        ->when(request()->has('user_id'), function($query) use ($request){
+            $query->where('user_id', $request->user_id);
+        })
+        ->paginate(500);
+        return view('posts.index', compact('posts'));
     }
 
 

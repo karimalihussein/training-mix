@@ -7,11 +7,14 @@ use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\ReferencesController;
 use App\Http\Controllers\GihtubController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileUpdatePassword;
 use App\Http\Controllers\SeriesIndexController;
 use App\Http\Controllers\SeriesShowController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UsersController;
+
 use App\Http\Controllers\WebscrapingController;
 use Bpuig\Subby\Models\Plan;
 use Illuminate\Support\Facades\Route;
@@ -49,7 +52,7 @@ Route::post('profile/update-password', [ProfileUpdatePassword::class, 'updatePas
 
 
 // Route::get('articles', [ArticleController::class, 'index'])->name('articles.index');
-Route::get('users', [UserController::class, 'index'])->name('users.index');
+Route::get('users', [UsersController::class, 'index'])->name('users.index');
 
 // auth middleware is applied to all routes in this group
 Route::middleware(['auth'])->group(function () {
@@ -80,3 +83,5 @@ Route::get('events', function () {
 Route::localized(function () {
     Route::get('about', AboutController::class)->name('about')->middleware(\CodeZero\LocalizedRoutes\Middleware\SetLocale::class);
 });
+
+Route::get('posts', [PostController::class, 'index'])->name('posts.index');

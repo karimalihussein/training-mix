@@ -201,12 +201,9 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // 'ExampleClass' => App\Example\ExampleClass::class,
         'GeoIP' => \Torann\GeoIP\Facades\GeoIP::class,
         'Clockwork' => Clockwork\Support\Laravel\Facade::class,
         'Goutte' => Weidner\Goutte\GoutteFacade::class,
-        'Talk'      => Nahid\Talk\Facades\Talk::class,
-
     ])->toArray(),
 
 ];

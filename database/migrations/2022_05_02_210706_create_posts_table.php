@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('content');
             $table->unsignedSmallInteger('active')->default(Post::ACTIVE_STATUS);
+            $table->foreignId('user_id')->index()->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

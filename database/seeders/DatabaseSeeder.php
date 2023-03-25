@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Office;
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -58,6 +59,8 @@ class DatabaseSeeder extends Seeder
 
         // assign roles to user
         $user->assignRole('admin');
+
+        User::factory()->times(5)->hasPosts(2000)->create();
 
     }
 }

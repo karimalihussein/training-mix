@@ -10,13 +10,12 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Devinweb\LaravelHyperpay\Traits\ManageUserTransactions;
 use Laravel\Scout\Searchable;
-use Octopy\Impersonate\Concerns\Impersonate;
 use Spatie\Permission\Traits\HasPermissions;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, ManageUserTransactions, HasRoles, HasPermissions, Impersonate;
+    use HasApiTokens, HasFactory, Notifiable, ManageUserTransactions, HasRoles, HasPermissions;
     /**
      * The attributes that are mass assignable.
      *
@@ -164,6 +163,12 @@ class User extends Authenticatable
     public function searchableAs(): string
     {
         return 'users_index';
+    }
+
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
     }
 
 

@@ -33,7 +33,6 @@
         "mjaschen/phpgeo": "^4.2",
         "nafezly/payments": "^2.4",
         "nwidart/laravel-modules": "^9.0",
-        "octopyid/laravel-impersonate": "^3",
         "omnipay/paypal": "^3.0",
         "predis/predis": "^2.0",
         "pusher/pusher-php-server": "^7.2",

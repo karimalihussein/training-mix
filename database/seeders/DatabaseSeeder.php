@@ -24,43 +24,9 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'password' => bcrypt('password'),
         ]);
-
-        // create roles
-        $roles = [
-            'admin',
-            'manager',
-            'employee',
-        ];
-
-        foreach ($roles as $role) {
-            \Spatie\Permission\Models\Role::create(['name' => $role]);
-        }
-
-        // create permissions
-        $permissions = 
-        [
-            'create office',
-            'read office',
-            'update office',
-            'delete office',
-            'create employee',
-            'read employee',
-            'update employee',
-            'delete employee',
-            'create article',
-            'read article',
-            'update article',
-            'delete article',
-        ];
-
-        foreach ($permissions as $permission) {
-            \Spatie\Permission\Models\Permission::create(['name' => $permission]);
-        }
-
-        // assign roles to user
-        $user->assignRole('admin');
-
+        $this->call([
+            RolesAndPermissionsSeeder::class,
+        ]);
         User::factory()->times(5)->hasPosts(2000)->create();
-
     }
 }

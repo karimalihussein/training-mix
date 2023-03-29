@@ -1,5 +1,6 @@
 <?php
 
+use App\Helpers\Routes\RouteHelper;
 use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\Api\PostsController;
 use App\Http\Controllers\Api\RegistrationController;
@@ -82,3 +83,13 @@ Route::get('simple', SimpleController::class);
 
 
 Route::post('folders', FolderController::class);
+
+
+
+Route::prefix('v1')->group(function () {
+    RouteHelper::includeRouteFiles(__DIR__ . '/api/v1');
+});
+
+Route::prefix('v2')->group(function () {
+    RouteHelper::includeRouteFiles(__DIR__ . '/api/v2');
+});

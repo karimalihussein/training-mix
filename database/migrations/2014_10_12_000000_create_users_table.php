@@ -23,7 +23,7 @@ return new class extends Migration
             $table->date('start_date')->nullable();
             $table->boolean('is_admin')->default(false);
             $table->string('profile')->nullable();
-            // $table->foreignId('last_login_id')->constrainted('logins')->nullable();
+            $table->foreignId('last_login_id')->constrainted('logins')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

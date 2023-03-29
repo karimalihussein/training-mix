@@ -28,6 +28,6 @@ class TestContoller extends Controller
 {
     public function __invoke()
     {
-     
+        return User::factory()->create();
     }
 }

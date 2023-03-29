@@ -185,6 +185,7 @@ return [
         Stevebauman\Location\LocationServiceProvider::class,
         Clockwork\Support\Laravel\ClockworkServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        App\Providers\GeolocationServiceProvider::class,
 
 
     ],

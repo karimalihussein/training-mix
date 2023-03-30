@@ -28,6 +28,7 @@ class TestContoller extends Controller
 {
     public function __invoke()
     {
-        return User::factory()->create();
+        $user =  User::factory()->create();
+        event(new \App\Events\UserCreated($user));
     }
 }

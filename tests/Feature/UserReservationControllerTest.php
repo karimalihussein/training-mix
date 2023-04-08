@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\Office;
 use App\Models\Reservation;
 use App\Models\User;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -13,7 +14,7 @@ use Tests\TestCase;
 
 class UserReservationControllerTest extends TestCase
 {
-    use LazilyRefreshDatabase;
+    
    /**
     * get user reservations data 
     * @test
@@ -200,8 +201,7 @@ class UserReservationControllerTest extends TestCase
             'office_id'     => 999,
         ]);
 
-    //    dd($response->json());
-        $response->assertStatus(302);
+        $response->assertStatus(422);
     }
 
     /*
@@ -222,7 +222,7 @@ class UserReservationControllerTest extends TestCase
             'office_id'     => $office->id,
         ]);
 
-        $response->assertStatus(302);
+        $response->assertStatus(422);
   
     }
 

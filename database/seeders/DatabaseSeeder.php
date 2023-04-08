@@ -27,6 +27,6 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RolesAndPermissionsSeeder::class,
         ]);
-        User::factory()->times(5)->hasPosts(2000)->create();
+        User::factory()->times(5)->hasPosts(10)->create();
     }
 }

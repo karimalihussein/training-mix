@@ -5,12 +5,14 @@ namespace Tests\Feature;
 use App\Models\Category;
 use App\Models\Thread;
 use App\Models\User;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ThreadTest extends TestCase
 {
+  
     
    function test_speed_considirations()
    {

@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class AchievementTest extends TestCase
 {
-    use RefreshDatabase;
+    
 
     public function when_createing_achievement_some_fields_are_required()
     {

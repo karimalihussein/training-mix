@@ -3,14 +3,10 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class AchievementTest extends TestCase
 {
-    use RefreshDatabase;
-
     public function when_createing_achievement_some_fields_are_required()
     {
         $url = route('achievements.store');

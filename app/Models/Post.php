@@ -25,35 +25,35 @@ class Post extends Model
         'user_id',
     ];
 
-    // /**
-    //  * Image relationship
-    //  * 
-    //  * @return \Illuminate\Database\Eloquent\Relations\MorphOne
-    //  */
-    // public function image()
-    // {
-    //     return $this->morphOne(Image::class, 'imageable');
-    // }
+    /**
+     * Image relationship
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
+     */
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable');
+    }
 
-    // /**
-    //  * Comment relationship
-    //  * 
-    //  * @return \Illuminate\Database\Eloquent\Relations\MorphMany
-    //  */
-    // public function comments()
-    // {
-    //     return $this->morphMany(Comment::class, 'commentable');
-    // }
+    /**
+     * Comment relationship
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
 
-    // /**
-    //  * Tag relationship
-    //  * 
-    //  * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
-    //  */
-    // public function tags()
-    // {
-    //     return $this->morphToMany(Tag::class, 'taggable');
-    // }
+    /**
+     * Tag relationship
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     */
+    public function tags()
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
+    }
 
     /**
      * User relationship
@@ -64,10 +64,14 @@ class Post extends Model
     {
         return $this->belongsTo(User::class);
     }
+    
 
-  
-  
-
-
+    public static function boot()
+    {
+        parent::boot();
+        static::creating(function($post){
+            $post->user_id = auth()->id() ?? $post->user_id;
+        });
+    }
   
 }

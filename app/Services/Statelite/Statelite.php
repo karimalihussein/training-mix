@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Maps;
+namespace App\Services\Statelite;
 
 class Statelite
 {

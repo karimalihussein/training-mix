@@ -1,6 +1,7 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\Bits;
+
 
 use App\Classes\Newsletter;
 use App\Containers\Container;

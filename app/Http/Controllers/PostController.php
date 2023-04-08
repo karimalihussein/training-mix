@@ -29,9 +29,9 @@ class PostController extends Controller
     }
 
 
-    public function store()
+    public function store(Request $request)
     {
-        $attributes = (new PostValidator())->validate($post = new Post(),request()->all());
+        $attributes = (new PostValidator())->validate($post = new Post(), $request->all());
         $post = DB::transaction(function()use($post,$attributes){
             $post->fill(
                     Arr::except($attributes, ['tags'])

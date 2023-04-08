@@ -26,3 +26,7 @@
             
     
             return $data;
+
+        //     Package innocenzi/laravel-vite is abandoned, you should avoid using it. Use official Vite integration from the Laravel team instead.
+        //     Package paypal/paypal-checkout-sdk is abandoned, you should avoid using it. No replacement was suggested.
+        //     Package spatie/data-transfer-object is abandoned, you should avoid using it. Use spatie/laravel-data instead.

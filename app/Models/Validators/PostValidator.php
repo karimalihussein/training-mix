@@ -12,8 +12,8 @@ class PostValidator
     {
        return validator($attributes,
         [
-            'title'                =>     [Rule::when($post->exists, 'sometimes'),'required', 'string'],
-            'content'              =>     [Rule::when($post->exists, 'sometimes'),'required', 'string'],
+            'title'                =>     [Rule::when($post->exists, 'sometimes'), 'required', 'string'],
+            'content'              =>     [Rule::when($post->exists, 'sometimes'), 'required', 'string'],
             'tags'                 =>     ['array'],
             'tags.*'               =>     ['integer', Rule::exists('tags', 'id')],
         ])->validate();

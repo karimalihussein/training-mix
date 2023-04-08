@@ -8,7 +8,7 @@ use App\Models\Reservation;
 use App\Models\Tag;
 use App\Models\User;
 use App\Notifications\OfficePendingApproval;
-use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Laravel\Sanctum\Sanctum;
@@ -20,7 +20,7 @@ use Illuminate\Http\UploadedFile;
 
 class OfficeControllerTest extends TestCase
 {
-    use LazilyRefreshDatabase;
+    
     /**
      * A basic feature test example.
      *

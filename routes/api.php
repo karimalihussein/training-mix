@@ -73,7 +73,6 @@ Route::get('features', [FeatureController::class, 'index']);
 Route::get('test', [TestContoller::class, '__invoke']);
 
 
-Orion::resource('posts', PostsController::class);
 
 Route::post('registeration', RegistrationController::class);
 

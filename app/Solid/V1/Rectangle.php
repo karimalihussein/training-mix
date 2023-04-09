@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Solid\V1;
+
+
+use App\Solid\V1\Interfaces\ShapeInterface;
+
+class Rectangle implements ShapeInterface
+{
+    public $width;
+    public $height;
+
+    public function __construct($width, $height)
+    {
+        $this->width = $width;
+        $this->height = $height;
+    }
+
+    public function area(): float
+    {
+        return $this->width * $this->height;
+    }
+
+    
+}

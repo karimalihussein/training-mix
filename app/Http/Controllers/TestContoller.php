@@ -2,33 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Connectors\ForgeConnector;
-use App\Models\GeneralSettings;
-use App\Models\Office;
-use App\Models\Person;
-use App\Models\Post;
-use App\Models\User;
-use App\Notifications\OfficePendingApproval;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Notification;
-use GenderApi\Client as GenderApiClient;
-use GrahamCampbell\ResultType\Success;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
-use ParagonIE\Sodium\Core\Curve25519\H;
-use Meilisearch\Client;
-use Nafezly\Payments\Classes\PaymobPayment;
-use Omnipay\Omnipay;
-use Location\Coordinate;
-use Location\Distance\Vincenty;
-use Location\Formatter\Coordinate\DecimalDegrees;
-use Location\Formatter\Coordinate\DMS;
+use App\Solid\V1\Circle;
+use App\Solid\V1\Triangle;
+use App\Solid\V1\Rectangle;
+use App\Solid\V1\AreaCalculator;
+use App\Solid\V2\PaymentService;
+use App\Http\Controllers\Controller;
+use App\Solid\V2\StripePaymentMethod;
 
 class TestContoller extends Controller
 {
     public function __invoke()
     {
-        $user =  User::factory()->create();
-        event(new \App\Events\UserCreated($user));
+        // $shapes = [
+        //     new Rectangle(2, 3),
+        //     new Circle(4),
+        //     new Triangle(4, 5)
+        // ];
+        // return (new AreaCalculator)->calculate(...$shapes);
+
+        return (new PaymentService)->pay(new StripePaymentMethod);
     }
 }

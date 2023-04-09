@@ -8,7 +8,11 @@ use App\Solid\V1\Rectangle;
 use App\Solid\V1\AreaCalculator;
 use App\Solid\V2\PaymentService;
 use App\Http\Controllers\Controller;
+use App\Models\Post;
 use App\Solid\V2\StripePaymentMethod;
+use App\Solid\V3\HtmlExport;
+use App\Solid\V3\PdfExport;
+use App\Solid\V3\PostReportService;
 
 class TestContoller extends Controller
 {
@@ -21,6 +25,14 @@ class TestContoller extends Controller
         // ];
         // return (new AreaCalculator)->calculate(...$shapes);
 
-        return (new PaymentService)->pay(new StripePaymentMethod);
+        // return (new PaymentService)->pay(new StripePaymentMethod);
+
+        // Post::factory()->count(10)->create([
+        //     'created_at' => now()->subDays(5)
+        // ]);
+
+        // return (new PostReportService)->between(now()->subDays(10), now()->subDays(5))->export(
+        //     new PdfExport
+        // );
     }
 }

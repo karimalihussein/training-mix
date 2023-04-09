@@ -10,7 +10,7 @@
     "require": {
         "php": "^8.0.2",
         "algolia/algoliasearch-client-php": "^3.3",
-        "beyondcode/laravel-websockets": "^1.13",
+        "beyondcode/laravel-websockets": "^1.14",
         "codezero/laravel-localized-routes": "^2.9",
         "devinweb/laravel-hyperpay": "^1.1",
         "ebess/advanced-nova-media-library": "^4.0",

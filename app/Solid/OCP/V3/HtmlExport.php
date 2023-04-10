@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Solid\V3;
+namespace App\Solid\OCP\V3;
 
-use App\Solid\V3\Interfaces\PostReportInterface;
+use App\Solid\OCP\V3\Interfaces\PostReportInterface;
 
 class HtmlExport implements PostReportInterface
 {

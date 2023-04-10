@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Solid\ISP\V2\interfaces;
+namespace App\Solid\ISP\V2\Interfaces;
 
 interface Account
 {

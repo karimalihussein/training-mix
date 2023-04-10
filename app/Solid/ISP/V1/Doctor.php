@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Solid\ISP;
+namespace App\Solid\ISP\V1;
 
-use App\Solid\ISP\interfaces\AppointmentInterface;
-use App\Solid\ISP\interfaces\PrescribableInterface;
+use App\Solid\ISP\V1\Interfaces\AppointmentInterface;
+use App\Solid\ISP\V1\Interfaces\PrescribableInterface;
 
 class Doctor implements AppointmentInterface, PrescribableInterface
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Solid\V3\Interfaces;
+namespace App\Solid\OCP\V3\Interfaces;
 
 interface PostReportInterface
 {

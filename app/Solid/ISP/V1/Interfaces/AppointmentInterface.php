@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Solid\ISP\interfaces;
+namespace App\Solid\ISP\V1\Interfaces;
 
 interface AppointmentInterface {
     public function createAppointment($date, $time);

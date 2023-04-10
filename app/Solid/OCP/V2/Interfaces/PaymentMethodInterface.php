@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Solid\V1\Interfaces;
+namespace App\Solid\OCP\V2\Interfaces;
 
 interface PaymentMethodInterface
 {

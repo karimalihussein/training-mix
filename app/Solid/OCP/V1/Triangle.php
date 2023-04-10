@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Solid\V1;
+namespace App\Solid\OCP\V1;
 
-use App\Solid\V1\Interfaces\ShapeInterface;
+use App\Solid\OCP\V1\Interfaces\ShapeInterface;
 
 class Triangle Implements ShapeInterface
 {

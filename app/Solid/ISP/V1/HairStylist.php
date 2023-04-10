@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Solid\ISP;
+namespace App\Solid\ISP\V1;
 
-use App\Solid\ISP\interfaces\AppointmentInterface;
-use App\Solid\ISP\interfaces\StylableInterface;
+use App\Solid\ISP\V1\Interfaces\AppointmentInterface;
+use App\Solid\ISP\V1\Interfaces\StylableInterface;
 
 class HairStylist implements AppointmentInterface, StylableInterface
 {

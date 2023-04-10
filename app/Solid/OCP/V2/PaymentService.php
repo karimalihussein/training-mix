@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Solid\V2;
+namespace App\Solid\OCP\V2;
 
-use App\Solid\V1\Interfaces\PaymentMethodInterface;
+use App\Solid\OCP\V2\Interfaces\PaymentMethodInterface;
 
 class PaymentService
 {

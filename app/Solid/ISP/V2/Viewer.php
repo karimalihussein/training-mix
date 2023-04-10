@@ -2,8 +2,8 @@
 
 namespace App\Solid\ISP\V2;
 
-use App\Solid\ISP\V2\interfaces\Account;
-use App\Solid\ISP\V2\interfaces\Watchable;
+use App\Solid\ISP\V2\Interfaces\Account;
+use App\Solid\ISP\V2\Interfaces\Watchable;
 
 class Viewer implements Watchable
 {

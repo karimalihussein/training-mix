@@ -12,6 +12,7 @@ use App\Http\Controllers\ProfileUpdatePassword;
 use App\Http\Controllers\SeriesIndexController;
 use App\Http\Controllers\SeriesShowController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UsersController;
 
@@ -85,3 +86,6 @@ Route::localized(function () {
 });
 
 Route::get('posts', [PostController::class, 'index'])->name('posts.index');
+
+Route::get('test', [TestController::class, 'index'])->name('test.index');
+Route::post('test', [TestController::class, 'store'])->name('test.store');

@@ -29,6 +29,7 @@
         "laravel/telescope": "^4.9",
         "laravel/tinker": "^2.7",
         "league/omnipay": "^3",
+        "livewire/livewire": "^2.12",
         "lorisleiva/laravel-actions": "^2.4",
         "meilisearch/meilisearch-php": "^0.24.2",
         "mjaschen/phpgeo": "^4.2",
@@ -54,6 +55,7 @@
         "spatie/laravel-settings": "^2.4",
         "spatie/valuestore": "^1.3",
         "stevebauman/location": "^6.5",
+        "symfony/finder": "^6.2",
         "tailflow/laravel-orion": "^2.19",
         "thejano/laravel-domain-driven-design": "^1.0",
         "torann/geoip": "^3.0",
@@ -96,10 +98,6 @@
         }
     },
     "scripts": {
-        "post-autoload-dump": [
-            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
-        ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
         ],
@@ -108,6 +106,11 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi",
+            "@php artisan vendor:publish --force --tag=livewire:assets --ansi"
         ]
     },
     "extra": {
@@ -132,9 +135,9 @@
             "type": "composer",
             "url": "https://nova.laravel.com"
         },
-        "0": {
-            "type": "composer",
-            "url": "https://nova.laravel.com"
+        "demo": {
+            "type": "path",
+            "url": "../saasforces/demo"
         }
     }
 }

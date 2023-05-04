@@ -18,6 +18,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const HOME = '/dashboard';
+    public const VOTING_HOME = '/voting/dashboard';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
@@ -29,22 +30,22 @@ class RouteServiceProvider extends ServiceProvider
         $this->configureRateLimiting();
         $this->mapWebRoutes();
         $this->mapApiRoutes();
-     
     }
     protected function mapWebRoutes()
     {
-            Route::middleware('web')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/web.php'));
-       
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/web.php'));
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/voting.php'));
     }
     protected function mapApiRoutes()
     {
-            Route::prefix('api')
-                ->middleware('api')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/api.php'));
-       
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/api.php'));
     }
 
 

@@ -2,12 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Scopes\ActivePostScope;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Prunable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Contracts\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Post extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes, Prunable;
     
     const ACTIVE_STATUS = 1;
 
@@ -66,12 +70,17 @@ class Post extends Model
     }
     
 
-    public static function boot()
+    public static function booted()
     {
-        parent::boot();
+        static::addGlobalScope(new ActivePostScope);
         static::creating(function($post){
             $post->user_id = auth()->id() ?? $post->user_id;
         });
+    }
+
+    public function prunbable(): Builder
+    {
+        return static::where('active', self::INACTIVE_STATUS);
     }
   
 }

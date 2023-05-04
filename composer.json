@@ -134,10 +134,6 @@
         "nova": {
             "type": "composer",
             "url": "https://nova.laravel.com"
-        },
-        "demo": {
-            "type": "path",
-            "url": "../saasforces/demo"
         }
     }
 }

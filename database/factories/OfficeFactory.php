@@ -28,7 +28,7 @@ class OfficeFactory extends Factory
             'approval_status' => Office::APPROVAL_APPROVED,
             'hidden' => false,
             'price_per_day' => fake()->randomElement([1_000, 2_000, 3_000, 4_000]),
-            'monthly_discount' => 0
+            'monthly_discount' => 0,
         ];
     }
 

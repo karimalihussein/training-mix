@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Bpuig\Subby\Models\Plan;
 use Bpuig\Subby\Models\PlanFeature;
 
@@ -10,19 +9,15 @@ class CheckOutController extends Controller
 {
     public function store()
     {
-         $user = auth()->user();
-         $features = $user->subscription('main')->plan->features;
+        $user = auth()->user();
+        $features = $user->subscription('main')->plan->features;
 
-         $features->contains('name', 'articles-management');
-
-
-
-
+        $features->contains('name', 'articles-management');
 
         // return $user->subscription('main')->features();
         // return $user->subscription('main')->isActive();
         // $plan = Plan::first();
-        // return $plan->features; 
+        // return $plan->features;
         // return auth()->user()->subscriptions->first()->plan->hasAnyFeature(['articles-management']);
         // $plan = Plan::create([
         //     'tag' => 'basic',

@@ -13,5 +13,4 @@ class ReportDownloadCSVService implements ReportDownloadServiceInterface
         // return response()->download($report);
         return "you're successfully downloaded $report.csv";
     }
-
 }

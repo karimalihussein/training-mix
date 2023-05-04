@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Orderer
 {
     protected $model;
+
     public function __construct(Model $model)
     {
         $this->model = $model;
     }
+
     public function firstOrder()
     {
         return $this->model->query()->orderBy('order', 'asc')->first() + 1;
@@ -24,11 +26,10 @@ class Orderer
     public function afterOrder()
     {
         $adjecent = $this->model->query()->where('order', '>', $this->model->order)
-        ->orderBy('order', 'asc')
-        ->first(); 
+            ->orderBy('order', 'asc')
+            ->first();
 
-        if(!$adjecent)
-        {
+        if (! $adjecent) {
             return $this->model->query()->max('order') + 1;
         }
 
@@ -38,10 +39,10 @@ class Orderer
     public function before()
     {
         $adjecent = $this->model->query()->where('order', '<', $this->model->order)
-        ->orderBy('order', 'desc')
-        ->first(); 
+            ->orderBy('order', 'desc')
+            ->first();
 
-        if(!$adjecent) {
+        if (! $adjecent) {
             return $this->model->query()->min('order') - 1;
         }
 

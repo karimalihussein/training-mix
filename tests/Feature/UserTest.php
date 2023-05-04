@@ -15,10 +15,10 @@ class UserTest extends TestCase
      */
     public function test_login_redirect_to_database()
     {
-      $uesr =  User::factory()->create([
-            'name'        => 'John Doe',
-            'email'       => 'test@test.com',
-            'password'    => bcrypt('secret'),
+        $uesr = User::factory()->create([
+            'name' => 'John Doe',
+            'email' => 'test@test.com',
+            'password' => bcrypt('secret'),
         ]);
 
         $response = $this->post('/login', [
@@ -30,12 +30,11 @@ class UserTest extends TestCase
 
         // $response->assertRedirect('/dashboard');
 
-       
     }
-
 
     /**
      * auth user can access the dashboard
+     *
      * @return void
      */
     public function test_auth_user_can_access_the_dashboard()
@@ -47,6 +46,7 @@ class UserTest extends TestCase
 
     /**
      * guest user can not access the dashboard
+     *
      * @return void
      */
     public function test_guest_user_can_not_access_the_dashboard()
@@ -61,10 +61,7 @@ class UserTest extends TestCase
      */
     public function test_user_has_name_attribute()
     {
-        $user = User::factory()->create(['name'  => 'John']);
+        $user = User::factory()->create(['name' => 'John']);
         $this->assertEquals(strtoupper('john'), $user->name);
     }
-
-
-
 }

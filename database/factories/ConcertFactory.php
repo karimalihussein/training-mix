@@ -2,9 +2,7 @@
 
 namespace Database\Factories;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
-
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Concert>
@@ -18,18 +16,18 @@ class ConcertFactory extends Factory
      */
     public function definition()
     {
-        
+
         return [
-            'title'                  =>  fake()->sentence(),
-            'subtitle'               =>  fake()->sentence(),
-            'date'                   =>  fake()->dateTimeBetween('-1 month', '+1 month'),
-            'ticket_price'           =>  fake()->numberBetween(100, 1000000),
-            'venue'                  =>  fake()->streetName(),
-            'venue_address'          =>  fake()->streetAddress(),
-            'city'                   =>  fake()->city(),
-            'state'                  =>  fake()->state(),
-            'zip'                    =>  fake()->postcode(),
-            'published_at'           =>  fake()->dateTimeBetween('-1 month', '+1 month'),
+            'title' => fake()->sentence(),
+            'subtitle' => fake()->sentence(),
+            'date' => fake()->dateTimeBetween('-1 month', '+1 month'),
+            'ticket_price' => fake()->numberBetween(100, 1000000),
+            'venue' => fake()->streetName(),
+            'venue_address' => fake()->streetAddress(),
+            'city' => fake()->city(),
+            'state' => fake()->state(),
+            'zip' => fake()->postcode(),
+            'published_at' => fake()->dateTimeBetween('-1 month', '+1 month'),
             'additional_information' => 'For tickets, call (555) 555-5555.',
         ];
     }

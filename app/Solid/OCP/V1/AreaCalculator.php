@@ -12,6 +12,7 @@ class AreaCalculator
         foreach ($shapes as $shape) {
             $area += $shape->area();
         }
+
         return $area;
     }
 }

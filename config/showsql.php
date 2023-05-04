@@ -74,6 +74,5 @@ return [
 
         'browser' => false,
 
-
-    ]
+    ],
 ];

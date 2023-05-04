@@ -15,10 +15,4 @@ class Series extends Model
         'title',
         'slug',
     ];
-
-
-
-
-    
-    
 }

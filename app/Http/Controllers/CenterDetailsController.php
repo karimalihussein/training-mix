@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Center;
-use Illuminate\Http\Request;
 
 class CenterDetailsController extends Controller
 {
@@ -18,8 +17,8 @@ class CenterDetailsController extends Controller
         $data = [];
 
         foreach ($sheetData as $key => $value) {
-            if($key > 0){
-                $data[]  = $value[0] . ' ' . $value[1];
+            if ($key > 0) {
+                $data[] = $value[0].' '.$value[1];
             }
         }
 
@@ -27,17 +26,15 @@ class CenterDetailsController extends Controller
 
         foreach (array_count_values($data) as $key => $value) {
             $newData[] = [
-                'name'   => $key,
-                'count'  => $value
+                'name' => $key,
+                'count' => $value,
             ];
         }
 
-        
         $jsonData = public_path('json/centers/details/all.json');
         file_put_contents($jsonData, json_encode($newData));
-        return "done";
 
-
+        return 'done';
 
         // $data = array_chunk($data, 10000);
 
@@ -50,25 +47,23 @@ class CenterDetailsController extends Controller
 
     }
 
-
     public function read()
     {
         $jsonData2 = public_path('/json/centers/details/all.json');
         $data2 = json_decode(file_get_contents($jsonData2), true);
         Center::insert($data2);
-        return "done";
+
+        return 'done';
         // Center
 
         // return $data2;
 
-       
-
-            // foreach (array_count_values($data2) as $key => $value) {
-            //     $newData[] = [
-            //         'name'   => $key,
-            //         'count'  => $value
-            //     ];
-            // }
-            // return $newData;
+        // foreach (array_count_values($data2) as $key => $value) {
+        //     $newData[] = [
+        //         'name'   => $key,
+        //         'count'  => $value
+        //     ];
+        // }
+        // return $newData;
     }
 }

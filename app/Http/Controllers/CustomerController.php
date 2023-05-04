@@ -3,18 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
-use App\Repositories\CustomerRepository;
 use App\Repositories\RepositoryInterface;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
-    
     public function __construct(RepositoryInterface $customerRepository)
     {
         $this->customerRepository = $customerRepository;
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -23,33 +21,34 @@ class CustomerController extends Controller
     public function index()
     {
         $customers = $this->customerRepository->all();
+
         return $customers;
     }
 
     /**
      * show customer details
-     * @param int $id
+     *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         $customer = $this->customerRepository->findById($id);
+
         return $customer;
     }
-
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-       
-       return $this->customerRepository->update($id, $request->all());
-        
+
+        return $this->customerRepository->update($id, $request->all());
+
     }
 
     /**
@@ -62,6 +61,4 @@ class CustomerController extends Controller
     {
         return $this->customerRepository->delete($id);
     }
-
-
 }

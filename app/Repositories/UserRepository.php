@@ -2,8 +2,8 @@
 
 namespace App\Repositories;
 
-use Torann\LaravelRepository\Repositories\AbstractRepository;
 use App\Models\User;
+use Torann\LaravelRepository\Repositories\AbstractRepository;
 
 class UserRepository extends AbstractRepository
 {
@@ -13,7 +13,6 @@ class UserRepository extends AbstractRepository
      * @return string
      */
     protected $model = User::class;
-    
 
     protected $searchable = [
         'query' => [

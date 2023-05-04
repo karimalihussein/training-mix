@@ -4,7 +4,6 @@ namespace App\Jobs;
 
 use App\Models\Center;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
@@ -15,6 +14,7 @@ class CenterXlJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public $data;
+
     public function __construct($data)
     {
         $this->data = $data;
@@ -29,12 +29,11 @@ class CenterXlJob implements ShouldQueue
     {
         foreach ($this->data as $center) {
             $all[] = [
-                    'name' => $center->name,
-                    'gender'  => $center->count,
+                'name' => $center->name,
+                'gender' => $center->count,
             ];
         }
 
         Center::insert($all);
     }
 }
-

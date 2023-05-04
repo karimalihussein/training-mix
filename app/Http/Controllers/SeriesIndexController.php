@@ -10,10 +10,10 @@ class SeriesIndexController extends Controller
     {
         $this->middleware('auth:sanctum');
     }
+
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function __invoke(Request $request)

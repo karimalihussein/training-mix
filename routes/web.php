@@ -2,22 +2,18 @@
 
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ArticleController;
-use App\Http\Controllers\BotManController;
 use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\CheckOutController;
-use App\Http\Controllers\ReferencesController;
 use App\Http\Controllers\GihtubController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileUpdatePassword;
+use App\Http\Controllers\ReferencesController;
 use App\Http\Controllers\SeriesIndexController;
 use App\Http\Controllers\SeriesShowController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\TestController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\UsersController;
-
 use App\Http\Controllers\WebscrapingController;
-use Bpuig\Subby\Models\Plan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,13 +40,11 @@ require __DIR__.'/auth.php';
 Route::get('auth/github/redirect', [GihtubController::class, 'redirectToProvider']);
 Route::get('auth/github/callback', [GihtubController::class, 'handleProviderCallback']);
 
-
 Route::get('/series', SeriesIndexController::class)->name('series.index');
 Route::get('series/{series:slug}', SeriesShowController::class);
 
 Route::get('profile', [ProfileUpdatePassword::class, 'index']);
 Route::post('profile/update-password', [ProfileUpdatePassword::class, 'updatePassword'])->name('profile.update-password');
-
 
 // Route::get('articles', [ArticleController::class, 'index'])->name('articles.index');
 Route::get('users', [UsersController::class, 'index'])->name('users.index');
@@ -70,7 +64,6 @@ Route::get('articles', [ArticleController::class, 'index'])->name('articles.inde
 
 Route::get('chatbot', ChatbotController::class)->name('chatbot');
 
-
 Route::get('webscraping', WebscrapingController::class)->name('webscraping');
 
 Route::get('settings', [SettingsController::class, 'index'])->name('settings.index');
@@ -78,6 +71,7 @@ Route::put('settings', [SettingsController::class, 'update'])->name('settings.up
 
 Route::get('events', function () {
     event(new \App\Events\UserRegister('sasasa'));
+
     return 'Event has been sent!';
 });
 
@@ -89,4 +83,3 @@ Route::get('posts', [PostController::class, 'index'])->name('posts.index');
 
 Route::get('test', [TestController::class, 'index'])->name('test.index');
 Route::post('test', [TestController::class, 'store'])->name('test.store');
-

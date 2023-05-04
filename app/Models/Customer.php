@@ -8,14 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
     use HasFactory;
-    
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'user_id', 'name', 'contract_at', 'active'
+        'user_id', 'name', 'contract_at', 'active',
     ];
 
     /**
@@ -24,8 +24,8 @@ class Customer extends Model
      * @var array
      */
     protected $casts = [
-        'contract_at'  => 'datetime',
-        'active'       => 'boolean'
+        'contract_at' => 'datetime',
+        'active' => 'boolean',
     ];
 
     /**
@@ -36,19 +36,19 @@ class Customer extends Model
         return $this->belongsTo(User::class);
     }
 
-
-    /**
-     * Get the customer's formatted contract date.
-     * @return array
-     */
+     /**
+      * Get the customer's formatted contract date.
+      *
+      * @return array
+      */
      public function format()
      {
          return [
-                'customer_id'    => $this->id,
-                'name'           => $this->name,
-                'created_by'     => $this->user->name,
-                'active'         => $this->active,
-                'last_updated'   => $this->updated_at->diffForHumans()
+             'customer_id' => $this->id,
+             'name' => $this->name,
+             'created_by' => $this->user->name,
+             'active' => $this->active,
+             'last_updated' => $this->updated_at->diffForHumans(),
          ];
      }
 }

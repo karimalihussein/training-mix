@@ -15,13 +15,13 @@ return [
             'app_secret' => env('PUSHER_APP_SECRET'),
             'options' => [
                 'cluster' => env('PUSHER_APP_CLUSTER'),
-                'encrypted' => true
-            ]
+                'encrypted' => true,
+            ],
         ],
     ],
     'oembed' => [
         'enabled' => false,
         'url' => '',
-        'key' => ''
-    ]
+        'key' => '',
+    ],
 ];

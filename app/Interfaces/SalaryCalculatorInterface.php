@@ -2,8 +2,7 @@
 
 namespace App\Interfaces;
 
-interface SalaryCalculatorInterface {
-
+interface SalaryCalculatorInterface
+{
     public function calculate(string $start_date): float;
-
 }

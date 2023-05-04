@@ -18,6 +18,4 @@ class PasswordHistory extends Model
         'user_id',
         'password',
     ];
-
-    
 }

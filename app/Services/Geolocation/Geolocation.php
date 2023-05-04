@@ -16,6 +16,7 @@ class Geolocation
     public function search(string $name): array
     {
         $locationInfo = $this->map->findAddress($name);
+
         return $this->statelite->pinpoint($locationInfo);
     }
 }

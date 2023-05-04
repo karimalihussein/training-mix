@@ -11,7 +11,6 @@ class FolderController extends Controller
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function __invoke(Request $request)
@@ -19,11 +18,11 @@ class FolderController extends Controller
         $folder = Folder::first();
         $user = User::first();
         $folder
-        ->addMediaFromRequest('image')
-        ->sanitizingFileName(function($fileName) {
-            return strtolower(str_replace(['#', '/', '\\', ' '], '-', $fileName));
-        })
-        ->usingFileName(time().'.'.$request->file('image')->getClientOriginalExtension())
-        ->toMediaCollection('folders');
+            ->addMediaFromRequest('image')
+            ->sanitizingFileName(function ($fileName) {
+                return strtolower(str_replace(['#', '/', '\\', ' '], '-', $fileName));
+            })
+            ->usingFileName(time().'.'.$request->file('image')->getClientOriginalExtension())
+            ->toMediaCollection('folders');
     }
 }

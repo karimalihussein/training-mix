@@ -12,8 +12,8 @@ class Order extends Model
     protected $fillable = [
         'user_id',
         'details',
-        'status'
-    ];  
+        'status',
+    ];
 
     public function invoice()
     {
@@ -29,6 +29,4 @@ class Order extends Model
     {
         $this->update(['status' => $status]);
     }
-
-    
 }

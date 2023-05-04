@@ -6,13 +6,11 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class PlanUnauthorizedException extends HttpException
 {
-
     private $requiredFeatures = [];
 
     public static function forFeatures(array $permissions): self
     {
         $message = 'Company does not have the right permissions.';
-
 
         $exception = new static(403, $message, null, []);
         $exception->requiredFeatures = $permissions;

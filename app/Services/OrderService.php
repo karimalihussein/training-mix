@@ -6,9 +6,8 @@ use App\Models\Invoice;
 use App\Models\Order;
 use Illuminate\Support\Facades\DB;
 
-class OrderService 
+class OrderService
 {
-
     public function pushStatus(Order $order, int $status): void
     {
         $order->update(['status' => $status]);
@@ -20,9 +19,10 @@ class OrderService
             throw new \Exception('Order already has an invoice');
         }
 
-        return DB::transaction(function() use ($order) {
+        return DB::transaction(function () use ($order) {
             $invoice = $order->invoice()->create();
             $this->pushStatus($order, 2);
+
             return $invoice;
         });
     }

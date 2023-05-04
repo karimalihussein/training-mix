@@ -2,27 +2,26 @@
 
 // Array Destructuring in PHP
 $params = [10, 20, 30];
-list($a, $b, $c) = $params;
+[$a, $b, $c] = $params;
 // var_dump($a, $b, $c);
 
 // Array Destructuring with keys
 $params = [
     'name' => 'John',
     'age' => 30,
-    'city' => 'New York'
+    'city' => 'New York',
 ];
 
-list('name' => $name, 'age' => $age, 'city' => $city) = $params;
+['name' => $name, 'age' => $age, 'city' => $city] = $params;
 // var_dump($name, $age, $city);
-
 
 // Array Destructuring with keys and default values
 $params = [
     'name' => 'John',
     'age' => 30,
-    'city' => 'New York'
+    'city' => 'New York',
 ];
-list('name' => $name, 'age' => $age, 'city' => $city, 'country' => $country) = $params + ['country' => 'USA'];
+['name' => $name, 'age' => $age, 'city' => $city, 'country' => $country] = $params + ['country' => 'USA'];
 
 $names = ['John', 'Jane', 'Jack'];
 // dd($names[0], $names[1], $names[2]);
@@ -55,8 +54,6 @@ $people = [
 
 // print_r($people);
 
-
-
 class Item
 {
     protected $cost;
@@ -64,6 +61,7 @@ class Item
     public function setCost($cost)
     {
         $this->cost = $cost;
+
         return $this;
     }
 
@@ -80,6 +78,7 @@ class Cart
     public function addItem(Item $item)
     {
         $this->items[] = $item;
+
         return $this;
     }
 
@@ -99,7 +98,6 @@ class Cart
 $item1 = (new Item)->setCost(10);
 $item2 = (new Item)->setCost(20);
 $item3 = (new Item)->setCost(30);
-
 
 $cart = (new Cart)
     ->addItem($item1)
@@ -136,7 +134,7 @@ $scores = [
     10.20,
     date('Y-m-d'),
     -10,
-    
+
 ];
 
 // get only integers
@@ -145,4 +143,3 @@ $scores = array_filter($scores, function ($score) {
 });
 
 // print_r($scores);
-

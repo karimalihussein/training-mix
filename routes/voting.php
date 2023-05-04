@@ -15,15 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 // voting routes start
 
 Route::group(['prefix' => 'voting', 'as' => 'voting.'], function () {
 
-    Route::get('/', function(){
+    Route::get('/', function () {
         return redirect()->route('voting.dashboard.index');
     });
-
 
     Route::get('/login', [AuthenticatedSessionController::class, 'create'])->middleware('guest')->name('login');
     Route::post('/login', [AuthenticatedSessionController::class, 'store'])->middleware('guest')->name('login');
@@ -32,11 +30,5 @@ Route::group(['prefix' => 'voting', 'as' => 'voting.'], function () {
         Route::get('/', DashboardController::class)->name('index');
         Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
     });
-
-
-
-
-
-
 
 });

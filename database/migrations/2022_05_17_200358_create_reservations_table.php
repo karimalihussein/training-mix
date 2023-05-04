@@ -30,37 +30,37 @@ return new class extends Migration
         });
 
         \App\Models\Tag::create([
-            'name'          => 'has_ac',
+            'name' => 'has_ac',
         ]);
         \App\Models\Tag::create([
-            'name'          => 'has_wifi',
+            'name' => 'has_wifi',
         ]);
         \App\Models\Tag::create([
-            'name'          => 'has_tv',
+            'name' => 'has_tv',
         ]);
         \App\Models\Tag::create([
-            'name'          => 'has_projector',
+            'name' => 'has_projector',
         ]);
         \App\Models\Tag::create([
-            'name'          => 'has_whiteboard',
+            'name' => 'has_whiteboard',
         ]);
         \App\Models\Tag::create([
-            'name'          => 'has_air_conditioner',
+            'name' => 'has_air_conditioner',
         ]);
         \App\Models\Tag::create([
-            'name'          => 'has_heating',
+            'name' => 'has_heating',
         ]);
         \App\Models\Tag::create([
-            'name'          => 'has_kitchen',
+            'name' => 'has_kitchen',
         ]);
         \App\Models\Tag::create([
-            'name'          => 'has_bathroom',
+            'name' => 'has_bathroom',
         ]);
         \App\Models\Tag::create([
-            'name'          => 'has_shower',
+            'name' => 'has_shower',
         ]);
         \App\Models\Tag::create([
-            'name'          => 'has_bathtub',
+            'name' => 'has_bathtub',
         ]);
     }
 

@@ -11,15 +11,11 @@ use ReflectionParameter;
 class Container
 {
     protected array $bindings = [];
+
     protected array $singletons = [];
 
     /**
      * Binds a given abstract to a concrete implementation or closure.
-     *
-     * @param string $abstract
-     * @param string|Closure $concrete
-     * @param bool $shared
-     * @return void
      */
     public function bind(string $abstract, string|Closure $concrete, bool $shared = false): void
     {
@@ -28,10 +24,6 @@ class Container
 
     /**
      * Binds a given abstract to a concrete implementation or closure as a singleton.
-     *
-     * @param string $abstract
-     * @param string|Closure $concrete
-     * @return void
      */
     public function singleton(string $abstract, string|Closure $concrete): void
     {
@@ -41,13 +33,11 @@ class Container
     /**
      * Resolves the given abstract out of the container.
      *
-     * @param string $abstract
-     * @return mixed
      * @throws Exception
      */
     public function get(string $abstract): mixed
     {
-        if (!isset($this->bindings[$abstract])) {
+        if (! isset($this->bindings[$abstract])) {
             if (class_exists($abstract)) {
                 return $this->resolveClass($abstract);
             }
@@ -62,7 +52,7 @@ class Container
 
         $concrete = $binding['concrete'];
 
-        if (!$concrete instanceof Closure) {
+        if (! $concrete instanceof Closure) {
             return $concrete;
         }
 
@@ -78,15 +68,13 @@ class Container
     /**
      * Resolves the given class out of the container.
      *
-     * @param string $class
-     * @return mixed
      * @throws Exception
      */
     protected function resolveClass(string $class): mixed
     {
         $reflector = new ReflectionClass($class);
 
-        if (!$constructor = $reflector->getConstructor()) {
+        if (! $constructor = $reflector->getConstructor()) {
             return new $class();
         }
 
@@ -98,8 +86,8 @@ class Container
     /**
      * Resolves the dependencies for the given array of parameters.
      *
-     * @param ReflectionParameter[] $parameters
-     * @return array
+     * @param  ReflectionParameter[]  $parameters
+     *
      * @throws Exception
      */
     protected function resolveDependencies(array $parameters): array
@@ -120,8 +108,6 @@ class Container
     /**
      * Resolves the dependency for the given parameter.
      *
-     * @param ReflectionParameter $parameter
-     * @return mixed
      * @throws Exception
      */
     protected function getDependency(ReflectionParameter $parameter): mixed
@@ -134,5 +120,4 @@ class Container
 
         throw new Exception("Cannot resolve dependency for {$parameter->getName()}");
     }
-
 }

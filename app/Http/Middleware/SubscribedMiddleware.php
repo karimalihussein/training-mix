@@ -14,8 +14,7 @@ class SubscribedMiddleware
             throw PlanUnauthorizedException::notLoggedIn();
         }
 
-        if(!$authGuard->user()->subscription('main')->isActive())
-        {
+        if (! $authGuard->user()->subscription('main')->isActive()) {
             return redirect()->route('plans');
         }
 
@@ -23,15 +22,12 @@ class SubscribedMiddleware
             ? $features
             : explode('|', $features);
 
-        foreach ($features as $permission) 
-        {
-           if($authGuard->user()->subscription('main')->plan->features->contains('tag', $permission))
-            {
+        foreach ($features as $permission) {
+            if ($authGuard->user()->subscription('main')->plan->features->contains('tag', $permission)) {
                 return $next($request);
             }
         }
 
         throw PlanUnauthorizedException::forFeatures($features);
-
     }
 }

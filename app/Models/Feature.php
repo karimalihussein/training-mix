@@ -10,8 +10,11 @@ class Feature extends Model
     use HasFactory;
 
     const STATUS_REQUESTED = 1;
+
     const STATUS_APPROVED = 2;
+
     const STATUS_REJECTED = 3;
+
     const STATUS_DELETED = 4;
 
     const STATUSES = [
@@ -23,6 +26,7 @@ class Feature extends Model
 
     /**
      * The attributes that are mass assignable.
+     *
      * @var array
      */
     protected $fillable = [
@@ -32,11 +36,10 @@ class Feature extends Model
 
     /**
      * The attributes that should be cast to native types.
+     *
      * @var array
      */
     protected $casts = [
         'status' => 'integer',
     ];
-
- 
 }

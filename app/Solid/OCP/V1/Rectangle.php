@@ -2,13 +2,12 @@
 
 namespace App\Solid\OCP\V1;
 
-
 use App\Solid\OCP\V1\Interfaces\ShapeInterface;
-
 
 class Rectangle implements ShapeInterface
 {
     public $width;
+
     public $height;
 
     public function __construct($width, $height)
@@ -21,6 +20,4 @@ class Rectangle implements ShapeInterface
     {
         return $this->width * $this->height;
     }
-
-    
 }

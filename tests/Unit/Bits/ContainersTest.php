@@ -2,7 +2,6 @@
 
 namespace Tests\Unit\Bits;
 
-
 use App\Classes\Newsletter;
 use App\Containers\Container;
 use PHPUnit\Framework\TestCase;
@@ -10,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 class ContainersTest extends TestCase
 {
     /** @test */
-    function level_one_it_can_bind_keys_values(): void
+    public function level_one_it_can_bind_keys_values(): void
     {
         $container = new Container();
         $container->bind('foo', 'bar');
@@ -18,7 +17,7 @@ class ContainersTest extends TestCase
     }
 
     /** @test */
-    function level_two_it_can_lazily_resolve_functions()
+    public function level_two_it_can_lazily_resolve_functions()
     {
         $container = new Container();
         $container->bind('newsletter', function () {
@@ -57,7 +56,4 @@ class ContainersTest extends TestCase
         $this->assertInstanceOf(Newsletter::class, $foo2);
         $this->assertSame($foo1, $foo2);
     }
-
-
-    
 }

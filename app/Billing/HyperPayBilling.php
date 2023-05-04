@@ -3,50 +3,46 @@
 namespace App\Billing;
 
 use Devinweb\LaravelHyperpay\Contracts\BillingInterface;
+use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class HyperPayBilling implements BillingInterface
 {
-    protected $request;
+    protected array $latLng;
 
-    protected $latlng;
-
-    public function __construct(Request $request)
+    public function __construct(protected Request $request)
     {
         $this->request = $request;
-        
-        $this->latlng = $this->getLatLng($request->ip());
+
+        $this->latLng = $this->getLatLng($request->ip());
     }
+
     /**
      * Get the billing data.
-     *
-     * @return array
      */
     public function getBillingData(): array
     {
         return $this->GetAddressFromLatLng();
     }
 
-
-    protected function GetAddressFromLatLng()
+    protected function GetAddressFromLatLng(): array
     {
-        $response =  Http::get('https://maps.googleapis.com/maps/api/geocode/json?latlng='.$this->latlng.'&key=AIzaSyAFHz-7hKCyzYx2kWfY-S_kSi6Hm8pZ8jk');
-        
+        $response = Http::get('https://maps.googleapis.com/maps/api/geocode/json?latlng='.$this->latlng.'&key=AIzaSyAFHz-7hKCyzYx2kWfY-S_kSi6Hm8pZ8jk');
+
         $array = $this->getBillingFromGeocode($response->json());
-       
+
         return $array;
     }
 
     protected function getLatLng($ip)
     {
-        $response = Http::withHeaders(['Accept'=> 'application/json'])->get('https://ipinfo.io/'.$ip);
+        $response = Http::withHeaders(['Accept' => 'application/json'])->get('https://ipinfo.io/'.$ip);
         $response = $response->json();
         if (Arr::has($response, 'loc')) {
             return Arr::get($response, 'loc');
         }
+
         return '21.4901,39.1862';
     }
 
@@ -57,15 +53,15 @@ class HyperPayBilling implements BillingInterface
             'billing.city' => '',
             'billing.state' => '',
             'billing.country' => '',
-            'billing.postcode' => ''
+            'billing.postcode' => '',
         ];
 
         if (Arr::has($response, 'results')) {
             $result = $response['results'];
 
-            $address_components = Arr::has($result[0], 'address_components') ? $result[0]['address_components']: [];
-            
-            $billing['billing.street1'] = Arr::has($result[0], 'formatted_address') ? $result[0]['formatted_address']: '';
+            $address_components = Arr::has($result[0], 'address_components') ? $result[0]['address_components'] : [];
+
+            $billing['billing.street1'] = Arr::has($result[0], 'formatted_address') ? $result[0]['formatted_address'] : '';
 
             for ($i = 0; $i < count($address_components); $i++) {
                 $child_address_components = $address_components[$i];
@@ -79,9 +75,9 @@ class HyperPayBilling implements BillingInterface
                     case 'country':
                         $billing['billing.country'] = Arr::get($child_address_components, 'short_name');
                         break;
-                    // case 'postal_code':
-                    //     $billing['billing.postcode'] = Arr::get($child_address_components, 'long_name');
-                    //     break;
+                        // case 'postal_code':
+                        //     $billing['billing.postcode'] = Arr::get($child_address_components, 'long_name');
+                        //     break;
                 }
             }
         }

@@ -3,24 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Person;
-use Illuminate\Http\Request;
 
 class PersonController extends Controller
 {
     public function index()
     {
 
+        $data = array_chunk($data, 10);
+        foreach ($data2 as $key => $value) {
+            // $jsonData = public_path('json/people/data'.$key.'.json');
+            // file_put_contents($jsonData, json_encode($value));
+            $array[] = $key;
+        }
 
-
-       $data = array_chunk($data, 10);
-       foreach ($data2 as $key => $value) {
-           // $jsonData = public_path('json/people/data'.$key.'.json');
-           // file_put_contents($jsonData, json_encode($value));
-           $array[] = $key;
-       }
-
-       return $array;
-
+        return $array;
 
         // $total = Person::select(['gender'])->pluck('gender')->toArray();
         //
@@ -46,10 +42,10 @@ class PersonController extends Controller
         // $total = $male; + $female; + $unknown;
 
         return [
-                    'Total'     => $total,
-                    'Female' => $female,
-                    'Male' => $male,
-                    'Unknown' => $unknown
+            'Total' => $total,
+            'Female' => $female,
+            'Male' => $male,
+            'Unknown' => $unknown,
         ];
 
     }

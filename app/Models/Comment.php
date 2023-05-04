@@ -14,7 +14,6 @@ class Comment extends Model
      *
      * @var array
      */
-
     protected $fillable = [
         'commentable_id',
         'commentable_type',
@@ -23,7 +22,7 @@ class Comment extends Model
 
     /**
      * Commentable relationship
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
     public function commentable()

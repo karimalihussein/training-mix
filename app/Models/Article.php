@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Article extends Model
 {
     use HasFactory;
+
     protected $table = 'articles';
 
     protected $fillable = [
@@ -16,7 +17,7 @@ class Article extends Model
         'description',
         'image',
         'user_id',
-        'published_at'
+        'published_at',
     ];
 
     public function user()
@@ -25,10 +26,6 @@ class Article extends Model
     }
 
     protected $dates = [
-        'published_at'
+        'published_at',
     ];
-
-
-
-
 }

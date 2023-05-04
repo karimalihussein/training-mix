@@ -18,7 +18,7 @@ class LoginFactory extends Factory
     public function definition()
     {
         return [
-            'user_id'    => User::factory(),
+            'user_id' => User::factory(),
             'ip_address' => fake()->ipv4(),
             'user_agent' => fake()->userAgent(),
             'created_at' => fake()->dateTimeBetween('-1 year', 'now'),

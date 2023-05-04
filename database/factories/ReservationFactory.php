@@ -35,6 +35,6 @@ class ReservationFactory extends Factory
         return $this->state([
             'status' => Reservation::STATUS_CANCELLED,
         ]);
-        
+
     }
 }

@@ -19,8 +19,8 @@ return new class extends Migration
             $table->foreignId('featured_image_id')->index()->nullable();
             $table->string('title');
             $table->text('description');
-            $table->decimal('lat',11,8);
-            $table->decimal('lng',11,8);
+            $table->decimal('lat', 11, 8);
+            $table->decimal('lng', 11, 8);
             $table->text('address_line1');
             $table->text('address_line2')->nullable();
             $table->tinyInteger('approval_status')->default(1);
@@ -31,11 +31,11 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('offices_tags', function (Blueprint $table){
-                $table->foreignId('office_id')->index();
-                $table->foreignId('tag_id')->index();
+        Schema::create('offices_tags', function (Blueprint $table) {
+            $table->foreignId('office_id')->index();
+            $table->foreignId('tag_id')->index();
 
-                $table->unique(['office_id', 'tag_id']);
+            $table->unique(['office_id', 'tag_id']);
         });
     }
 

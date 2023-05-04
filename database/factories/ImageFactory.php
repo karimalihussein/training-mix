@@ -15,13 +15,12 @@ class ImageFactory extends Factory
      *
      * @return array<string, mixed>
      */
-
     protected $model = Image::class;
-    
+
     public function definition()
     {
         return [
-            'path' => 'image.png'
+            'path' => 'image.png',
         ];
     }
 }

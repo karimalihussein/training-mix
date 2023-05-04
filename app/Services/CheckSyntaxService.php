@@ -4,19 +4,18 @@ namespace App\Services;
 
 use Symfony\Component\Finder\Finder;
 
-
 class CheckSyntaxService
 {
     public function handle()
     {
-        $rootDir = realpath(__DIR__ . '/../..');
+        $rootDir = realpath(__DIR__.'/../..');
         $phpExecutable = 'php';
         $finder = new Finder();
         $finder->files()
             ->in($rootDir)
             ->exclude(['storage', 'vendor'])
             ->name('*.php');
-        if (!$finder->hasResults()) {
+        if (! $finder->hasResults()) {
             echo "No files found\n";
             exit(1);
         }
@@ -24,8 +23,9 @@ class CheckSyntaxService
             $absoluteFilePath = $file->getRealPath();
             $relativeFilePath = $file->getRelativePathname();
 
-            if (!is_string($absoluteFilePath)) {
+            if (! is_string($absoluteFilePath)) {
                 echo "Invalid file path for: $relativeFilePath\n";
+
                 continue;
             }
 
@@ -35,8 +35,9 @@ class CheckSyntaxService
                 2 => ['pipe', 'w'],
             ], $pipes);
 
-            if (!is_resource($process)) {
+            if (! is_resource($process)) {
                 echo "Failed to start PHP syntax check process for: $relativeFilePath\n";
+
                 continue;
             }
 
@@ -52,6 +53,7 @@ class CheckSyntaxService
             if ($returnCode !== 0) {
                 echo "Syntax error found in file: $relativeFilePath\n";
                 echo $errors;
+
                 continue;
             }
 

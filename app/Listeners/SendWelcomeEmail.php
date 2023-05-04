@@ -3,8 +3,6 @@
 namespace App\Listeners;
 
 use App\Events\UserCreated;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 class SendWelcomeEmail
 {
@@ -21,7 +19,6 @@ class SendWelcomeEmail
     /**
      * Handle the event.
      *
-     * @param  \App\Events\UserCreated  $event
      * @return void
      */
     public function handle(UserCreated $event)

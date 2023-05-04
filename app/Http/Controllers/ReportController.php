@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Services\Reports\ReportDownloadService;
-use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
@@ -11,10 +10,13 @@ class ReportController extends Controller
     {
         $this->reportDownloadService = $reportDownloadService;
     }
-    public function download(){
 
-        $report = "report";
-        return $this->reportDownloadService->downloadReport($report, "karim");
+    public function download()
+    {
+
+        $report = 'report';
+
+        return $this->reportDownloadService->downloadReport($report, 'karim');
 
     }
 }

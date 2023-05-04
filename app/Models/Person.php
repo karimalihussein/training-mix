@@ -13,6 +13,4 @@ class Person extends Model
         'name',
         'gender',
     ];
-
-    
 }

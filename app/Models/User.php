@@ -2,20 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Devinweb\LaravelHyperpay\Traits\ManageUserTransactions;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Devinweb\LaravelHyperpay\Traits\ManageUserTransactions;
-use Laravel\Scout\Searchable;
 use Spatie\Permission\Traits\HasPermissions;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, ManageUserTransactions, HasRoles, HasPermissions;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -27,7 +26,7 @@ class User extends Authenticatable
         'password',
         'employee_type',
         'start_date',
-        'is_admin'
+        'is_admin',
     ];
 
     /**
@@ -57,7 +56,6 @@ class User extends Authenticatable
         // 'salary',
     ];
 
-
     /**
      * Image relationship
      *
@@ -68,7 +66,7 @@ class User extends Authenticatable
         return $this->morphOne(Image::class, 'imageable');
     }
 
-    public function name() : Attribute
+    public function name(): Attribute
     {
         return new Attribute(
             get: fn ($value) => strtoupper($value),
@@ -78,10 +76,10 @@ class User extends Authenticatable
 
     /**
      * Calculate the salary of the user
+     *
      * @var float
-     * @return float
      */
-    public function getSalaryAttribute() : float
+    public function getSalaryAttribute(): float
     {
         $positions = [
             'developer' => 'App\\Calculators\\DeveloperSalaryCalculator',
@@ -89,7 +87,7 @@ class User extends Authenticatable
             'sales' => 'App\\Calculators\\SalesSalaryCalculator',
         ];
 
-      return (new $positions[$this->employee_type])->calculate($this->start_date);
+        return (new $positions[$this->employee_type])->calculate($this->start_date);
     }
 
     public function orders()
@@ -101,7 +99,6 @@ class User extends Authenticatable
     {
         return $this->hasMany(Office::class);
     }
-
 
     public function passwordHistories()
     {
@@ -151,9 +148,9 @@ class User extends Authenticatable
     public function scopeWithLastLogin($query)
     {
         $query->addSelect(['last_login_id' => Login::select('id')
-        ->whereColumn('user_id', 'users.id')
-        ->latest()
-        ->take(1)
+            ->whereColumn('user_id', 'users.id')
+            ->latest()
+            ->take(1),
         ])->with('lastLogin');
     }
 
@@ -165,11 +162,8 @@ class User extends Authenticatable
         return 'users_index';
     }
 
-
     public function posts()
     {
         return $this->hasMany(Post::class);
     }
-
-
 }

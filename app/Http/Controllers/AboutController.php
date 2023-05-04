@@ -10,11 +10,10 @@ class AboutController extends Controller
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\View\View $view
      */
-    public function __invoke(Request $request) : View
+    public function __invoke(Request $request): View
     {
         return view('about.index');
     }
-}   
+}

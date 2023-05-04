@@ -29,7 +29,7 @@ return [
 
     'services' => [
         'payment_methods' => [
-            'free' => \Bpuig\Subby\Services\PaymentMethods\Free::class
-        ]
-    ]
+            'free' => \Bpuig\Subby\Services\PaymentMethods\Free::class,
+        ],
+    ],
 ];

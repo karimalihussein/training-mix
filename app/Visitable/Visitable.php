@@ -6,7 +6,6 @@ use App\Models\Visit;
 
 trait Visitable
 {
-
     public function visit()
     {
         return new PendingVisit($this);
@@ -16,5 +15,4 @@ trait Visitable
     {
         return $this->morphMany(Visit::class, 'visitable');
     }
-    
 }

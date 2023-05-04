@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Str;
+use Laravel\Socialite\Facades\Socialite;
 
 class GihtubController extends Controller
 {
@@ -35,6 +34,7 @@ class GihtubController extends Controller
         ]);
         auth()->login($user);
         $user->notify(new \App\Notifications\WelcomeNotification($password));
+
         return redirect()->route('dashboard');
     }
 }

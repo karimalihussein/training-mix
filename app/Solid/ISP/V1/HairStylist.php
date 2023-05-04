@@ -26,5 +26,4 @@ class HairStylist implements AppointmentInterface, StylableInterface
     {
         // Style hair
     }
-
 }

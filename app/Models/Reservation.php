@@ -11,6 +11,7 @@ class Reservation extends Model
     use HasFactory;
 
     const STATUS_ACTIVE = 1;
+
     const STATUS_CANCELLED = 2;
 
     protected $fillable = [
@@ -20,17 +21,15 @@ class Reservation extends Model
         'start_date',
         'end_date',
         'wifi_password',
-        'price'
+        'price',
     ];
 
-
-
     protected $casts = [
-        'price'         => 'integer',
-        'status'        => 'integer',
-        'start_date'    => 'immutable_date',
-        'end_date'      => 'immutable_date',
-        'wifi_password' => 'encrypted'
+        'price' => 'integer',
+        'status' => 'integer',
+        'start_date' => 'immutable_date',
+        'end_date' => 'immutable_date',
+        'wifi_password' => 'encrypted',
     ];
 
     public function user(): BelongsTo
@@ -43,16 +42,15 @@ class Reservation extends Model
         return $this->belongsTo(Office::class);
     }
 
-
     public function scopeBetweenDates($query, $start, $end)
     {
-        $query->where(function($query)use($start, $end){
-             $query->whereBetween('start_date', [$start, $end])
-                    ->orWhereBetween('end_date', [$start, $end])
-                    ->orWhere(function($query)use ($start, $end){
-                        $query->where('start_date', '<', $start)
-                                ->where('end_date', '>', $end);
-                    });
+        $query->where(function ($query) use ($start, $end) {
+            $query->whereBetween('start_date', [$start, $end])
+                ->orWhereBetween('end_date', [$start, $end])
+                ->orWhere(function ($query) use ($start, $end) {
+                    $query->where('start_date', '<', $start)
+                        ->where('end_date', '>', $end);
+                });
         });
     }
 
@@ -61,5 +59,4 @@ class Reservation extends Model
         $query->whereStatus(self::STATUS_ACTIVE)
             ->betweenDates($start, $end);
     }
-
 }

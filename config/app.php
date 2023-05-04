@@ -16,7 +16,7 @@ return [
     */
 
     'name' => settings('app_name', 'Laravel'),
-    'test_url'  => env('TEST_URL', 'http://test.com'),
+    'test_url' => env('TEST_URL', 'http://test.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -164,7 +164,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Weidner\Goutte\GoutteServiceProvider::class,
+        // Weidner\Goutte\GoutteServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -186,7 +186,6 @@ return [
         Clockwork\Support\Laravel\ClockworkServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         App\Providers\GeolocationServiceProvider::class,
-
 
     ],
 

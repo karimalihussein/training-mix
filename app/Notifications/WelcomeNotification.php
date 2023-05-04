@@ -3,7 +3,6 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -20,7 +19,6 @@ class WelcomeNotification extends Notification
     {
         //
     }
-    
 
     /**
      * Get the notification's delivery channels.
@@ -42,11 +40,11 @@ class WelcomeNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-        ->subject('Welcome to Our Community')
-        ->greeting("Hello {$notifiable->name}, your password is {$this->password}")
-        ->line('The introduction to the notification.')
-        ->action('Notification Action', url('/'))
-        ->line('Thank you for using our application!');
+            ->subject('Welcome to Our Community')
+            ->greeting("Hello {$notifiable->name}, your password is {$this->password}")
+            ->line('The introduction to the notification.')
+            ->action('Notification Action', url('/'))
+            ->line('Thank you for using our application!');
     }
 
     /**

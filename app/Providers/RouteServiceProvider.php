@@ -18,6 +18,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const HOME = '/dashboard';
+
     public const VOTING_HOME = '/voting/dashboard';
 
     /**
@@ -31,6 +32,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapWebRoutes();
         $this->mapApiRoutes();
     }
+
     protected function mapWebRoutes()
     {
         Route::middleware('web')
@@ -40,6 +42,7 @@ class RouteServiceProvider extends ServiceProvider
             ->namespace($this->namespace)
             ->group(base_path('routes/voting.php'));
     }
+
     protected function mapApiRoutes()
     {
         Route::prefix('api')
@@ -47,7 +50,6 @@ class RouteServiceProvider extends ServiceProvider
             ->namespace($this->namespace)
             ->group(base_path('routes/api.php'));
     }
-
 
     /**
      * Configure the rate limiters for the application.

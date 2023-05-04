@@ -4,7 +4,6 @@ namespace App\Jobs;
 
 use App\Models\Sale;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
@@ -19,15 +18,15 @@ class SalesCsvProcess implements ShouldQueue
      *
      * @return void
      */
-
     public $data;
+
     public $fillables;
+
     public function __construct($data, $fillables)
     {
         $this->data = $data;
         $this->fillables = $fillables;
     }
-
 
     /**
      * Execute the job.
@@ -36,10 +35,9 @@ class SalesCsvProcess implements ShouldQueue
      */
     public function handle()
     {
-     
-        foreach ($this->data as $sale)
-        {
-            $sale =  array_combine($this->fillables, $sale);
+
+        foreach ($this->data as $sale) {
+            $sale = array_combine($this->fillables, $sale);
             Sale::create($sale);
         }
     }

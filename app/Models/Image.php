@@ -15,20 +15,15 @@ class Image extends Model
      *
      * @var array
      */
-     protected $fillable = [
-            'id',
-            'resource_type',
-            'resource_id',
-            'path'
-     ];
+    protected $fillable = [
+        'id',
+        'resource_type',
+        'resource_id',
+        'path',
+    ];
 
-
-     public function resource() : MorphTo
-     {
-         return $this->morphTo();
-     }
-
-
-
-
+    public function resource(): MorphTo
+    {
+        return $this->morphTo();
+    }
 }

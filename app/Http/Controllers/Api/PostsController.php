@@ -8,5 +8,6 @@ use Orion\Http\Controllers\Controller;
 class PostsController extends Controller
 {
     use \Orion\Concerns\DisableAuthorization;
+
     protected $model = Post::class;
 }

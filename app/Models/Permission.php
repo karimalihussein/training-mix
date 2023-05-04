@@ -12,5 +12,4 @@ class Permission extends BasePermission
     public $guard_name = 'web';
 
     protected $hidden = ['pivot'];
-
 }

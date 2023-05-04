@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Helpers\Routes;
-
 
 class RouteHelper
 {
@@ -15,12 +13,11 @@ class RouteHelper
         $it = new \RecursiveIteratorIterator($dirIterator);
 
         // require the file in each iteration
-        while ($it->valid()){
-            if(!$it->isDot()
+        while ($it->valid()) {
+            if (! $it->isDot()
                 && $it->isFile()
                 && $it->isReadable()
-                && $it->current()->getExtension() === 'php')
-            {
+                && $it->current()->getExtension() === 'php') {
                 require $it->key();
             }
             $it->next();

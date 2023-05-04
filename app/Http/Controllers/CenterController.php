@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Jobs\CenterXlJob;
 use App\Models\Center;
-use Illuminate\Http\Request;
 
 class CenterController extends Controller
 {
-
     public function index()
     {
         $jsonData = public_path('centersFinal.json');
@@ -18,8 +16,8 @@ class CenterController extends Controller
 
         return 'done';
 
-        
     }
+
     public function checkData()
     {
         // $file = public_path('centers.xlsx');
@@ -38,7 +36,6 @@ class CenterController extends Controller
 
         //  $data = json_decode(json_encode($data));
         // //  $data = array_chunk($data, 100000);
-
 
         // foreach (array_count_values($data) as $key => $value) {
         //     $newData[] = [
@@ -64,16 +61,17 @@ class CenterController extends Controller
 
     public function readfile()
     {
-      $jsonData = public_path('json/centers/data0.json');
-      $data = json_decode(file_get_contents($jsonData), true);
+        $jsonData = public_path('json/centers/data0.json');
+        $data = json_decode(file_get_contents($jsonData), true);
 
-      foreach (array_count_values($data) as $key => $value) {
-           $data2[] = [
-              'name'   => $key,
-              'count'  => $value
-           ];
-       }
-       return $data2;
+        foreach (array_count_values($data) as $key => $value) {
+            $data2[] = [
+                'name' => $key,
+                'count' => $value,
+            ];
+        }
+
+        return $data2;
 
         //    return $data2;
 
@@ -82,39 +80,35 @@ class CenterController extends Controller
 
         foreach (array_count_values($data2) as $key => $value) {
             $data3[] = [
-                'name'   => $key,
-                'count'  => $value
+                'name' => $key,
+                'count' => $value,
             ];
         }
 
-       // array push to another
+        // array push to another
 
-       
-
-       
     }
 
     public function storeData2()
     {
         $path = public_path('json/centers/');
-        $files = glob($path . "*");
+        $files = glob($path.'*');
         foreach ($files as $file) {
             $data = array_map('str_getcsv', file($file));
             $data = json_decode(file_get_contents($file), true);
 
             foreach (array_count_values($data) as $key => $value) {
                 $newData[] = [
-                    'name'   => $key,
-                    'count'  => $value
+                    'name' => $key,
+                    'count' => $value,
                 ];
             }
-
 
             CenterXlJob::dispatch($newData);
             unlink($file);
         }
 
-        return "done";
-       
+        return 'done';
+
     }
 }

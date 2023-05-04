@@ -4,7 +4,6 @@ namespace App\Notifications;
 
 use App\Models\Thread;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -19,7 +18,7 @@ class ThreadCreated extends Notification
      */
     public function __construct(protected Thread $thread)
     {
-        
+
     }
 
     /**
@@ -42,9 +41,9 @@ class ThreadCreated extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-        ->subject('New Thread Created')
-        ->line('A new thread has been created')
-        ->action('View Thread', url('threads.show', $this->thread));
+            ->subject('New Thread Created')
+            ->line('A new thread has been created')
+            ->action('View Thread', url('threads.show', $this->thread));
     }
 
     /**

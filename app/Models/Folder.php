@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-
 class Folder extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
@@ -55,5 +54,4 @@ class Folder extends Model implements HasMedia
             $folder->uuid = (string) \Str::uuid();
         });
     }
-
 }

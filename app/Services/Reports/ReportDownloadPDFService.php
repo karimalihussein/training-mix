@@ -6,8 +6,6 @@ use App\Interfaces\ReportDownloadServiceInterface;
 
 class ReportDownloadPDFService implements ReportDownloadServiceInterface
 {
-   
-
     public function download($report)
     {
         // to be implemented - download as CSV
@@ -15,5 +13,4 @@ class ReportDownloadPDFService implements ReportDownloadServiceInterface
         // return response()->download($report);
         return "you're successfully downloaded $report.pdf";
     }
-
 }

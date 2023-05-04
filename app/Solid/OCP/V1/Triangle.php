@@ -4,9 +4,10 @@ namespace App\Solid\OCP\V1;
 
 use App\Solid\OCP\V1\Interfaces\ShapeInterface;
 
-class Triangle Implements ShapeInterface
+class Triangle implements ShapeInterface
 {
     public $base;
+
     public $height;
 
     public function __construct($base, $height)
@@ -19,5 +20,4 @@ class Triangle Implements ShapeInterface
     {
         return $this->base * $this->height / 2;
     }
- 
 }

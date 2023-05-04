@@ -12,7 +12,7 @@ class Step extends Model
 
     protected $fillable = [
         'title',
-        'order'
+        'order',
     ];
 
     public function visits()
@@ -24,12 +24,10 @@ class Step extends Model
     {
         parent::boot();
         static::creating(function ($step) {
-  
+
             if (is_null($step->order)) {
                 $step->order = self::max('order') + 1;
             }
         });
     }
-
-  
 }

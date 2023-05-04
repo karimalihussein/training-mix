@@ -5,7 +5,6 @@ namespace App\Jobs;
 use App\Models\Tenant;
 use App\Models\Tenant\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
@@ -32,23 +31,18 @@ class CreateTenantAdmin implements ShouldQueue
      */
     public function handle()
     {
-        $this->tenant->run(function($tenant){
+        $this->tenant->run(function ($tenant) {
 
-                    User::create(
-                                [
-                                    'name' => $this->tenant->name,
-                                    'email' => $this->tenant->email,
-                                    'password' => $this->tenant->password,
-                                    'phone_number' => $this->tenant->phone_number,
-                                    'is_manager' => true,
-                                ]
-                            );
+            User::create(
+                [
+                    'name' => $this->tenant->name,
+                    'email' => $this->tenant->email,
+                    'password' => $this->tenant->password,
+                    'phone_number' => $this->tenant->phone_number,
+                    'is_manager' => true,
+                ]
+            );
 
         });
     }
 }
-
-
-
-
-

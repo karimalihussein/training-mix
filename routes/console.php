@@ -29,5 +29,3 @@ Artisan::command('tail {file=storage/logs/laravel.log} {--only=}', function () {
             'ONLY' => $this->option('only'),
         ]);
 })->purpose('Tail a file');
-
-

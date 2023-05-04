@@ -2,7 +2,7 @@
 
 namespace App\Interfaces;
 
-interface ReportDownloadServiceInterface 
+interface ReportDownloadServiceInterface
 {
     public function download($report);
 }

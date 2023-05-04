@@ -19,17 +19,12 @@ class Tag extends Model
         'name',
     ];
 
-
-      
-
- 
-
     public function posts()
     {
         return $this->morphedByMany(Post::class, 'taggable');
     }
 
-    public function offices() : BelongsToMany
+    public function offices(): BelongsToMany
     {
         return $this->belongsToMany(Office::class, 'offices_tags');
     }

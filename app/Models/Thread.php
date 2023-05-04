@@ -53,6 +53,4 @@ class Thread extends Model
     {
         return $this->hasMany(Reply::class);
     }
-
-    
 }

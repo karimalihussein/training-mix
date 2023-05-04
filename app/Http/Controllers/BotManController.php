@@ -1,8 +1,8 @@
 <?php
+
 namespace App\Http\Controllers;
-   
+
 use BotMan\BotMan\BotMan;
-use Illuminate\Http\Request;
 use BotMan\BotMan\Messages\Incoming\Answer;
 use BotMan\BotMan\Messages\Outgoing\Actions\Button;
 use BotMan\BotMan\Messages\Outgoing\Question;
@@ -15,15 +15,14 @@ class BotManController extends Controller
     public function handle()
     {
         $botman = app('botman');
-   
-        $botman->hears('hi', function($botman) {
+
+        $botman->hears('hi', function ($botman) {
             $botman->reply('Hello!');
             $this->startConversation($botman);
         });
-   
+
         $botman->listen();
     }
-
 
     public function startConversation(BotMan $bot)
     {

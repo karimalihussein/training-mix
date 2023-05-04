@@ -9,7 +9,6 @@ class WebscrapingController extends Controller
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function __invoke(Request $request)
@@ -17,9 +16,9 @@ class WebscrapingController extends Controller
         $client = new \Goutte\Client();
         $crawler = $client->request('GET', 'https://syarah.com/en/cars/used-cars');
 
-        # clas name searchResultContainer 
+        // clas name searchResultContainer
         $crawler->filter('.allCarsResult')->each(function ($node) {
-          
+
         });
     }
-}   
+}

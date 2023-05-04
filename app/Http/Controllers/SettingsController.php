@@ -15,6 +15,7 @@ class SettingsController extends Controller
     public function index()
     {
         $values = Valuestore::make(public_path('settings.json'));
+
         return view('settings.index', compact('values'));
     }
 
@@ -24,6 +25,7 @@ class SettingsController extends Controller
         foreach ($request->except(['_token', '_method']) as $key => $value) {
             $values->put($key, $value);
         }
+
         return redirect()->back()->with('success', 'Settings updated successfully');
     }
 }

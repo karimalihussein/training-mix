@@ -3,16 +3,17 @@
 namespace App\Services\Reports;
 
 use App\Models\Invoice;
-use Illuminate\Http\Response;
 use DB;
-class InvoiceReportService {
+use Illuminate\Http\Response;
 
+class InvoiceReportService
+{
     public function getReportByMonth()
     {
         return Invoice::withSum('products', DB::raw('invoice_product.price * invoice_product.quantity'))
             ->orderBy('invoice_date', 'desc')
             ->get()
-            ->groupBy(function($invoice) {
+            ->groupBy(function ($invoice) {
                 return $invoice->invoice_date->format('Y-m');
             });
     }
@@ -37,7 +38,7 @@ class InvoiceReportService {
         // to be implemented - download as CSV
     }
 
-    public function downloadAsXLS($report):Response
+    public function downloadAsXLS($report): Response
     {
         // to be implemented - download as XLS
     }

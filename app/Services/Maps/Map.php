@@ -6,6 +6,6 @@ class Map
 {
     public function findAddress(string $address): array
     {
-       return [];
+        return [];
     }
 }

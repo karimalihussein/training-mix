@@ -23,6 +23,7 @@
         "laravel/framework": "^9.2",
         "laravel/helpers": "^1.5",
         "laravel/nova": "~4.0",
+        "laravel/pint": "^1.10",
         "laravel/sanctum": "^2.14.1",
         "laravel/scout": "^9.8",
         "laravel/socialite": "^5.5",
@@ -40,7 +41,7 @@
         "omnipay/paypal": "^3.0",
         "opcodesio/log-viewer": "^1.7",
         "phpoffice/phpspreadsheet": "^1.23",
-        "predis/predis": "^2.0",
+        "predis/predis": "^2.1",
         "pusher/pusher-php-server": "^7.2",
         "qoraiche/laravel-mail-editor": "^4.0",
         "roach-php/core": "^1.1",
@@ -62,7 +63,6 @@
         "torann/laravel-repository": "^0.6.2",
         "twilio/sdk": "^6.37",
         "vyuldashev/nova-permission": "^3.2",
-        "weidner/goutte": "^2.2",
         "xaboy/form-builder": "~2.0"
     },
     "require-dev": {

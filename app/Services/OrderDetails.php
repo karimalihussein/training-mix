@@ -2,11 +2,9 @@
 
 namespace App\Services;
 
-
 class OrderDetails
 {
     private $paymentGatway;
-
 
     public function __construct(PaymentGatwayContract $paymentGatway)
     {
@@ -16,10 +14,10 @@ class OrderDetails
     public function all()
     {
         $this->paymentGatway->setDiscount(500);
+
         return [
-                        'name'         => 'John Doe',
-                        'address'      => '123 Main St.',
+            'name' => 'John Doe',
+            'address' => '123 Main St.',
         ];
     }
-
 }

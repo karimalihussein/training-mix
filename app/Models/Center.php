@@ -11,6 +11,6 @@ class Center extends Model
 
     protected $fillable = [
         'name',
-        'count'
+        'count',
     ];
 }

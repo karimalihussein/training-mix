@@ -20,7 +20,7 @@ class Login extends Model
         'user_agent',
         'created_at',
     ];
-    
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -36,5 +36,4 @@ class Login extends Model
     ];
 
     public $timestamps = false;
-
 }

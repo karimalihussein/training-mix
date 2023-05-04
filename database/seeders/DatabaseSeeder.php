@@ -2,10 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Office;
-use App\Models\Post;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,7 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-   
+
         // create user
         $user = \App\Models\User::factory()->create([
             'name' => 'Admin',

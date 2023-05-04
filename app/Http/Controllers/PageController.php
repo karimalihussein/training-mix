@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
 class PageController extends Controller
@@ -14,6 +13,7 @@ class PageController extends Controller
         //     return \App\Article::latest()->get();
         // });
         $articles = Article::latest()->take(100)->get();
+
         return view('pages.index', compact('articles'));
     }
 }

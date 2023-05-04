@@ -4,9 +4,6 @@ namespace Tests\Feature;
 
 use App\Models\Office;
 use App\Models\User;
-use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\Sanctum;
@@ -14,12 +11,13 @@ use Tests\TestCase;
 
 class OfficeImageTest extends TestCase
 {
-    
-   /**
-    * api test for  storing images for an office
-    * @test
-    * @return void
-    */
+    /**
+     * api test for  storing images for an office
+     *
+     * @test
+     *
+     * @return void
+     */
     public function api_test_for_storing_images_for_an_office()
     {
         Storage::fake('public');
@@ -27,7 +25,7 @@ class OfficeImageTest extends TestCase
         $user = User::factory()->create();
 
         Sanctum::actingAs($user, ['*']);
-        
+
         $office = Office::factory()->for($user)->create();
 
         $response = $this->post("/api/offices/{$office->id}/images", [
@@ -35,16 +33,16 @@ class OfficeImageTest extends TestCase
         ]);
 
         $response->assertCreated();
-        
-      
+
         Storage::disk('public')->assertExists($response->json('data.path'));
 
     }
 
-
     /**
      * api test for  deleting an image for an office
+     *
      * @test
+     *
      * @return void
      */
     public function api_test_for_deleting_an_image_for_an_office()
@@ -56,11 +54,11 @@ class OfficeImageTest extends TestCase
         $office = Office::factory()->for($user)->create();
 
         $office->images()->create([
-            'path' => 'image.jpg'
+            'path' => 'image.jpg',
         ]);
 
         $image = $office->images()->create([
-            'path' => 'office_image.jpg'
+            'path' => 'office_image.jpg',
         ]);
 
         Sanctum::actingAs($user, ['*']);
@@ -77,7 +75,9 @@ class OfficeImageTest extends TestCase
 
     /**
      * it doesnt allow to delete the only image
+     *
      * @test
+     *
      * @return void
      */
     public function it_doesnt_allow_to_delete_the_only_image()
@@ -87,7 +87,7 @@ class OfficeImageTest extends TestCase
         $office = Office::factory()->for($user)->create();
 
         $image = $office->images()->create([
-            'path' => 'office_image.jpg'
+            'path' => 'office_image.jpg',
         ]);
 
         Sanctum::actingAs($user, ['*']);
@@ -100,7 +100,9 @@ class OfficeImageTest extends TestCase
 
     /**
      * it doesnt allow to delete the featured image
+     *
      * @test
+     *
      * @return void
      */
     public function it_doesnt_allow_to_delete_the_featured_image()
@@ -110,10 +112,10 @@ class OfficeImageTest extends TestCase
         $office = Office::factory()->for($user)->create();
 
         $image = $office->images()->create([
-            'path' => 'office_image.jpg'
+            'path' => 'office_image.jpg',
         ]);
         $office->images()->create([
-                'path' => 'office_image.jpg',
+            'path' => 'office_image.jpg',
         ]);
 
         $office->update(['featured_image_id' => $image->id]);
@@ -130,7 +132,9 @@ class OfficeImageTest extends TestCase
 
     /**
      * it doesnt delete image that belong to another resource
+     *
      * @test
+     *
      * @return void
      */
     public function it_doesnt_delete_image_that_belong_to_another_resource()
@@ -140,20 +144,18 @@ class OfficeImageTest extends TestCase
         $office = Office::factory()->for($user)->create();
 
         $image = $office->images()->create([
-            'path' => 'office_image.jpg'
+            'path' => 'office_image.jpg',
         ]);
 
         $another_office = Office::factory()->for($user)->create();
 
         $another_office->images()->create([
-            'path' => 'office_image.jpg'
+            'path' => 'office_image.jpg',
         ]);
 
         Sanctum::actingAs($user, ['*']);
 
         $response = $this->deleteJson("/api/offices/{$another_office->id}/images/{$image->id}");
-
-        
 
         $response->assertUnprocessable();
 

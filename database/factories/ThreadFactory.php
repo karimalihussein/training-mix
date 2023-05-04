@@ -19,10 +19,10 @@ class ThreadFactory extends Factory
     public function definition()
     {
         return [
-            'user_id'   => User::factory(),
-            'category_id'   => Category::factory(),
-            'title'  => fake()->sentence(),
-            'body'  => fake()->paragraph(),
+            'user_id' => User::factory(),
+            'category_id' => Category::factory(),
+            'title' => fake()->sentence(),
+            'body' => fake()->paragraph(),
         ];
     }
 }

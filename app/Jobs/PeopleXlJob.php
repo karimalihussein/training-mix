@@ -3,13 +3,12 @@
 namespace App\Jobs;
 
 use App\Models\Person;
+use GenderApi\Client as GenderApiClient;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use GenderApi\Client as GenderApiClient;
 
 class PeopleXlJob implements ShouldQueue
 {
@@ -21,6 +20,7 @@ class PeopleXlJob implements ShouldQueue
      * @return void
      */
     public $data;
+
     public function __construct($data)
     {
         $this->data = $data;
@@ -33,12 +33,12 @@ class PeopleXlJob implements ShouldQueue
      */
     public function handle()
     {
-         $apiClient = new GenderApiClient('8PQXe8d5LEVwaFwLXB5JcUKKmfP32CnlVFSW');
+        $apiClient = new GenderApiClient('8PQXe8d5LEVwaFwLXB5JcUKKmfP32CnlVFSW');
         foreach ($this->data as $person) {
             $lookup = $apiClient->getByFirstNameAndLastNameAndCountry($person, 'egypt');
             $all[] = [
-                    'name' => $person,
-                    'gender'  => $lookup->getGender(),
+                'name' => $person,
+                'gender' => $lookup->getGender(),
             ];
         }
 

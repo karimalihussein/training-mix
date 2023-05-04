@@ -12,5 +12,4 @@ class Role extends RoleModel
     public $guard_name = 'web';
 
     protected $hidden = ['pivot'];
-
 }

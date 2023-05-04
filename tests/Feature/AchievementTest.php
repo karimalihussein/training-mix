@@ -21,6 +21,7 @@ class AchievementTest extends TestCase
             ],
         ]);
     }
+
     /**
      * A basic feature test example.
      *
@@ -31,17 +32,12 @@ class AchievementTest extends TestCase
         $user = User::factory()->create();
         $url = route('achievements.store');
         $response = $this->postJson($url, [
-            'name'        => 'test',
-            'user_id'     => $user->id,
-            'datails'     => 'test',
+            'name' => 'test',
+            'user_id' => $user->id,
+            'datails' => 'test',
         ]);
 
         $response->assertStatus(201);
 
-
-
-        
-       
-      
     }
 }

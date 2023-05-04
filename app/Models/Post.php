@@ -3,16 +3,16 @@
 namespace App\Models;
 
 use App\Models\Scopes\ActivePostScope;
+use Illuminate\Contracts\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Contracts\Database\Query\Builder;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Post extends Model
 {
     use HasFactory, SoftDeletes, Prunable;
-    
+
     const ACTIVE_STATUS = 1;
 
     const INACTIVE_STATUS = 2;
@@ -31,7 +31,7 @@ class Post extends Model
 
     /**
      * Image relationship
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\MorphOne
      */
     public function image()
@@ -41,7 +41,7 @@ class Post extends Model
 
     /**
      * Comment relationship
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
     public function comments()
@@ -51,7 +51,7 @@ class Post extends Model
 
     /**
      * Tag relationship
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
      */
     public function tags()
@@ -61,19 +61,18 @@ class Post extends Model
 
     /**
      * User relationship
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-    
 
     public static function booted()
     {
         static::addGlobalScope(new ActivePostScope);
-        static::creating(function($post){
+        static::creating(function ($post) {
             $post->user_id = auth()->id() ?? $post->user_id;
         });
     }
@@ -82,5 +81,4 @@ class Post extends Model
     {
         return static::where('active', self::INACTIVE_STATUS);
     }
-  
 }

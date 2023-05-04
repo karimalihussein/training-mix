@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
-use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
@@ -16,6 +15,6 @@ class ArticleController extends Controller
             ->get()
             ->groupBy(fn ($article) => $article->published_at->year);
 
-            return view('articles.index', compact('years'));
+        return view('articles.index', compact('years'));
     }
 }

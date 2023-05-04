@@ -19,7 +19,7 @@ class OfficePendingApproval extends Notification implements ShouldQueue
      */
     public function __construct(public Office $office)
     {
-        $office  = $this->office;
+        $office = $this->office;
     }
 
     /**
@@ -42,9 +42,9 @@ class OfficePendingApproval extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->line('The introduction to the notification.')
+            ->action('Notification Action', url('/'))
+            ->line('Thank you for using our application!');
     }
 
     /**

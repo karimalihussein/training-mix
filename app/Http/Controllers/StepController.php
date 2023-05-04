@@ -22,6 +22,7 @@ class StepController extends Controller
                 ],
             ]);
         }
+
         return $steps;
     }
 
@@ -30,8 +31,9 @@ class StepController extends Controller
         $order = Step::find(42)->ordering()->before();
         $step = Step::create([
             'title' => 'ahmed',
-            'order' => $order
+            'order' => $order,
         ]);
+
         return $step;
     }
 
@@ -39,7 +41,7 @@ class StepController extends Controller
     {
         $steps = Step::orderBy('order', 'asc')->get()->each(function ($step, $index) {
             $step->update([
-                'order' => $index + 1
+                'order' => $index + 1,
             ]);
         });
     }

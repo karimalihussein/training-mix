@@ -16,9 +16,9 @@ class GeolocationServiceProvider extends ServiceProvider
      */
     public function register()
     {
-       $this->app->bind(Geolocation::class, function ($app) {
-           return new Geolocation(new Map(), new Statelite());
-       });
+        $this->app->bind(Geolocation::class, function ($app) {
+            return new Geolocation(new Map(), new Statelite());
+        });
     }
 
     /**

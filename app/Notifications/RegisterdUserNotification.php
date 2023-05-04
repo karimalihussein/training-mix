@@ -10,7 +10,7 @@ use Illuminate\Notifications\Notification;
 class RegisterdUserNotification extends Notification implements ShouldQueue
 {
     use Queueable;
-    
+
     private $user;
 
     /**
@@ -43,9 +43,9 @@ class RegisterdUserNotification extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->line('The introduction to the notification.')
+            ->action('Notification Action', url('/'))
+            ->line('Thank you for using our application!');
     }
 
     /**

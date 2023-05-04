@@ -11,6 +11,7 @@ class Product extends Model
 
     /**
      * The attributes that are mass assignable.
+     *
      * @return array
      */
     protected $fillable = [
@@ -23,5 +24,4 @@ class Product extends Model
     {
         return number_format($this->price / 100, 2);
     }
-    
 }

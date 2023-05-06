@@ -63,6 +63,7 @@
         "torann/laravel-repository": "^0.6.2",
         "twilio/sdk": "^6.37",
         "vyuldashev/nova-permission": "^3.2",
+        "wendelladriel/laravel-validated-dto": "^2.6",
         "xaboy/form-builder": "~2.0"
     },
     "require-dev": {

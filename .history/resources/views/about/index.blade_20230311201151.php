@@ -1,2 +1,0 @@
-{# get local current language #}
-

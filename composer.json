@@ -17,6 +17,7 @@
         "gender-api/client": "^1.0",
         "guzzlehttp/guzzle": "^7.5",
         "http-interop/http-factory-guzzle": "^1.0",
+        "ignited/laravel-omnipay": "^3.5",
         "itsgoingd/clockwork": "^5.1",
         "laravel-shift/blueprint": "^2.1",
         "laravel/fortify": "^1.16",

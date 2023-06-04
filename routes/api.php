@@ -1,26 +1,29 @@
 <?php
 
+use Illuminate\Http\Request;
 use App\Helpers\Routes\RouteHelper;
-use App\Http\Controllers\AchievementController;
-use App\Http\Controllers\Api\RegistrationController;
-use App\Http\Controllers\FeatureController;
-use App\Http\Controllers\FolderController;
-use App\Http\Controllers\HostReservationController;
-use App\Http\Controllers\Integrations\Payments\HyperpayController;
-use App\Http\Controllers\Integrations\TwilioPhoneCallController;
-use App\Http\Controllers\OfficeController;
-use App\Http\Controllers\OfficeImageController;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\SimpleController;
-use App\Http\Controllers\StepController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\StepController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\UserReservationController;
-use App\Http\Controllers\V2\InvoiceController;
+use App\Http\Controllers\FolderController;
+use App\Http\Controllers\OfficeController;
+use App\Http\Controllers\SimpleController;
+use App\Http\Controllers\FeatureController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\WhatsappController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\V2\InvoiceController;
+use App\Http\Controllers\AchievementController;
+use App\Http\Controllers\OfficeImageController;
+use App\Http\Controllers\HostReservationController;
+use App\Http\Controllers\UserReservationController;
+use App\Http\Controllers\Api\RegistrationController;
+use App\Http\Controllers\Integrations\Calls\Agora\AgoraController;
+use App\Http\Controllers\Integrations\Payments\PaypalController;
+use App\Http\Controllers\Integrations\TwilioPhoneCallController;
+use App\Http\Controllers\Integrations\Payments\HyperpayController;
 
 
 
@@ -47,9 +50,19 @@ use Illuminate\Support\Facades\Route;
                 Route::get('callback', [HyperpayController::class, 'callback'])->name('integrations/payments/hyperpay/callback');
             });
 
+            Route::group(['prefix' => 'paypal'], function () {
+                Route::post('create', [PaypalController::class, 'create']);
+                Route::post('orders/{orderId}/capture', [PaypalController::class, 'capture']);
+            });
         });
         Route::group(['prefix' => 'twilio'], function () {
             Route::get('call', [TwilioPhoneCallController::class, 'index']);
+        });
+
+       Route::group(['prefix' => 'agora'], function () {
+               Route::get('chat', [AgoraController::class, 'index']);
+               Route::post('token', [AgoraController::class, 'token']);
+               Route::post('call-user', [AgoraController::class, 'callUser']);
         });
 
     });
@@ -77,3 +90,9 @@ Route::prefix('v1')->group(function () {
 Route::prefix('v2')->group(function () {
     RouteHelper::includeRouteFiles(__DIR__.'/api/v2');
 });
+
+Route::post('pay/{id}', [PaymentController::class, 'pay'])->name('payment');
+Route::get('success', [PaymentController::class, 'success']);
+Route::get('error', [PaymentController::class, 'error']);
+
+

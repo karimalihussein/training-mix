@@ -7,21 +7,11 @@ use Illuminate\Support\Facades\Redis;
 use WendellAdriel\ValidatedDTO\Exceptions\CastTargetException;
 use WendellAdriel\ValidatedDTO\Exceptions\MissingCastTypeException;
 
-class TestController extends Controller
+class TestController extends PaymentController
 {
-    /**
-     * @throws CastTargetException
-     * @throws MissingCastTypeException
-     */
+
     public function __invoke()
     {
-//      $counter = Redis::incr('counter');
-//      return $counter;
-
-        $data =  new UserDTO([
-            'email' => 'john.doe@example.com',
-            'password' => 's3CreT!@1a2B'
-        ]);
-        return $data->name;
+        return $this->pay();
     }
 }

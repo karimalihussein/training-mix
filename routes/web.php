@@ -83,3 +83,8 @@ Route::get('posts', [PostController::class, 'index'])->name('posts.index');
 
 Route::get('test', [TestController::class, 'index'])->name('test.index');
 Route::post('test', [TestController::class, 'store'])->name('test.store');
+
+
+Route::get('integrations/payments/paypal', function() {
+    return view('integrations.payments.paypal.index');
+})->name('integrations.payments.paypal.index');

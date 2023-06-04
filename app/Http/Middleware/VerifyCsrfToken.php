@@ -12,6 +12,8 @@ class VerifyCsrfToken extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        //
+        'api/integrations/payments/paypal/create',
+        'integrations/payments/paypal',
+        'api/integrations/payments/paypal/orders/{order:id}/capture',
     ];
 }

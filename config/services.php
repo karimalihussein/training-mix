@@ -39,5 +39,9 @@ return [
         'client_secret' => env('GITHUB_CLIENT_SECRET'),
         'redirect' => '/auth/github/callback',
     ],
+    "agora" => [
+        "ak" => env("AGORA_AK", "ef455056beaf4559992e62e34735226d"),
+        "sk" => env("AGORA_SK", "f9e518d8bb0a427bb356d4f752386aca"),
+    ],
 
 ];

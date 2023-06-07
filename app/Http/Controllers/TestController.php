@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\DTOs\UserDTO;
-use Illuminate\Support\Facades\Redis;
-use WendellAdriel\ValidatedDTO\Exceptions\CastTargetException;
-use WendellAdriel\ValidatedDTO\Exceptions\MissingCastTypeException;
+use App\DataStructure\Fibonacci;
+use App\DataStructure\Mix;
 
-class TestController extends PaymentController
+class TestController extends Controller
 {
 
     public function __invoke()
     {
-        return $this->pay();
+        $mixAlgorithm = new Mix();
+        $target = "F";
+        $array = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
+        $result = $mixAlgorithm->binarySearch($array, $target);
+        return $result;
     }
 }

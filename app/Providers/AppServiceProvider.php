@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use Laravel\Cashier\Cashier;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -81,5 +82,7 @@ class AppServiceProvider extends ServiceProvider
         ]);
         Gate::define('admin', fn (User $user) => $user->is_admin);
         Blade::if('admin', fn () => auth()->user()?->can('admin'));
+        Cashier::useCustomerModel(User::class);
+        Cashier::calculateTaxes();
     }
 }

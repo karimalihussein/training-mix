@@ -43,5 +43,11 @@ return [
         "ak" => env("AGORA_AK", "ef455056beaf4559992e62e34735226d"),
         "sk" => env("AGORA_SK", "f9e518d8bb0a427bb356d4f752386aca"),
     ],
+    "stripe" => [
+        'model' => App\Models\User::class,
+        'key' => env('STRIPE_KEY'),
+        'secret' => env('STRIPE_SECRET'),
+
+    ]
 
 ];

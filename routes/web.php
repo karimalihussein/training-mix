@@ -88,3 +88,4 @@ Route::post('test', [TestController::class, 'store'])->name('test.store');
 Route::get('integrations/payments/paypal', function() {
     return view('integrations.payments.paypal.index');
 })->name('integrations.payments.paypal.index');
+

@@ -96,3 +96,7 @@ Route::get('success', [PaymentController::class, 'success']);
 Route::get('error', [PaymentController::class, 'error']);
 
 
+
+Route::prefix('billing')->group(function(){
+    RouteHelper::includeRouteFiles(__DIR__.'/billing');
+});

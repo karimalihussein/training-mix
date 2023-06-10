@@ -20,6 +20,11 @@ return new class extends Migration
             $table->timestamp('contract_at')->nullable();
             $table->unsignedSmallInteger('active')->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('email')->unique()->index();
+            $table->string('phone_number')->nullable();
+            $table->timestamp('customer_at')->nullable();
+            $table->foreignId('tenant_id')->nullable()->constrained()->onDelete('cascade');
+            $table->unsignedInteger('company_code')->nullable();
             $table->timestamps();
         });
     }

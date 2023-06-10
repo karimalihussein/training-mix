@@ -23,10 +23,8 @@ class DatabaseSeeder extends Seeder
         ]);
         $this->call([
             RolesAndPermissionsSeeder::class,
+            PlanSeeder::class,
         ]);
-        User::factory()->times(5)->hasPosts(10)->create();
-        $this->call([
-          PlanSeeder::class,
-        ]);
+        User::factory()->times(5)->create();
     }
 }

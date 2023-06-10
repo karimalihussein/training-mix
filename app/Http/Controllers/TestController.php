@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\DataStructure\Fibonacci;
-use App\DataStructure\Mix;
+use App\Models\User;
+use App\Models\Tenant\Tenant;
+use App\Http\Controllers\Controller;
+use Bpuig\Subby\Models\Plan;
 
 class TestController extends Controller
 {
 
     public function __invoke()
     {
-        $mixAlgorithm = new Mix();
-        $target = "F";
-        $array = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
-        $result = $mixAlgorithm->binarySearch($array, $target);
-        return $result;
+        $tenant = Tenant::query()->first();
+        // $tenant->newPlanSubscription('main', Plan::query()->first());
+        $user = User::query()->first();
+        $plan = Plan::query()->first();
+        $user->newSubscription('main', $plan, 'Main subscription', 'Customer main subscription');
     }
 }

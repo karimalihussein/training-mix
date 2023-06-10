@@ -186,6 +186,7 @@ return [
         Clockwork\Support\Laravel\ClockworkServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         App\Providers\GeolocationServiceProvider::class,
+        App\Providers\TenancyServiceProvider::class
 
     ],
 

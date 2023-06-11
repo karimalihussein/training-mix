@@ -2,13 +2,21 @@
 
 namespace App\Models\Tenant;
 
+use Devinweb\LaravelHyperpay\Traits\ManageUserTransactions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Bpuig\Subby\Traits\HasSubscriptions;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasPermissions;
+use Spatie\Permission\Traits\HasRoles;
 
-class Customer extends Model
+class Customer extends Authenticatable
 {
     use HasFactory;
+    use hasSubscriptions;
+    use HasApiTokens;
     use Notifiable;
 
     protected $fillable = [

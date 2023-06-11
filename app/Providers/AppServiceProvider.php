@@ -9,6 +9,8 @@ use App\Models\Office;
 use App\Models\Post;
 use App\Models\Series;
 use App\Models\Step;
+use App\Models\Tenant\Customer;
+use App\Models\Tenant\Tenant;
 use App\Models\User;
 use App\PostcardSendingService;
 use App\Services\CreditPaymentGatway;
@@ -79,6 +81,8 @@ class AppServiceProvider extends ServiceProvider
             'step' => Step::class,
             'series' => Series::class,
             'folder' => Folder::class,
+            'customer' => Customer::class,
+            'tenant' => Tenant::class
         ]);
         Gate::define('admin', fn (User $user) => $user->is_admin);
         Blade::if('admin', fn () => auth()->user()?->can('admin'));

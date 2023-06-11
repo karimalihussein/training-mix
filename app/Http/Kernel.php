@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\PlanFeaturesSubscriptionMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -68,5 +69,6 @@ class Kernel extends HttpKernel
         'cache.response' => \App\Http\Middleware\CasheResponeMiddleware::class,
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
         'subscribed' => \App\Http\Middleware\SubscribedMiddleware::class,
+        'tenant' => PlanFeaturesSubscriptionMiddleware::class
     ];
 }

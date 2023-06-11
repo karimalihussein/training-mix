@@ -25,6 +25,10 @@ Route::middleware([
     PreventAccessFromCentralDomains::class,
 ])->group(function () {
     Route::get('/', function () {
-        return 'This is your multi-tenant application. The id of the current tenant is ' . tenant('id');
+        // return 'This is your multi-tenant application. The id of the current tenant is ' . tenant('id');
+        $tenant =  tenant();
+        return $tenant->subscription('main')->features;
     })->middleware(PlanSubscriptionMiddleware::class);
+
+    Route::get('features', [\App\Http\Controllers\Tenant\FeatureController::class, 'index']);
 });

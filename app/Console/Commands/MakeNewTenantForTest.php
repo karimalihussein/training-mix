@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Tenant\Tenant;
 use App\Models\Tenant\Customer;
+use Bpuig\Subby\Models\Plan;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use App\Models\User as CenteralUser;
@@ -35,7 +36,7 @@ class MakeNewTenantForTest extends Command
     {
         DB::statement('DROP DATABASE IF EXISTS `tenant'. 1 .'`');
         Artisan::call('migrate:fresh --seed');
-        $customer = Customer::create([
+        $customer = Customer::query()->create([
             'name' => 'Test Customer',
             'email' => 'test@gmail.com',
             'phone_number' => '123456789',
@@ -53,11 +54,38 @@ class MakeNewTenantForTest extends Command
             'tenant_id' => $tenant->id,
             'customer_at' => now(),
         ]);
-
+        $tenant->newSubscription('main', Plan::find(4) , 'Main subscription', 'Customer main subscription', now(), 'paid');
         $tenant->run(function ($tenant) {
-            TenantUser::create([
+            TenantUser::query()->create([
                 'name' => 'Test User',
                 'email' => 'test@gmail.com',
+                'password' => 'password',
+            ]);
+        });
+
+        $customer2 = Customer::query()->create([
+            'name' => 'Test Customer 2',
+            'email' => 'test2@gmail.com',
+            'phone_number' => '01292993312',
+            'customer_at' => now(),
+            'company_code' => 4321,
+            'user_id' => CenteralUser::factory()->create()->id,
+            'contract_at' => now(),
+            'active' => true,
+        ]);
+        $tenant2 = Tenant::query()->create([
+            'domain' => 'free.'.env('CENTERAL_DOMAIN_URL'),
+        ]);
+        $tenant2->createDomain(['domain' => $tenant2->domain]);
+        $customer2->update([
+            'tenant_id' => $tenant2->id,
+            'customer_at' => now(),
+        ]);
+        $tenant2->newSubscription('main', Plan::find(1) , 'Main subscription', 'Customer main subscription', now(), 'free');
+        $tenant->run(function ($tenant) {
+            TenantUser::query()->create([
+                'name' => 'Test User 2',
+                'email' => 'test2@gmail.com',
                 'password' => 'password',
             ]);
         });

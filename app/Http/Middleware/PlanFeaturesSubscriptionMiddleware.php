@@ -21,7 +21,10 @@ class PlanFeaturesSubscriptionMiddleware
                 return $next($request);
             }
         }
-        throw new \Exception('you dont have access to this feature');
+        return  new JsonResponse([
+                'message' => 'You are not subscribed to the required plan',
+                'features' => $tenant->subscription('main')->features
+            ], 402);
     }
 }
 

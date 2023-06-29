@@ -95,7 +95,8 @@
             "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
-            "app/Helpers/helpers.php" 
+            "app/Helpers/helpers.php",
+            "app/Helpers/Tenant.php" 
         ]
     },
     "autoload-dev": {

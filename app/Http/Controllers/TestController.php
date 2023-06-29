@@ -13,6 +13,7 @@ class TestController extends Controller
 
     public function __invoke()
     {
+        return Plan::query()->where('tag', 'free')->first()->features->where('tag', 'leads_management')->first()->value;
         $tenant = Tenant::query()->first();
         $customer = Customer::query()->first();
         // $tenant->newPlanSubscription('main', Plan::query()->first());

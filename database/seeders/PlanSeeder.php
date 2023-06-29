@@ -15,6 +15,23 @@ class PlanSeeder extends Seeder
      */
     public function run()
     {
+
+        $freePlan = Plan::create([
+            'tag' => 'free',
+            'name' => 'Free Plan',
+            'description' => 'For small businesses',
+            'price' => 0.00,
+            'signup_fee' => 0.00,
+            'invoice_period' => 1,
+            'invoice_interval' => 'month',
+            'trial_period' => 15,
+            'trial_interval' => 'day',
+            'grace_period' => 1,
+            'grace_interval' => 'day',
+            'tier' => 0,
+            'currency' => 'JOD',
+        ]);
+
         $basicPlan = Plan::create([
             'tag' => 'basic',
             'name' => 'Basic Plan',
@@ -268,5 +285,47 @@ class PlanSeeder extends Seeder
             ]),
 
         ]);
+
+        $freePlan->features()->saveMany([
+            new PlanFeature([
+                'tag' => 'leads_management',
+                'name' => 'Leads Management System (LMS) - 100 Leads',
+                'description' => 'Leads Management System (LMS) - Control your leads and convert them to customers with our LMS system that allows you to manage your leads, assign them to your team, and track their progress.',
+                'value' => 10,
+                'sort_order' => 1,
+                'resettable_period' => 1,
+                'resettable_interval' => 'month',
+            ]),
+            new PlanFeature([
+                'tag' => 'web_forms',
+                'name' => 'Web Forms To Collect Leads - 10 Web Forms',
+                'description' => 'Web Forms To Collect Leads - Collect leads from your website with our web forms that allow you to collect leads from your website and convert them to customers.',
+                'value' => 10,
+                'sort_order' => 2,
+                'resettable_period' => 1,
+                'resettable_interval' => 'month',
+            ]),
+
+            new PlanFeature([
+                'tag' => 'agents_management',
+                'name' => 'Agents Management System (AMS) - 10 Agents',
+                'description' => 'Agents Management System (AMS) - Control all your agents and create teams with roles and permissions and give them access to the system.',
+                'value' => 10,
+                'sort_order' => 3,
+                'resettable_period' => 1,
+                'resettable_interval' => 'month',
+            ]),
+
+            new PlanFeature([
+                'tag' => 'tasks_management',
+                'name' => 'Tasks Management System (TMS) - 10 Tasks',
+                'description' => 'Tasks Management System (TMS) - Control all your tasks and assign them to your team and track their progress.',
+                'value' => 10,
+                'sort_order' => 4,
+                'resettable_period' => 1,
+                'resettable_interval' => 'month',
+            ]),
+        ]);
+
     }
 }

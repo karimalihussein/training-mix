@@ -30,5 +30,5 @@ Route::middleware([
         return $tenant->subscription('main')->features;
     })->middleware(PlanSubscriptionMiddleware::class);
 
-    Route::get('features', [\App\Http\Controllers\Tenant\FeatureController::class, 'index']);
+    Route::get('features', [\App\Http\Controllers\Tenant\FeatureController::class, 'index'])->middleware(PlanSubscriptionMiddleware::class);
 });

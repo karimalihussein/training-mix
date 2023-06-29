@@ -25,6 +25,7 @@
         "laravel/fortify": "^1.16",
         "laravel/framework": "^9.2",
         "laravel/helpers": "^1.5",
+        "laravel/horizon": "^5.17",
         "laravel/nova": "~4.0",
         "laravel/pint": "^1.10",
         "laravel/sanctum": "^2.14.1",

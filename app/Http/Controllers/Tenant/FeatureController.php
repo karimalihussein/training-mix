@@ -16,7 +16,7 @@ class FeatureController extends Controller
         $this->featureRepository = $featureRepository;
     }
 
-    public function index(Request $request): JsonResource
+    public function index(Request $request)
     {
         return $this->featureRepository->store();
     }

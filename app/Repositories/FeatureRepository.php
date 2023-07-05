@@ -13,7 +13,7 @@ class FeatureRepository
         $this->maxReachedService = $maxReachedService;
     }
 
-    public function store(): JsonResource
+    public function store()
     {
         // $usersCount = 51;//User::query()->count();
         $maxUsers = $this->maxReachedService->canCreateNewRecord('leads_management', 99);

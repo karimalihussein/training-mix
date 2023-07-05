@@ -35,6 +35,8 @@ class MakeNewTenantForTest extends Command
     public function handle()
     {
         DB::statement('DROP DATABASE IF EXISTS `tenant'. 1 .'`');
+        DB::statement('DROP DATABASE IF EXISTS `tenant'. 2 .'`');
+
         Artisan::call('migrate:fresh --seed');
         $customer = Customer::query()->create([
             'name' => 'Test Customer',

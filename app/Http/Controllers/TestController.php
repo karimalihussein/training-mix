@@ -23,6 +23,9 @@ class TestController extends Controller
         // // $user->newSubscription('main', $plan, 'Main subscription', 'Customer main subscription');
         // $tenant->newSubscription('main', $plan, 'Main subscription', 'Customer main subscription', now(), 'paid');
         $plan = Plan::query()->first();
-        return $plan;
+        // return $plan;
+        $user = User::query()->first();
+        // return $user;
+        return $user->newSubscription('main', $plan->id, 'Main subscription', 'Customer main subscription', now(), 'paid');
     }
 }

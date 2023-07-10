@@ -13,14 +13,16 @@ class TestController extends Controller
 
     public function __invoke()
     {
-        return Plan::query()->where('tag', 'free')->first()->features->where('tag', 'leads_management')->first()->value;
-        $tenant = Tenant::query()->first();
-        $customer = Customer::query()->first();
-        // $tenant->newPlanSubscription('main', Plan::query()->first());
-        // $user = User::query()->first();
-        // dd($user->subscription('main')->isOnTrial());
-        $plan = Plan::query()->find(2);
-        // $user->newSubscription('main', $plan, 'Main subscription', 'Customer main subscription');
-        $tenant->newSubscription('main', $plan, 'Main subscription', 'Customer main subscription', now(), 'paid');
+        // return Plan::query()->where('tag', 'free')->first()->features->where('tag', 'leads_management')->first()->value;
+        // $tenant = Tenant::query()->first();
+        // $customer = Customer::query()->first();
+        // // $tenant->newPlanSubscription('main', Plan::query()->first());
+        // // $user = User::query()->first();
+        // // dd($user->subscription('main')->isOnTrial());
+        // $plan = Plan::query()->find(2);
+        // // $user->newSubscription('main', $plan, 'Main subscription', 'Customer main subscription');
+        // $tenant->newSubscription('main', $plan, 'Main subscription', 'Customer main subscription', now(), 'paid');
+        $plan = Plan::query()->first();
+        return $plan;
     }
 }

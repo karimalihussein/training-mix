@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasSubscription;
 use Devinweb\LaravelHyperpay\Traits\ManageUserTransactions;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -15,7 +16,7 @@ use Laravel\Cashier\Billable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, ManageUserTransactions, HasRoles, HasPermissions, HasSubscriptions;
+    use HasApiTokens, HasFactory, Notifiable, ManageUserTransactions, HasRoles, HasPermissions, HasSubscriptions, HasSubscription;
 
     /**
      * The attributes that are mass assignable.

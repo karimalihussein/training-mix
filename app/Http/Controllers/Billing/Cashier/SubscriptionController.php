@@ -9,15 +9,49 @@ use Bpuig\Subby\Models\Plan;
 
 class SubscriptionController extends Controller
 {
-    public function subscribe()
+    public function subscribe(int $id)
     {
         $user = User::query()->first();
-        $plan = Plan::query()->first();
-        // check if the current user has a subscription and if it is active
-        if ($user->hasActiveSubscription()) {
-            // if the user has an active subscription, we will cancel it
-            $user->subscription('main')->cancel();
+        $plan = Plan::query()->find($id);
+        if($user->useTrailPeriodBefore())
+        {
+            if($user->onTrialPeriod())
+            {
+                return response()->json([
+                    'message' => 'You are already on trial period, you can not subscribe to another plan',
+                ], 403);
+            }
+//            return response()->json([
+//                'message' => 'you have to pay for this plan,because you have used your free trial period',
+//            ], 403);
+            return $user->newPremiumSubscription('main', $plan, 'Default subscription', 'Customer default subscription');
         }
-        return $user->newSubscription('main', $plan, 'Main subscription', 'Customer main subscription', null, 'free');
+        return $user->newSubscription('on_trial', $plan, 'On trial subscription', 'Customer on trial subscription', null, 'trial');
+
+    }
+
+    public function useFreeTrial()
+    {
+        $user = User::query()->first();
+        $plan = Plan::query()->find(1);
+        return $user->newSubscription('on_trial', $plan, 'On trial subscription', 'Customer on trial subscription', null, 'trial');
+    }
+
+    public function mySubscription()
+    {
+        $user = User::query()->first();
+        return $user->subscription();
+    }
+
+    public function mySubscriptionsDetails(): array
+    {
+        $user = User::query()->first();
+        return [
+            'trial_start_date' => $user->subscription()->getTrialStartDate()->format('Y-m-d H:i:s'),
+            'trial_total_duration' => $user->subscription()->getTrialTotalDurationIn('day'),
+            'trial_period_usage' => $user->subscription()->getTrialPeriodUsageIn('day'),
+            'trial_period_remaining_usage' => $user->subscription()->getTrialPeriodRemainingUsageIn('day'),
+            'is_free' => $user->subscription()->isFree(),
+        ];
     }
 }

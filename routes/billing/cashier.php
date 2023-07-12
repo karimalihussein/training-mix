@@ -10,4 +10,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('plans', [PlanController::class, 'index']);
 Route::get('plans/{id}', [PlanController::class, 'show']);
 
-Route::get('subscribe', [SubscriptionController::class, 'subscribe']);
+Route::post('free-trial', [SubscriptionController::class, 'useFreeTrial']);
+Route::post('subscribe/{id}', [SubscriptionController::class, 'subscribe']);
+Route::get('my-subscription', [SubscriptionController::class, 'mySubscription']);
+Route::get('my-subscription-details', [SubscriptionController::class, 'mySubscriptionsDetails']);

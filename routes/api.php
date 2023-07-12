@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use App\Helpers\Routes\RouteHelper;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TagController;
@@ -24,7 +23,7 @@ use App\Http\Controllers\Integrations\Calls\Agora\AgoraController;
 use App\Http\Controllers\Integrations\Payments\PaypalController;
 use App\Http\Controllers\Integrations\TwilioPhoneCallController;
 use App\Http\Controllers\Integrations\Payments\HyperpayController;
-
+use Illuminate\Http\Request;
 
 
     Route::get('whatsapp', [WhatsappController::class, 'index']);
@@ -75,8 +74,11 @@ Route::get('steps', [StepController::class, 'index']);
 Route::get('steps/create', [StepController::class, 'store']);
 Route::get('steps/refresh', [StepController::class, 'refresh']);
 Route::get('features', [FeatureController::class, 'index']);
-Route::get('test', TestController::class);
-
+Route::get('test', [TestController::class, 'payment']);
+Route::get('/payments/verify/{payment?}', function (Request $request){
+    // log the payment
+    \Illuminate\Support\Facades\Log::info("$request->all()");
+})->name('payment-verify');
 Route::post('registration', RegistrationController::class);
 
 Route::get('simple', SimpleController::class);

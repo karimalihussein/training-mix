@@ -17,6 +17,7 @@ class TestController extends Controller
     public function index()
     {
         $payment = new PaymobPayment();
+        $paypal = new PayPalPayment();
         dd($payment);
         // $randomTime = time();
         // return $randomTime;

@@ -11,17 +11,21 @@ use App\Problemes\BearandBigBrother;
 use Bpuig\Subby\Models\PlanSubscription;
 use Nafezly\Payments\Classes\PaymobPayment;
 use Nafezly\Payments\Classes\PayPalPayment;
-
+use Rap2hpoutre\FastExcel\FastExcel;
 class TestController extends Controller
 {
 
     public function index()
     {
+        $collection = (new FastExcel)->import('data.xlsx');
+        return $collection;
        $file = public_path('data.xlsx');
         $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
         $spreadsheet = $reader->load($file);
         $sheet = $spreadsheet->getActiveSheet();
         $sheetData = $sheet->toArray();
+
+        dd($sheetData);
 
         $data = [];
 

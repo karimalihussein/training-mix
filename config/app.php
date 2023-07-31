@@ -187,7 +187,8 @@ return [
         Clockwork\Support\Laravel\ClockworkServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         App\Providers\GeolocationServiceProvider::class,
-        App\Providers\TenancyServiceProvider::class
+        App\Providers\TenancyServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 
@@ -206,6 +207,7 @@ return [
         'GeoIP' => \Torann\GeoIP\Facades\GeoIP::class,
         'Clockwork' => Clockwork\Support\Laravel\Facade::class,
         'Goutte' => Weidner\Goutte\GoutteFacade::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ])->toArray(),
 
 ];

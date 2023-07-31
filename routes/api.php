@@ -26,6 +26,9 @@ use App\Http\Controllers\Integrations\Payments\HyperpayController;
 use Illuminate\Http\Request;
 
 
+Route::get('test', [TestController::class, 'index']);
+
+
     Route::get('whatsapp', [WhatsappController::class, 'index']);
     Route::get('tags', TagController::class);
     Route::post('achievements', [AchievementController::class, 'store'])->name('achievements.store');
@@ -74,7 +77,6 @@ Route::get('steps', [StepController::class, 'index']);
 Route::get('steps/create', [StepController::class, 'store']);
 Route::get('steps/refresh', [StepController::class, 'refresh']);
 Route::get('features', [FeatureController::class, 'index']);
-Route::get('test', [TestController::class, 'payment']);
 Route::get('/payments/verify/{payment?}', function (Request $request){
     // log the payment
     \Illuminate\Support\Facades\Log::info("$request->all()");

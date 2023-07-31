@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tenant\Customer;
 use App\Models\User;
-use App\Models\Tenant\Tenant;
-use App\Http\Controllers\Controller;
 use Bpuig\Subby\Models\Plan;
+use App\Models\Tenant\Tenant;
+use App\Models\Tenant\Customer;
+use App\Http\Controllers\Controller;
+use App\Problemes\BearandBigBrother;
 use Bpuig\Subby\Models\PlanSubscription;
 use Nafezly\Payments\Classes\PaymobPayment;
 use Nafezly\Payments\Classes\PayPalPayment;
@@ -16,33 +17,45 @@ class TestController extends Controller
 
     public function index()
     {
-        $payment = new PaymobPayment();
-        $paypal = new PayPalPayment();
-        dd($payment);
-        // $randomTime = time();
-        // return $randomTime;
-        // return $amountOfPosts = PlanSubscription::find(1)->getFeatureValue('leads_management');
-        // return Plan::query()->where('tag', 'free')->first()->features->where('tag', 'leads_management')->first()->value;
-        // $tenant = Tenant::query()->first();
-        // $customer = Customer::query()->first();
-        // // $tenant->newPlanSubscription('main', Plan::query()->first());
-        // // $user = User::query()->first();
-        // // dd($user->subscription('main')->isOnTrial());
-        // $plan = Plan::query()->find(2);
-        // // $user->newSubscription('main', $plan, 'Main subscription', 'Customer main subscription');
-        // $tenant->newSubscription('main', $plan, 'Main subscription', 'Customer main subscription', now(), 'paid');
-//         $plan = Plan::query()->first();
-        // return $plan;
-        // $user = User::query()->first();
-        // return $user->onTrialPeriod;
-        // return $user;
-//         return $user->newSubscription('main three', $plan, 'Main subscription', 'Customer main subscription');
-        // return $user->activeSubscriptions();
+       $file = public_path('data.xlsx');
+        $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+        $spreadsheet = $reader->load($file);
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheetData = $sheet->toArray();
+
+        $data = [];
+
+        foreach ($sheetData as $key => $value) {
+            if($key > 0){
+                $data[] = $value[0];
+            }
+        }
+
+         $data = json_decode(json_encode($data));
+         $data = array_chunk($data, 10);
+         return $data;
+
+        // foreach (array_count_values($data) as $key => $value) {
+        //     $newData[] = [
+        //         'name'   => $key,
+        //         'count'  => $value
+        //     ];
+        // }
+
+        // // save new data to json file_put_contents
+        // $file = public_path('centersFinal.json');
+        // file_put_contents($file, json_encode($newData));
+
+        // return $newData;
+
+        // return $newData;
+        // foreach ($newData as $key => $value) {
+        //     $jsonData = public_path('json/centers/new/data'.$key.'.json');
+        //     file_put_contents($jsonData, json_encode($value));
+        // }
+
+        // return "done";
     }
 
-    public function payment()
-    {
-        $paypal = new PayPalPayment();
-        return $paypal->pay(100, 1, 'Ahmed', 'Mohamed', 'ahmedmohamed@gmail.com', '01000000000', 'paypal');
-    }
+    
 }

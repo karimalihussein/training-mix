@@ -8,36 +8,40 @@ use App\Models\Tenant\Tenant;
 use App\Models\Tenant\Customer;
 use App\Http\Controllers\Controller;
 use App\Problemes\BearandBigBrother;
+use Rap2hpoutre\FastExcel\FastExcel;
 use Bpuig\Subby\Models\PlanSubscription;
 use Nafezly\Payments\Classes\PaymobPayment;
 use Nafezly\Payments\Classes\PayPalPayment;
-use Rap2hpoutre\FastExcel\FastExcel;
+use App\Imports\UsersImport;
+use Maatwebsite\Excel\Facades\Excel;
+
 class TestController extends Controller
 {
 
     public function index()
     {
-        $collection = (new FastExcel)->import('data.xlsx');
-        return $collection;
-       $file = public_path('data.xlsx');
-        $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
-        $spreadsheet = $reader->load($file);
-        $sheet = $spreadsheet->getActiveSheet();
-        $sheetData = $sheet->toArray();
+        Excel::import(new UsersImport, 'data.xlsx');
+    //     $collection = (new FastExcel)->import('data.xlsx');
+    //     return $collection;
+    //    $file = public_path('data.xlsx');
+    //     $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+    //     $spreadsheet = $reader->load($file);
+    //     $sheet = $spreadsheet->getActiveSheet();
+    //     $sheetData = $sheet->toArray();
 
-        dd($sheetData);
+    //     dd($sheetData);
 
-        $data = [];
+    //     $data = [];
 
-        foreach ($sheetData as $key => $value) {
-            if($key > 0){
-                $data[] = $value[0];
-            }
-        }
+    //     foreach ($sheetData as $key => $value) {
+    //         if($key > 0){
+    //             $data[] = $value[0];
+    //         }
+    //     }
 
-         $data = json_decode(json_encode($data));
-         $data = array_chunk($data, 10);
-         return $data;
+    //      $data = json_decode(json_encode($data));
+    //      $data = array_chunk($data, 10);
+    //      return $data;
 
         // foreach (array_count_values($data) as $key => $value) {
         //     $newData[] = [

@@ -11,12 +11,11 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasPermissions;
 use Spatie\Permission\Traits\HasRoles;
-use Bpuig\Subby\Traits\HasSubscriptions;
 use Laravel\Cashier\Billable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, ManageUserTransactions, HasRoles, HasPermissions, HasSubscriptions, HasSubscription;
+    use HasApiTokens, HasFactory, Notifiable, ManageUserTransactions, HasRoles, HasPermissions;
 
     /**
      * The attributes that are mass assignable.
@@ -50,6 +49,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'is_admin' => 'boolean',
+        'password' => 'hashed'
     ];
 
     /**

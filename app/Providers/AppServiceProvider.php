@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Laravel\Cashier\Cashier;
@@ -88,5 +89,8 @@ class AppServiceProvider extends ServiceProvider
         Blade::if('admin', fn () => auth()->user()?->can('admin'));
         Cashier::useCustomerModel(User::class);
         Cashier::calculateTaxes();
+        // Http::macro('github', fn() => Http::withHeaders(['X-Example' => 'example'])->baseUrl('https://github.com'));
+        // https://www.arbeitnow.com/api/job-board-api
+        Http::macro('arbeitnow', fn () => Http::withHeaders(['X-Example' => 'example'])->baseUrl('https://www.arbeitnow.com/api/job-board-api'));
     }
 }

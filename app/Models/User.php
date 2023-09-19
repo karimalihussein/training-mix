@@ -12,10 +12,11 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasPermissions;
 use Spatie\Permission\Traits\HasRoles;
 use Laravel\Cashier\Billable;
-
-class User extends Authenticatable
+use OwenIt\Auditing\Contracts\Auditable;
+class User extends Authenticatable implements Auditable
 {
     use HasApiTokens, HasFactory, Notifiable, ManageUserTransactions, HasRoles, HasPermissions;
+    use \OwenIt\Auditing\Auditable;
 
     /**
      * The attributes that are mass assignable.

@@ -189,7 +189,7 @@ return [
         App\Providers\GeolocationServiceProvider::class,
         App\Providers\TenancyServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
-
+        OwenIt\Auditing\AuditingServiceProvider::class,
     ],
 
     /*

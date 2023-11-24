@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services\Reports;
 
 class ReportDownloadService
@@ -23,7 +25,7 @@ class ReportDownloadService
         // Better way: add more formats in the future without modifying this class
         $className = 'App\Services\Reports\ReportDownload'.strtoupper($format).'Service';
         if (class_exists($className)) {
-            return (new $className)->download($report);
+            return (new $className())->download($report);
         }
 
         return response()->json(['error' => 'Download format not found'], 404);

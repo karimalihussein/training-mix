@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests;
 
 use Illuminate\Contracts\Auth\Authenticatable as UserContract;
@@ -9,7 +11,8 @@ use Laravel\Sanctum\Sanctum;
 
 abstract class TestCase extends BaseTestCase
 {
-    use CreatesApplication, LazilyRefreshDatabase;
+    use CreatesApplication;
+    use LazilyRefreshDatabase;
 
     public function actingAs(UserContract $user, $abilities = ['*'])
     {

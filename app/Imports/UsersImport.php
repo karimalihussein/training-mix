@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Imports;
 
 use App\Models\Tag;
-use App\Models\User;
 use Maatwebsite\Excel\Concerns\ToModel;
 
 class UsersImport implements ToModel

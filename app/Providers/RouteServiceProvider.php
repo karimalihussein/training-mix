@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Providers;
 
 use Illuminate\Cache\RateLimiting\Limit;
@@ -45,7 +47,7 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/web.php'));
         }
     }
-    
+
     protected function mapApiRoutes()
     {
         foreach ($this->centralDomains() as $domain) {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Middleware;
 
 use App\Exceptions\PlanUnauthorizedException;
@@ -14,7 +16,7 @@ class SubscribedMiddleware
             throw PlanUnauthorizedException::notLoggedIn();
         }
 
-        if (! $authGuard->user()->subscription('main')->isActive()) {
+        if (!$authGuard->user()->subscription('main')->isActive()) {
             return redirect()->route('plans');
         }
 

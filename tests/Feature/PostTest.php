@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature;
 
 use App\Models\Tag;
@@ -36,27 +38,27 @@ class PostTest extends TestCase
             ->assertJsonPath('data.content', 'this is a content');
     }
 
-     /**
-      * @test
-      *
-      * @dataProvider validationProvider
-      */
-     public function validationTests(array $payload, string $key)
-     {
-         $response = $this->postJson(route('posts.store'), $payload);
-         $response->assertSessionHasErrors($key);
-     }
+    /**
+     * @test
+     *
+     * @dataProvider validationProvider
+     */
+    public function validationTests(array $payload, string $key)
+    {
+        $response = $this->postJson(route('posts.store'), $payload);
+        $response->assertSessionHasErrors($key);
+    }
 
-        public function validationProvider(): Generator
-        {
-            $defaultPayload = [
-                'title' => 'this is a post',
-                'content' => 'this is a content',
-            ];
+    public function validationProvider(): Generator
+    {
+        $defaultPayload = [
+            'title' => 'this is a post',
+            'content' => 'this is a content',
+        ];
 
-            yield 'title is required' => [
-                array_merge($defaultPayload, ['title' => '']),
-                'title',
-            ];
-        }
+        yield 'title is required' => [
+            array_merge($defaultPayload, ['title' => '']),
+            'title',
+        ];
+    }
 }

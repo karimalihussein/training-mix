@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,15 +11,15 @@ class Feature extends Model
 {
     use HasFactory;
 
-    const STATUS_REQUESTED = 1;
+    public const STATUS_REQUESTED = 1;
 
-    const STATUS_APPROVED = 2;
+    public const STATUS_APPROVED = 2;
 
-    const STATUS_REJECTED = 3;
+    public const STATUS_REJECTED = 3;
 
-    const STATUS_DELETED = 4;
+    public const STATUS_DELETED = 4;
 
-    const STATUSES = [
+    public const STATUSES = [
         self::STATUS_REQUESTED => 'Requested',
         self::STATUS_APPROVED => 'Approved',
         self::STATUS_REJECTED => 'Rejected',

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Http\Resources\ReservationResource;
@@ -25,13 +27,17 @@ class HostReservationController extends Controller
 
         $reservations = Reservation::query()
             ->whereRelation('office', 'user', auth()->user()->id)
-            ->when(request('office_id'),
+            ->when(
+                request('office_id'),
                 fn ($query) => $query->where('office_id', request('office_id'))
-            )->when(request('status'),
+            )->when(
+                request('status'),
                 fn ($query) => $query->where('status', request('status'))
-            )->when(request('user_id'),
+            )->when(
+                request('user_id'),
                 fn ($query) => $query->where('user_id', request('user_id'))
-            )->when(request('start_date') && request('end_date'),
+            )->when(
+                request('start_date') && request('end_date'),
                 fn ($query) => $query->betweenDates(request('start_date'), request('end_date'))
             )
             ->with(['office.featuredImage'])

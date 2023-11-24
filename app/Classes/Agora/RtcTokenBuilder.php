@@ -1,12 +1,15 @@
 <?php
+
+declare(strict_types=1);
+
 namespace App\Classes\Agora;
 
 class RtcTokenBuilder
 {
-    const RoleAttendee = 0;
-    const RolePublisher = 1;
-    const RoleSubscriber = 2;
-    const RoleAdmin = 101;
+    public const RoleAttendee = 0;
+    public const RolePublisher = 1;
+    public const RoleSubscriber = 2;
+    public const RoleAdmin = 101;
 
     # appID: The App ID issued to you by Agora. Apply for a new App ID from
     #        Agora Dashboard if it is missing from your kit. See Get an App ID.

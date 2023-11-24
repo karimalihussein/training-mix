@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use App\Ordering\Traits\HasOrder;
@@ -8,7 +10,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Step extends Model
 {
-    use HasFactory, HasOrder;
+    use HasFactory;
+    use HasOrder;
 
     protected $fillable = [
         'title',

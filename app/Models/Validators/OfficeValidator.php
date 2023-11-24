@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\Validators;
 
 use App\Models\Office;
@@ -9,7 +11,8 @@ class OfficeValidator
 {
     public function validate(Office $office, array $attributes): array
     {
-        return validator($attributes,
+        return validator(
+            $attributes,
             [
                 'title' => [Rule::when($office->exists, 'sometimes'), 'required', 'string'],
                 'description' => [Rule::when($office->exists, 'sometimes'), 'required', 'string'],
@@ -23,6 +26,7 @@ class OfficeValidator
                 'monthly_discount' => ['integer', 'min:0', 'max:90'],
                 'tags' => ['nullable', 'array'],
                 'tags.*' => ['integer', Rule::exists('tags', 'id')],
-            ])->validate();
+            ]
+        )->validate();
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Http\Resources\ReservationResource;
@@ -29,11 +31,14 @@ class UserReservationController extends Controller
 
         $reservations = Reservation::query()
             ->where('user_id', auth()->id())
-            ->when(request('office_id'),
+            ->when(
+                request('office_id'),
                 fn ($query) => $query->where('office_id', request('office_id'))
-            )->when(request('status'),
+            )->when(
+                request('status'),
                 fn ($query) => $query->where('status', request('status'))
-            )->when(request('start_date') && request('end_date'),
+            )->when(
+                request('start_date') && request('end_date'),
                 fn ($query) => $query->betweenDates(request('start_date'), request('end_date'))
             )
             ->with(['office.featuredImage'])
@@ -45,7 +50,8 @@ class UserReservationController extends Controller
 
     public function store()
     {
-        abort_unless(auth()->user()->tokenCan('reservations.make'),
+        abort_unless(
+            auth()->user()->tokenCan('reservations.make'),
             Response::HTTP_FORBIDDEN
         );
 

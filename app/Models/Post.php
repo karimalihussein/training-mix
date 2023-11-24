@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use App\Models\Scopes\ActivePostScope;
@@ -11,11 +13,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
-    use HasFactory, SoftDeletes, Prunable;
+    use HasFactory;
+    use SoftDeletes;
+    use Prunable;
 
-    const ACTIVE_STATUS = 1;
+    public const ACTIVE_STATUS = 1;
 
-    const INACTIVE_STATUS = 2;
+    public const INACTIVE_STATUS = 2;
 
     /**
      * The attributes that are mass assignable.
@@ -71,7 +75,7 @@ class Post extends Model
 
     public static function booted()
     {
-        static::addGlobalScope(new ActivePostScope);
+        static::addGlobalScope(new ActivePostScope());
         static::creating(function ($post) {
             $post->user_id = auth()->id() ?? $post->user_id;
         });

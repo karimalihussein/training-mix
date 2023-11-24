@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -13,11 +15,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Office extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
-    const APPROVAL_PENDING = 1;
+    public const APPROVAL_PENDING = 1;
 
-    const APPROVAL_APPROVED = 2;
+    public const APPROVAL_APPROVED = 2;
 
     protected $fillable = [
         'title',

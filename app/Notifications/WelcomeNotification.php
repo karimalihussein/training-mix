@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
@@ -39,7 +41,7 @@ class WelcomeNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
+        return (new MailMessage())
             ->subject('Welcome to Our Community')
             ->greeting("Hello {$notifiable->name}, your password is {$this->password}")
             ->line('The introduction to the notification.')

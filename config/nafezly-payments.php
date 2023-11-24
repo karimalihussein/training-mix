@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     //PAYMOB
     'PAYMOB_API_KEY' => env('PAYMOB_API_KEY'),

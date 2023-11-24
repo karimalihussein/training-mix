@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Http\Resources\OfficeResource;
@@ -23,13 +25,15 @@ class OfficeController extends Controller
     public function index(): AnonymousResourceCollection
     {
         $offices = Office::query()
-            ->when(request('user_id') && auth()->user() && request('user_id') == auth()->id(),
+            ->when(
+                request('user_id') && auth()->user() && request('user_id') == auth()->id(),
                 fn ($builder) => $builder,
-                fn ($builder) => $builder->where('approval_status', Office::APPROVAL_APPROVED)->where('hidden', false))
+                fn ($builder) => $builder->where('approval_status', Office::APPROVAL_APPROVED)->where('hidden', false)
+            )
             ->when(request('user_id'), fn ($builder) => $builder->whereUserId(request('user_id')))
-            ->when(request('visitor_id'),
+            ->when(
+                request('visitor_id'),
                 fn (Builder $builder) => $builder->whereRelation('reservations', 'user_id', '=', request('visitor_id'))
-
             )
             ->when(
                 request('lat') && request('lng'),
@@ -37,7 +41,8 @@ class OfficeController extends Controller
                 fn (Builder $builder) => $builder->orderBy('id', 'desc')
             )
             ->with(['images', 'tags', 'user'])
-            ->withCount(['reservations' => fn (Builder $builder) => $builder->where('status', Reservation::STATUS_ACTIVE)]
+            ->withCount(
+                ['reservations' => fn (Builder $builder) => $builder->where('status', Reservation::STATUS_ACTIVE)]
             )
             ->get();
 
@@ -46,7 +51,8 @@ class OfficeController extends Controller
 
     public function show(Office $office): OfficeResource
     {
-        $office->loadCount(['reservations' => fn (Builder $builder) => $builder->where('status', Reservation::STATUS_ACTIVE)]
+        $office->loadCount(
+            ['reservations' => fn (Builder $builder) => $builder->where('status', Reservation::STATUS_ACTIVE)]
         )->load(['images', 'tags', 'user', 'reservations']);
 
         return OfficeResource::make($office);
@@ -54,7 +60,7 @@ class OfficeController extends Controller
 
     public function store(): JsonResource
     {
-        if (! auth()->user()->tokenCan('office.create')) {
+        if (!auth()->user()->tokenCan('office.create')) {
             abort(Response::HTTP_FORBIDDEN, 'You are not allowed to create an office');
         }
 
@@ -84,7 +90,7 @@ class OfficeController extends Controller
 
     public function update(Office $office): JsonResource
     {
-        if (! auth()->user()->tokenCan('office.update')) {
+        if (!auth()->user()->tokenCan('office.update')) {
             abort(Response::HTTP_FORBIDDEN, 'You are not allowed to update an office');
         }
 
@@ -119,7 +125,7 @@ class OfficeController extends Controller
 
     public function delete(Office $office)
     {
-        if (! auth()->user()->tokenCan('office.delete')) {
+        if (!auth()->user()->tokenCan('office.delete')) {
             abort(Response::HTTP_FORBIDDEN, 'You are not allowed to update an office');
         }
 

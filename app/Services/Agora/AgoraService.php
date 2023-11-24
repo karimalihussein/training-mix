@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace App\Services\Agora;
 
 use DateTime;
@@ -9,8 +12,8 @@ use App\Traits\ResponseApiTrait;
 class AgoraService
 {
     use ResponseApiTrait;
-    
-    public function createSdkToken($role, $data=[])
+
+    public function createSdkToken($role, $data = [])
     {
     }
 

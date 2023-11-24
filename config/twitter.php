@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 // You can find the keys here : https://developer.twitter.com/en/portal/projects-and-apps
 
 return [

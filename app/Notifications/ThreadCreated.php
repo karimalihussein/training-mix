@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Notifications;
 
 use App\Models\Thread;
@@ -40,7 +42,7 @@ class ThreadCreated extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
+        return (new MailMessage())
             ->subject('New Thread Created')
             ->line('A new thread has been created')
             ->action('View Thread', url('threads.show', $this->thread));

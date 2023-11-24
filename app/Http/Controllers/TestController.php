@@ -1,12 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Rmunate\Utilities\SpellNumber;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Http;
-use App\Services\Integrations\Twitter\TwitterService;
 use Twilio\Rest\Client;
 
 class TestController extends Controller

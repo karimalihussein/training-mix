@@ -1,11 +1,14 @@
 <?php
+
+declare(strict_types=1);
+
 namespace App\Classes\Agora;
 
 use App\Classes\Message;
 
 class AccessToken
 {
-    const Privileges = [
+    public const Privileges = [
         "kJoinChannel" => 1,
         "kPublishAudioStream" => 2,
         "kPublishVideoStream" => 3,
@@ -56,9 +59,9 @@ class AccessToken
     {
         $accessToken = new AccessToken();
 
-        if (! $accessToken->is_nonempty_string("appID", $appID) ||
-            ! $accessToken->is_nonempty_string("appCertificate", $appCertificate) ||
-            ! $accessToken->is_nonempty_string("channelName", $channelName)) {
+        if (!$accessToken->is_nonempty_string("appID", $appID) ||
+            !$accessToken->is_nonempty_string("appCertificate", $appCertificate) ||
+            !$accessToken->is_nonempty_string("channelName", $channelName)) {
             return null;
         }
 
@@ -75,7 +78,7 @@ class AccessToken
     public static function initWithToken($token, $appCertificate, $channel, $uid)
     {
         $accessToken = new AccessToken();
-        if (! $accessToken->extract($token, $appCertificate, $channel, $uid)) {
+        if (!$accessToken->extract($token, $appCertificate, $channel, $uid)) {
             return null;
         }
 
@@ -100,9 +103,9 @@ class AccessToken
             return false;
         }
 
-        if (! $this->is_nonempty_string("token", $token) ||
-            ! $this->is_nonempty_string("appCertificate", $appCertificate) ||
-            ! $this->is_nonempty_string("channelName", $channelName)) {
+        if (!$this->is_nonempty_string("token", $token) ||
+            !$this->is_nonempty_string("appCertificate", $appCertificate) ||
+            !$this->is_nonempty_string("channelName", $channelName)) {
             return false;
         }
 

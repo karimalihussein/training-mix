@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Containers;
 
 use Closure;
@@ -37,7 +39,7 @@ class Container
      */
     public function get(string $abstract): mixed
     {
-        if (! isset($this->bindings[$abstract])) {
+        if (!isset($this->bindings[$abstract])) {
             if (class_exists($abstract)) {
                 return $this->resolveClass($abstract);
             }
@@ -52,7 +54,7 @@ class Container
 
         $concrete = $binding['concrete'];
 
-        if (! $concrete instanceof Closure) {
+        if (!$concrete instanceof Closure) {
             return $concrete;
         }
 
@@ -74,7 +76,7 @@ class Container
     {
         $reflector = new ReflectionClass($class);
 
-        if (! $constructor = $reflector->getConstructor()) {
+        if (!$constructor = $reflector->getConstructor()) {
             return new $class();
         }
 

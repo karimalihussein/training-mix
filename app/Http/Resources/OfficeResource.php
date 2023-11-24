@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -20,13 +22,15 @@ class OfficeResource extends JsonResource
             'user' => UserResource::make($this->user),
             'images' => ImageResource::collection($this->images),
             'tags' => TagResource::collection($this->tags),
-            $this->merge(Arr::except($this->resource->toArray(),
+            $this->merge(Arr::except(
+                $this->resource->toArray(),
                 [
                     'user_id',
                     'created_at',
                     'updated_at',
                     'deleted_at',
-                ])),
+                ]
+            )),
 
         ];
 

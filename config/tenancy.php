@@ -7,7 +7,7 @@ use App\Models\Tenant\Tenant;
 
 return [
     'tenant_model' => Tenant::class,
-    'id_generator' => NULL,
+    'id_generator' => null,
 
     'domain_model' => Domain::class,
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Ordering;
 
 use Illuminate\Database\Eloquent\Model;
@@ -29,7 +31,7 @@ class Orderer
             ->orderBy('order', 'asc')
             ->first();
 
-        if (! $adjecent) {
+        if (!$adjecent) {
             return $this->model->query()->max('order') + 1;
         }
 
@@ -42,7 +44,7 @@ class Orderer
             ->orderBy('order', 'desc')
             ->first();
 
-        if (! $adjecent) {
+        if (!$adjecent) {
             return $this->model->query()->min('order') - 1;
         }
 

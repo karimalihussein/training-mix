@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 // Array Destructuring in PHP
 $params = [10, 20, 30];
 [$a, $b, $c] = $params;
@@ -95,11 +97,11 @@ class Cart
     }
 }
 
-$item1 = (new Item)->setCost(10);
-$item2 = (new Item)->setCost(20);
-$item3 = (new Item)->setCost(30);
+$item1 = (new Item())->setCost(10);
+$item2 = (new Item())->setCost(20);
+$item3 = (new Item())->setCost(30);
 
-$cart = (new Cart)
+$cart = (new Cart())
     ->addItem($item1)
     ->addItem($item2)
     ->addItem($item3);

@@ -1,15 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\Tenant;
 
-use Devinweb\LaravelHyperpay\Traits\ManageUserTransactions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasPermissions;
-use Spatie\Permission\Traits\HasRoles;
 
 class Customer extends Authenticatable
 {
@@ -29,7 +27,7 @@ class Customer extends Authenticatable
         'active'
     ];
 
-    protected  $casts = [
+    protected $casts = [
         'customer_at' => 'datetime',
         'tenant_id' => 'string',
         'company_code' => 'integer',

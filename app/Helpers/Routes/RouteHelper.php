@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Helpers\Routes;
 
 class RouteHelper
@@ -14,7 +16,7 @@ class RouteHelper
 
         // require the file in each iteration
         while ($it->valid()) {
-            if (! $it->isDot()
+            if (!$it->isDot()
                 && $it->isFile()
                 && $it->isReadable()
                 && $it->current()->getExtension() === 'php') {

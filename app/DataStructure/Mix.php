@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataStructure;
 
 class Mix
@@ -33,7 +35,7 @@ class Mix
         return $this->merge($this->mergeSort($left), $this->mergeSort($right));
     }
 
-    public function merge(array $left,array $right): array
+    public function merge(array $left, array $right): array
     {
         $result = [];
         $leftLength = count($left);

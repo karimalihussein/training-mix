@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature;
 
 use App\Models\Office;
@@ -72,7 +74,6 @@ class UserReservationControllerTest extends TestCase
                     'end_date' => '2022-04-05',
                 ],
             ]
-
         );
 
         $this->actingAs($user);

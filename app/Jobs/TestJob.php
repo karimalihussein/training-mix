@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Jobs;
 
 use Illuminate\Bus\Queueable;
@@ -7,12 +9,15 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use App\Imports\UsersImport;
 use Maatwebsite\Excel\Facades\Excel;
+
 class TestJob implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
     /**
      * Create a new job instance.
@@ -32,6 +37,6 @@ class TestJob implements ShouldQueue
     public function handle()
     {
         $data = public_path('data.xlsx');
-        Excel::import(new UsersImport, $data);
+        Excel::import(new UsersImport(), $data);
     }
 }

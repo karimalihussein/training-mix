@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'ace' => ['name' => 'Achinese', 'script' => 'Latn', 'native' => 'Aceh'],
     'af' => ['name' => 'Afrikaans', 'script' => 'Latn', 'native' => 'Afrikaans'],

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Providers;
 
 use App\Http\Middleware\CasheResponeMiddleware;
@@ -54,7 +56,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Model::unguard();
-        Model::preventLazyLoading(! app()->isProduction());
+        Model::preventLazyLoading(!app()->isProduction());
         Model::handleLazyLoadingViolationUsing(
             fn ($model, $relation) => Logger("Lazy loading violation: {$model} {$relation}")
         );

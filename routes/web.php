@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ChatbotController;
@@ -85,7 +87,6 @@ Route::get('test', [TestController::class, 'index'])->name('test.index');
 Route::post('test', [TestController::class, 'store'])->name('test.store');
 
 
-Route::get('integrations/payments/paypal', function() {
+Route::get('integrations/payments/paypal', function () {
     return view('integrations.payments.paypal.index');
 })->name('integrations.payments.paypal.index');
-

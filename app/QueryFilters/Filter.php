@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\QueryFilters;
 
 use Closure;
@@ -9,7 +11,7 @@ abstract class Filter
 {
     public function handle($request, Closure $next)
     {
-        if (! request()->has($this->filterName())) {
+        if (!request()->has($this->filterName())) {
             return $next($request);
         }
         $builder = $next($request);

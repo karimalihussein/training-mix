@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Console\Commands;
 
 use App\Models\Tenant\Tenant;
@@ -34,8 +36,8 @@ class MakeNewTenantForTest extends Command
      */
     public function handle()
     {
-         DB::statement('DROP DATABASE IF EXISTS `tenant'. 1 .'`');
-         DB::statement('DROP DATABASE IF EXISTS `tenant'. 2 .'`');
+        DB::statement('DROP DATABASE IF EXISTS `tenant'. 1 .'`');
+        DB::statement('DROP DATABASE IF EXISTS `tenant'. 2 .'`');
 
         Artisan::call('migrate:fresh --seed');
         $customer = Customer::query()->create([
@@ -56,7 +58,7 @@ class MakeNewTenantForTest extends Command
             'tenant_id' => $tenant->id,
             'customer_at' => now(),
         ]);
-//        $tenant->newSubscription('main', Plan::find(4) , 'Main subscription', 'Customer main subscription', now(), 'paid');
+        //        $tenant->newSubscription('main', Plan::find(4) , 'Main subscription', 'Customer main subscription', now(), 'paid');
         $tenant->run(function ($tenant) {
             TenantUser::query()->create([
                 'name' => 'Test User',
@@ -83,7 +85,7 @@ class MakeNewTenantForTest extends Command
             'tenant_id' => $tenant2->id,
             'customer_at' => now(),
         ]);
-//        $tenant2->newSubscription('main', Plan::find(1) , 'Main subscription', 'Customer main subscription', now(), 'free');
+        //        $tenant2->newSubscription('main', Plan::find(1) , 'Main subscription', 'Customer main subscription', now(), 'free');
         $tenant->run(function ($tenant) {
             TenantUser::query()->create([
                 'name' => 'Test User 2',

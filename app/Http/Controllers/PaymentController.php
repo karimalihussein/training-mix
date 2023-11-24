@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Models\Payment;
@@ -10,7 +12,8 @@ class PaymentController extends Controller
 {
     private \Omnipay\Common\GatewayInterface $gateway;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->gateway = Omnipay::create('PayPal_Rest');
         $this->gateway->setClientId(env('PAYPAL_CLIENT_ID'));
         $this->gateway->setSecret(env('PAYPAL_CLIENT_SECRET'));
@@ -70,12 +73,10 @@ class PaymentController extends Controller
 
                 return "Payment is Successfull. Your Transaction Id is : " . $arr['id'];
 
-            }
-            else{
+            } else {
                 return $response->getMessage();
             }
-        }
-        else{
+        } else {
             return 'Payment declined!!';
         }
     }

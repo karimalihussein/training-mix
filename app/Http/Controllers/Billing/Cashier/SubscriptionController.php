@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Billing\Cashier;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\PlanResource;
 use App\Models\User;
 use Bpuig\Subby\Models\Plan;
 
@@ -13,17 +14,15 @@ class SubscriptionController extends Controller
     {
         $user = User::query()->first();
         $plan = Plan::query()->find($id);
-        if($user->useTrailPeriodBefore())
-        {
-            if($user->onTrialPeriod())
-            {
+        if($user->useTrailPeriodBefore()) {
+            if($user->onTrialPeriod()) {
                 return response()->json([
                     'message' => 'You are already on trial period, you can not subscribe to another plan',
                 ], 403);
             }
-//            return response()->json([
-//                'message' => 'you have to pay for this plan,because you have used your free trial period',
-//            ], 403);
+            //            return response()->json([
+            //                'message' => 'you have to pay for this plan,because you have used your free trial period',
+            //            ], 403);
             return $user->newPremiumSubscription('main', $plan, 'Default subscription', 'Customer default subscription');
         }
         return $user->newSubscription('on_trial', $plan, 'On trial subscription', 'Customer on trial subscription', null, 'trial');

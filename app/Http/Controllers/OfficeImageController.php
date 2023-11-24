@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Http\Resources\ImageResource;
@@ -21,7 +23,8 @@ class OfficeImageController extends Controller
     public function store(Office $office): JsonResource
     {
 
-        abort_unless(auth()->user()->tokenCan('office.update'),
+        abort_unless(
+            auth()->user()->tokenCan('office.update'),
             Response::HTTP_FORBIDDEN
         );
 
@@ -59,21 +62,26 @@ class OfficeImageController extends Controller
         // Storage::disk('public')->delete($image->path);
         // $image->delete();
 
-        abort_unless(auth()->user()->tokenCan('office.update'),
+        abort_unless(
+            auth()->user()->tokenCan('office.update'),
             Response::HTTP_FORBIDDEN
         );
 
         $this->authorize('update', $office);
 
-        throw_if($image->resource_type != 'office' || $image->resource_id != $office->id,
+        throw_if(
+            $image->resource_type != 'office' || $image->resource_id != $office->id,
             ValidationException::withMessages(['image' => ['The image does not belong to this office'],
-            ]));
+            ])
+        );
 
-        throw_if($office->images()->count() == 1,
+        throw_if(
+            $office->images()->count() == 1,
             ValidationException::withMessages(['image' => 'Cannot delete the only image.'])
         );
 
-        throw_if($office->featured_image_id == $image->id,
+        throw_if(
+            $office->featured_image_id == $image->id,
             ValidationException::withMessages(['image' => 'Cannot delete the featured image.'])
         );
 

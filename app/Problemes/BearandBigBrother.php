@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 // namespace App\Problemes;
 
 // class BearandBigBrother
@@ -32,5 +34,3 @@ function getYears($limakWeight, $bobWeight): int
     }
     return (string) $years;
 }
-
-

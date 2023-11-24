@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
-use App\Traits\HasSubscription;
 use Devinweb\LaravelHyperpay\Traits\ManageUserTransactions;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,11 +12,16 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasPermissions;
 use Spatie\Permission\Traits\HasRoles;
-use Laravel\Cashier\Billable;
 use OwenIt\Auditing\Contracts\Auditable;
+
 class User extends Authenticatable implements Auditable
 {
-    use HasApiTokens, HasFactory, Notifiable, ManageUserTransactions, HasRoles, HasPermissions;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
+    use ManageUserTransactions;
+    use HasRoles;
+    use HasPermissions;
     use \OwenIt\Auditing\Auditable;
 
     /**
@@ -91,7 +97,7 @@ class User extends Authenticatable implements Auditable
             'sales' => 'App\\Calculators\\SalesSalaryCalculator',
         ];
 
-        return (new $positions[$this->employee_type])->calculate($this->start_date);
+        return (new $positions[$this->employee_type]())->calculate($this->start_date);
     }
 
     public function orders()

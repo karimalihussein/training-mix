@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\File;
@@ -30,7 +32,7 @@ class ReferencesController extends Controller
             } catch (DirectoryNotFoundException $exception) {
             }
 
-            if (! empty($filesInFolder)) {
+            if (!empty($filesInFolder)) {
                 foreach ($filesInFolder as $file) {
                     if (str_ends_with($file->getPathname(), 'composer.json')) {
 
@@ -95,7 +97,7 @@ class ReferencesController extends Controller
             } catch (DirectoryNotFoundException $exception) {
             }
 
-            if (! empty($filesInFolder)) {
+            if (!empty($filesInFolder)) {
                 foreach ($filesInFolder as $file) {
                     if (str_ends_with($file->getPathname(), 'package.json')) {
 
@@ -107,7 +109,7 @@ class ReferencesController extends Controller
                             $url = $plugin_json['homepage'];
                         }
 
-                        if (! empty($url)) {
+                        if (!empty($url)) {
                             $references[] = [
                                 'name' => $plugin,
                                 'desc' => $plugin_json['description'] ?? '',

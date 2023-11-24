@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Services\Tenant;
+declare(strict_types=1);
 
-use Bpuig\Subby\Models\Plan;
-use Illuminate\Database\Eloquent\Model;
+namespace App\Services\Tenant;
 
 class MaxReachedService
 {

@@ -3,12 +3,12 @@
 declare(strict_types=1);
 
 namespace App\Services\Subscriptions;
+
 use Bpuig\Subby\Models\Plan;
 use Bpuig\Subby\Models\PlanCombination;
 use Bpuig\Subby\Services\Period;
 use Carbon\Carbon;
 use Exception;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class SubscriptionPeriod extends \Bpuig\Subby\Services\SubscriptionPeriod
 {
@@ -24,7 +24,7 @@ class SubscriptionPeriod extends \Bpuig\Subby\Services\SubscriptionPeriod
      */
     public function __construct(Plan|PlanCombination $plan, Carbon $startDate)
     {
-         parent::__construct($plan, $startDate);
+        parent::__construct($plan, $startDate);
         $this->plan = $plan;
         $this->startDate = $startDate;
         $this->setSubscriptionPeriod();

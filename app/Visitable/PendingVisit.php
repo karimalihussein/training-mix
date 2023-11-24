@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Visitable;
 
 use App\Models\User;
@@ -54,15 +56,17 @@ class PendingVisit
 
     protected function shuldBeLoggedAgain(Visit $visit)
     {
-        return ! $visit->wasRecentlyCreated && $visit->created_at->lessThan($this->inteval);
+        return !$visit->wasRecentlyCreated && $visit->created_at->lessThan($this->inteval);
     }
 
     public function __destruct()
     {
         $visit = $this->model->visits()->latest()->firstOrCreate(
-            $this->buildJsonColumns(), [
+            $this->buildJsonColumns(),
+            [
                 'data' => $this->attributes,
-            ]);
+            ]
+        );
 
         $visit->when($this->shuldBeLoggedAgain($visit), function () use ($visit) {
             $visit->replicate()->save();

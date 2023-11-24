@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services\Integrations\Twitter;
+
 use Illuminate\Support\Facades\Http;
 
 class TwitterService
 {
-
     protected mixed $consumer_key;
     protected mixed $consumer_secret;
     protected mixed $access_token;
@@ -21,11 +23,11 @@ class TwitterService
         $this->version = env('TWITTER_API_VERSION');
     }
 
-     public function getBearerToken()
-     {
-          $response = Http::withBasicAuth($this->consumer_key, $this->consumer_secret)->asForm()->post('https://api.twitter.com/oauth2/token', ['grant_type' => 'client_credentials']);
-          return $response->json()['access_token'];
-     }
+    public function getBearerToken()
+    {
+        $response = Http::withBasicAuth($this->consumer_key, $this->consumer_secret)->asForm()->post('https://api.twitter.com/oauth2/token', ['grant_type' => 'client_credentials']);
+        return $response->json()['access_token'];
+    }
 
     public function getTweets(string $username, int $count = 10): array
     {

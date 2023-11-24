@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 
 
 // if (! function_exists('settings')) {
@@ -19,7 +21,7 @@
 // }
 
 
-if (! function_exists('getNumber')) {
+if (!function_exists('getNumber')) {
     function getNumber()
     {
         return tenant()->subscription('main')->getFeatureByTag('leads_management')->value;

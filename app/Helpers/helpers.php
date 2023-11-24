@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 use Spatie\Valuestore\Valuestore;
 
-if (! function_exists('settings')) {
+if (!function_exists('settings')) {
     /**
      * Gets the value from settings json file.
      *

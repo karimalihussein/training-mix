@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,9 +12,9 @@ class Reservation extends Model
 {
     use HasFactory;
 
-    const STATUS_ACTIVE = 1;
+    public const STATUS_ACTIVE = 1;
 
-    const STATUS_CANCELLED = 2;
+    public const STATUS_CANCELLED = 2;
 
     protected $fillable = [
         'user_id',

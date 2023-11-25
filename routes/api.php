@@ -27,7 +27,7 @@ use App\Http\Controllers\Integrations\TwilioPhoneCallController;
 use App\Http\Controllers\Integrations\Payments\HyperpayController;
 use Illuminate\Http\Request;
 
-Route::get('test', [TestController::class, 'index']);
+Route::get('test', TestController::class);
 
 
 Route::get('whatsapp', [WhatsappController::class, 'index']);
@@ -67,7 +67,6 @@ Route::group(['prefix' => 'integrations'], function () {
         Route::post('token', [AgoraController::class, 'token']);
         Route::post('call-user', [AgoraController::class, 'callUser']);
     });
-
 });
 
 Route::apiResource('users', UserController::class);
@@ -89,11 +88,11 @@ Route::get('simple', SimpleController::class);
 Route::post('folders', FolderController::class);
 
 Route::prefix('v1')->group(function () {
-    RouteHelper::includeRouteFiles(__DIR__.'/api/v1');
+    RouteHelper::includeRouteFiles(__DIR__ . '/api/v1');
 });
 
 Route::prefix('v2')->group(function () {
-    RouteHelper::includeRouteFiles(__DIR__.'/api/v2');
+    RouteHelper::includeRouteFiles(__DIR__ . '/api/v2');
 });
 
 Route::post('pay/{id}', [PaymentController::class, 'pay'])->name('payment');
@@ -103,5 +102,5 @@ Route::get('error', [PaymentController::class, 'error']);
 
 
 Route::prefix('billing')->group(function () {
-    RouteHelper::includeRouteFiles(__DIR__.'/billing');
+    RouteHelper::includeRouteFiles(__DIR__ . '/billing');
 });

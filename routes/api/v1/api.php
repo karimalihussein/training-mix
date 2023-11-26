@@ -9,3 +9,6 @@ Route::get('users', function () {
         'message' => 'this is from v1 api',
     ]);
 });
+
+
+Route::get('messages', [\App\Http\Controllers\Api\V1\MessagesController::class, 'index'])->middleware('treblle');

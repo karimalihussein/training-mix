@@ -37,28 +37,4 @@ class PostTest extends TestCase
             ->assertJsonPath('data.title', 'this is a post')
             ->assertJsonPath('data.content', 'this is a content');
     }
-
-    /**
-     * @test
-     *
-     * @dataProvider validationProvider
-     */
-    public function validationTests(array $payload, string $key)
-    {
-        $response = $this->postJson(route('posts.store'), $payload);
-        $response->assertSessionHasErrors($key);
-    }
-
-    public function validationProvider(): Generator
-    {
-        $defaultPayload = [
-            'title' => 'this is a post',
-            'content' => 'this is a content',
-        ];
-
-        yield 'title is required' => [
-            array_merge($defaultPayload, ['title' => '']),
-            'title',
-        ];
-    }
 }

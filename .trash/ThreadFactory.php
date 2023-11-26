@@ -23,6 +23,7 @@ class ThreadFactory extends Factory
             'category_id'   => Category::factory(),
             'title'  => fake()->sentence(),
             'body'  => fake()->paragraph(),
+            'slug'  => fake()->slug(),
         ];
     }
 }

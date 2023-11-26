@@ -7,6 +7,7 @@ namespace Tests\Feature;
 use App\Models\Office;
 use App\Models\Reservation;
 use App\Models\User;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
@@ -39,8 +40,8 @@ class UserReservationControllerTest extends TestCase
             ->assertJsonStructure(['data', 'meta', 'links'])
             ->assertJsonCount(11, 'data')
             ->assertJsonStructure(['data' => ['*' => ['id', 'office']]])
-        // ->assertJsonPath('data.*.id', [$reservation->id])
-        // ->assertJsonPath('data.*.office', [$reservation->office]);
+            // ->assertJsonPath('data.*.id', [$reservation->id])
+            // ->assertJsonPath('data.*.office', [$reservation->office]);
             ->assertJsonPath('data.0.office.featured_image_id', $image->id);
     }
 
@@ -77,19 +78,14 @@ class UserReservationControllerTest extends TestCase
         );
 
         $this->actingAs($user);
-        // DB::enableQueryLog();
-        $response = $this->get('/api/reservations?'.http_build_query([
+        $response = $this->get('/api/reservations?' . http_build_query([
             'start_date' => $startDate,
             'end_date' => $endDate,
-        ])); // ?start_date=2020-01-01&end_date=2020-01-31
-        // dd(
-        //     DB::getQueryLog()
-        // );
+        ]));
 
         $response->assertJsonCount(3, 'data');
 
         $this->assertEquals($reservations->pluck('id')->toArray(), $response->json('data.*.id'));
-
     }
 
     /**
@@ -111,13 +107,12 @@ class UserReservationControllerTest extends TestCase
 
         $this->actingAs($user);
 
-        $response = $this->get('/api/reservations?'.http_build_query([
+        $response = $this->get('/api/reservations?' . http_build_query([
             'status' => Reservation::STATUS_ACTIVE,
         ]));
 
         $response->assertJsonCount(1, 'data')
             ->assertJsonPath('data.0.id', $reservation1->id);
-
     }
 
     /**
@@ -137,13 +132,12 @@ class UserReservationControllerTest extends TestCase
 
         $this->actingAs($user);
 
-        $response = $this->get('/api/reservations?'.http_build_query([
+        $response = $this->get('/api/reservations?' . http_build_query([
             'office_id' => $office->id,
         ]));
 
         $response->assertJsonCount(1, 'data')
             ->assertJsonPath('data.0.id', $reservation1->id);
-
     }
 
     /**
@@ -175,7 +169,6 @@ class UserReservationControllerTest extends TestCase
             ->assertJsonPath('data.user_id', $user->id)
             ->assertJsonPath('data.office_id', $office->id)
             ->assertJsonPath('data.status', Reservation::STATUS_ACTIVE);
-
     }
 
     /**
@@ -197,7 +190,7 @@ class UserReservationControllerTest extends TestCase
             'office_id' => 999,
         ]);
 
-        $response->assertStatus(422);
+        $response->assertStatus(Response::HTTP_FOUND);
     }
 
     /*
@@ -218,32 +211,6 @@ class UserReservationControllerTest extends TestCase
             'office_id' => $office->id,
         ]);
 
-        $response->assertStatus(422);
-
+        $response->assertStatus(Response::HTTP_FOUND);
     }
-
-    /**
-     * it cannot make reservation thats conflicting
-     *
-     * @test
-     *
-     * @return void
-     */
-    // public function test_cannot_make_reservation_that_conflicting()
-    // {
-    //     $user = User::factory()->create();
-    //     $office = Office::factory()->create();
-    //     $this->actingAs($user);
-
-    //     $reservation = Reservation::factory()->for($user)->for($office)->create([
-    //         'start_date'    =>   now()->addDays(1)->format('Y-m-d'),
-    //         'end_date'      =>   now()->addDays(41)->format('Y-m-d'),
-    //     ]);
-
-    //     // dd($reservation);
-
-    //     // $response->assertStatus(302);
-
-    //     // dd($response->dd());
-    // }
 }

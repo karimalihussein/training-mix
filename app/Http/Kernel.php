@@ -71,6 +71,7 @@ class Kernel extends HttpKernel
         'cache.response' => \App\Http\Middleware\CasheResponeMiddleware::class,
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
         'subscribed' => \App\Http\Middleware\SubscribedMiddleware::class,
-        'tenant' => PlanFeaturesSubscriptionMiddleware::class
+        'tenant' => PlanFeaturesSubscriptionMiddleware::class,
+        'treblle' => \Treblle\Middlewares\TreblleMiddleware::class,
     ];
 }

@@ -10,11 +10,6 @@ use App\Services\Cache\StorageService;
 
 final class MessagesController
 {
-
-    public function __construct(private readonly StorageService $cache)
-    {
-    }
-
     public function index()
     {
         return new ApiResponse(

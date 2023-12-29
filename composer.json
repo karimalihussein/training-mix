@@ -51,6 +51,7 @@
         "rap2hpoutre/fast-excel": "^5.3",
         "rmunate/spell-number": "^2.0",
         "spatie/laravel-data": "^2.2.3",
+        "spatie/laravel-health": "^1.23",
         "spatie/laravel-medialibrary": "^10.15.0",
         "spatie/laravel-permission": "^5.11.1",
         "spatie/laravel-query-builder": "^5.6",

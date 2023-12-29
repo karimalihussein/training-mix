@@ -27,6 +27,10 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Laravel\Cashier\Cashier;
+use Spatie\Health\Checks\Checks\DatabaseCheck;
+use Spatie\Health\Facades\Health;
+use Spatie\Health\Checks\Checks\UsedDiskSpaceCheck;
+use Spatie\Health\Checks\Checks\CpuLoadCheck;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -46,6 +50,16 @@ class AppServiceProvider extends ServiceProvider
 
             return new PaymentGatway(config('services.payment_gatway.currency'));
         });
+
+       // Health::checks([
+           // UsedDiskSpaceCheck::new()
+               // ->warnWhenUsedSpaceIsAbovePercentage(70)
+             //   ->failWhenUsedSpaceIsAbovePercentage(90),
+
+           // DatabaseCheck::new(),
+           // CpuLoadCheck::new(),
+
+//        ]);
     }
 
     /**

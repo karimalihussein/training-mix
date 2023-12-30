@@ -207,7 +207,6 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         'GeoIP' => \Torann\GeoIP\Facades\GeoIP::class,
         'Clockwork' => Clockwork\Support\Laravel\Facade::class,
-        'Goutte' => Weidner\Goutte\GoutteFacade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ])->toArray(),
 

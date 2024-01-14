@@ -25,6 +25,7 @@ use App\Http\Controllers\Integrations\Calls\Agora\AgoraController;
 use App\Http\Controllers\Integrations\Payments\PaypalController;
 use App\Http\Controllers\Integrations\TwilioPhoneCallController;
 use App\Http\Controllers\Integrations\Payments\HyperpayController;
+use App\Http\Controllers\PaymentDriverController;
 use Illuminate\Http\Request;
 
 Route::get('test', TestController::class);
@@ -98,6 +99,10 @@ Route::prefix('v2')->group(function () {
 Route::post('pay/{id}', [PaymentController::class, 'pay'])->name('payment');
 Route::get('success', [PaymentController::class, 'success']);
 Route::get('error', [PaymentController::class, 'error']);
+
+// payment route pass the driver in the url as a query string just allow ['paypal', 'stripe'] as query string
+
+Route::get('payment/{driver}', PaymentDriverController::class)->name('payment');
 
 
 

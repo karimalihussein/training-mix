@@ -191,6 +191,7 @@ return [
         App\Providers\TenancyServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         OwenIt\Auditing\AuditingServiceProvider::class,
+        App\Providers\ModularServiesProvider::class,
     ],
 
     /*

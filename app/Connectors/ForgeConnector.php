@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace App\Connectors;
 
-use Saloon\Http\Connector;
 
-class ForgeConnector extends Connector
+class ForgeConnector
 {
     public function resolveBaseUrl(): string
     {

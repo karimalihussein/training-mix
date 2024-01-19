@@ -12,7 +12,8 @@ use RoachPHP\Http\Response;
 use RoachPHP\Spider\BasicSpider;
 use RoachPHP\Spider\ParseResult;
 
-class LaravelDocsSpider extends BasicSpider
+class LaravelDocsSpider
+//extends BasicSpider
 {
     public array $startUrls = [
         //

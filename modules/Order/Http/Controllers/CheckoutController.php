@@ -6,21 +6,21 @@ use Illuminate\Validation\ValidationException;
 use Modules\Order\Http\Requests\CheckoutRequest;
 use Modules\Order\Models\Order;
 use Modules\Payment\Services\PayBuddy;
-use Modules\Product\Models\Product;
+use Modules\Product\DTO\CartItemCollection;
+use Modules\Product\Warehouse\ProductStockManager;
 use RuntimeException;
 
 final class CheckoutController
 {
+    public function __construct(protected ProductStockManager $productStockManager)
+    {
+    }
+
     public function __invoke(CheckoutRequest $request)
     {
-        $prodcuts = collect($request->input('products'))->map(function ($product) {
-            return [
-                'product' => Product::findOrFail($product['id']),
-                'quantity' => $product['quantity'],
-            ];
-        });
-        $orderTotalInCents = $prodcuts->sum(fn ($product) => $product['product']->price_in_cents * $product['quantity']);
-        $payBuddy = PayBuddy::make();
+        $cartItems         = CartItemCollection::fromArray($request->input('products'));
+        $orderTotalInCents = $cartItems->totalInCents();
+        $payBuddy          = PayBuddy::make();
         try {
             $charge = $payBuddy->charge($request->input('payment_token'), $orderTotalInCents, 'Laravel Shop');
         } catch (RuntimeException) {
@@ -29,34 +29,26 @@ final class CheckoutController
             ]);
         }
         $order = Order::query()->create([
-            'payment_id' => $charge['id'],
-            'status' => 'paid',
-            'total_in_cents' => $orderTotalInCents,
+            'payment_id'      => $charge['id'],
+            'status'          => 'paid',
+            'total_in_cents'  => $orderTotalInCents,
             'payment_gateway' => 'paybuddy',
-            'user_id' => $request->user()->id,
+            'user_id'         => $request->user()->id,
         ]);
 
-        $prodcuts->each(function ($product) use ($order) {
-
-            if ($product['product']->stock < $product['quantity']) {
-                throw ValidationException::withMessages([
-                    'products' => 'We do not have enough stock to fulfill your order.',
-                ]);
-            }
-
-            $product['product']->decrement('stock', $product['quantity']);
-
+        foreach ($cartItems->items() as $cartItem) {
+            $this->productStockManager->decremnt($cartItem->product->id, $cartItem->quantity);
 
             $order->lines()->create([
-                'product_id' => $product['product']->id,
-                'quantity' => $product['quantity'],
-                'price_in_cents' => $product['product']->price_in_cents,
+                'product_id'     => $cartItem->product->id,
+                'quantity'       => $cartItem->quantity,
+                'price_in_cents' => $cartItem->product->priceInCents,
             ]);
-        });
+        }
 
         return response()->json([
             'message' => 'Order created successfully.',
-            'order' => $order,
+            'order'   => $order,
         ], 201);
     }
 }

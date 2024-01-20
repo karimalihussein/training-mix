@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Order\Http\Controllers\CheckoutController;
 
-Route::get('order-test', function () {
-    return 'Hello from the order module!';
-});
+Route::post('checkout', CheckoutController::class)->name('checkout.store')->middleware('auth:sanctum');

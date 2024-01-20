@@ -14,7 +14,7 @@ return new class extends Migration
             $table->string('status');
             $table->integer('total_in_cents');
             $table->string('payment_gateway');
-            // $table->foreignId('payment_id')->nullable()->constrained('modules_payments');
+            $table->string('payment_id')->unique();
             $table->timestamps();
         });
     }

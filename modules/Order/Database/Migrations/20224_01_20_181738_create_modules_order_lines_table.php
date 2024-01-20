@@ -8,18 +8,18 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('modules_products', function (Blueprint $table) {
+        Schema::create('modules_order_lines', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique()->index();
+            $table->foreignId('order_id')->constrained('modules_orders');
+            $table->foreignId('product_id')->constrained('modules_products');
+            $table->integer('quantity');
             $table->integer('price_in_cents');
-            $table->integer('stock')->default(0);
-            $table->string('description')->nullable();
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('modules_products');
+        Schema::dropIfExists('modules_order_lines');
     }
 };

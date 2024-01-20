@@ -1,0 +1,46 @@
+<?php
+
+namespace Modules\Payment\Services;
+
+use Illuminate\Support\Str;
+use NumberFormatter;
+
+final class PayBuddy
+{
+    public function charge(string $token, int $amountInCents, string $statementDescription): array
+    {
+        $this->validateToken($token);
+
+        $numberFormatter = new NumberFormatter('en_US', NumberFormatter::CURRENCY);
+
+        return [
+            'id' => (string) Str::uuid()->toString(),
+            'amount_in_cents' => $amountInCents,
+            'amount_formatted' => $numberFormatter->formatCurrency($amountInCents / 100, 'USD'),
+            'statement_description' => $statementDescription,
+            'created_at' => now()->toDateTimeString(),
+        ];
+    }
+
+    public static function make(): self
+    {
+        return new self();
+    }
+
+    public static function validToken(): string
+    {
+        return (string) Str::uuid();
+    }
+
+    public static function invalidToken(): string
+    {
+        return substr(self::validToken(), -35);
+    }
+
+    private function validateToken(string $token): void
+    {
+        if (!Str::isUuid($token)) {
+            throw new \RuntimeException('Invalid token.');
+        }
+    }
+}

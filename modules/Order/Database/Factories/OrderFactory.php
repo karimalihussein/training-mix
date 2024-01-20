@@ -18,6 +18,7 @@ final class OrderFactory extends Factory
             'status' => $this->faker->randomElement(['pending', 'completed']),
             'total_in_cents' => $this->faker->numberBetween(1000, 10000),
             'payment_gateway' => $this->faker->randomElement(['stripe', 'paypal']),
+            'payment_id' => $this->faker->uuid,
         ];
     }
 }

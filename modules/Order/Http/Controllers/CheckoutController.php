@@ -30,7 +30,7 @@ final class CheckoutController
         }
         $order = Order::query()->create([
             'payment_id'      => $charge['id'],
-            'status'          => 'paid',
+            'status'          => 'completed',
             'total_in_cents'  => $orderTotalInCents,
             'payment_gateway' => 'paybuddy',
             'user_id'         => $request->user()->id,
@@ -45,6 +45,14 @@ final class CheckoutController
                 'price_in_cents' => $cartItem->product->priceInCents,
             ]);
         }
+
+        $order->payments()->create([
+            'total_in_cents' => $orderTotalInCents,
+            'status'         => 'paid',
+            'payment_id'     => $charge['id'],
+            'payment_gateway' => 'paybuddy',
+            'user_id'         => $request->user()->id,
+        ]);
 
         return response()->json([
             'message' => 'Order created successfully.',

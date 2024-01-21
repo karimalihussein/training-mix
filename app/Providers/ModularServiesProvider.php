@@ -6,7 +6,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Modules\Order\Providers\OrderServiceProvider;
-use Modules\Payment\Providers\PaymentServiceProvider;
+use Modules\Payment\Infrastructure\Providers\PaymentServiceProvider;
 use Modules\Product\Providers\ProductServiceProvider;
 use Modules\Shipment\Providers\ShipmentServiceProvider;
 

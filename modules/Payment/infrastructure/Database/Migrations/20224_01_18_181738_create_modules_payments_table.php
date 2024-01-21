@@ -11,9 +11,11 @@ return new class extends Migration
         Schema::create('modules_payments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->constrained('modules_orders');
+            $table->foreignId('user_id')->constrained('users');
             $table->string('status');
-            $table->string('provider');
-            $table->string('provider_payment_id');
+            $table->string('payment_gateway');
+            $table->string('payment_id');
+            $table->integer('total_in_cents');
             $table->timestamps();
         });
     }

@@ -78,5 +78,6 @@ final class CheckoutControllerTest extends TestCase
             'payment_token' => PayBuddy::invalidToken(),
         ])->assertUnprocessable();
         $response->assertJsonValidationErrors('payment_token');
+        $this->assertEquals(0, Order::count());
     }
 }

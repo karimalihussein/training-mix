@@ -9,10 +9,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Modules\Order\Database\Factories\OrderFactory;
+use Modules\Order\Exceptions\OrderMissingOrderLinesException;
 use Modules\Payment\Models\Payment;
+use Modules\Product\DTO\CartItemCollection;
 
 final class Order extends Model
 {
+    public const PENDEING = 'pending';
+    public const COMPLETED = 'completed';
     use HasFactory;
     protected $table = 'modules_orders';
     protected $fillable = [
@@ -56,5 +60,40 @@ final class Order extends Model
     public function url(): string
     {
         return route('orders.show', $this);
+    }
+
+    public static function startForUser(int $userId): self
+    {
+        return self::make([
+            'user_id' => $userId,
+            'status' => self::PENDEING,
+            'payment_gateway' => 'paybuddy',
+        ]);
+    }
+
+    /**
+     * @param CartItemCollection $items
+     * @return void
+     */
+    public function addLinesToOrder(CartItemCollection $items): void
+    {
+        foreach ($items->items() as $cartItem) {
+            $this->lines->push(OrderLine::make([
+                'product_id' => $cartItem->product->id,
+                'quantity' => $cartItem->quantity,
+                'price_in_cents' => $cartItem->product->priceInCents,
+            ]));
+        }
+        $this->total_in_cents = $items->totalInCents();
+    }
+
+    public function fullfill(): void
+    {
+        if ($this->lines->isEmpty()) {
+            throw new OrderMissingOrderLinesException("Can't fullfill an order without order lines.");
+        }
+        $this->status = self::COMPLETED;
+        $this->save();
+        $this->lines()->saveMany($this->lines);
     }
 }

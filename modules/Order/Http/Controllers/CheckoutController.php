@@ -19,7 +19,7 @@ final class CheckoutController
     {
         $cartItems = CartItemCollection::fromArray($request->input('products'));
         try {
-            $this->action->handle(
+            $order =  $this->action->handle(
                 $cartItems,
                 PayBuddy::make(),
                 $request->input('payment_token'),
@@ -31,7 +31,7 @@ final class CheckoutController
             ]);
         }
         return response()->json([
-            'message' => 'Order created successfully.',
+            'order_url' => $order->url(),
         ], 201);
     }
 }

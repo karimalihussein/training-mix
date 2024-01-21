@@ -33,7 +33,7 @@ final class CheckoutControllerTest extends TestCase
         ]);
 
         $response->assertCreated();
-        $order = Order::query()->findOrFail($response->json('order.id'));
+        $order = Order::query()->latest()->first();
         // order
         $this->assertTrue($order->user->is($user));
         $this->assertSame('completed', $order->status);

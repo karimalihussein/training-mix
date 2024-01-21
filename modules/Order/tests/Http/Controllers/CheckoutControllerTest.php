@@ -34,10 +34,16 @@ final class CheckoutControllerTest extends TestCase
 
         $response->assertCreated();
         $order = Order::query()->findOrFail($response->json('order.id'));
+        // order
         $this->assertTrue($order->user->is($user));
-        $this->assertSame('paid', $order->status);
+        $this->assertSame('completed', $order->status);
         $this->assertEquals(60000, $order->total_in_cents);
         $this->assertSame('paybuddy', $order->payment_gateway);
+        // payment
+        $payment = $order->lastPayment;
+        $this->assertSame('paid', $payment->status);
+        $this->assertSame('paybuddy', $payment->payment_gateway);
+        $this->assertTrue($payment->user->is($user));
 
         $this->assertCount(2, $order->lines);
 

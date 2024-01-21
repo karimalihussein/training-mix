@@ -14,7 +14,7 @@ return new class extends Migration
             $table->string('status');
             $table->integer('total_in_cents');
             $table->string('payment_gateway');
-            $table->string('payment_id')->unique();
+            $table->string('payment_id')->unique()->nullable();
             $table->timestamps();
         });
     }

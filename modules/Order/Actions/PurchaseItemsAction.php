@@ -18,30 +18,20 @@ final class PurchaseItemsAction
     ) {
     }
 
-    public function handle(CartItemCollection $items, PayBuddy $paymentProvider, string $paymentToken, int $userid): order
+    public function handle(CartItemCollection $items, PayBuddy $paymentProvider, string $paymentToken, int $userId): order
     {
-        $orderTotalInCents = $items->totalInCents();
-        return $this->databaseManager->transaction(function () use ($items, $orderTotalInCents, $userid, $paymentProvider, $paymentToken) {
-            $order =  Order::query()->create([
-                'status'          => 'completed',
-                'total_in_cents'  => $orderTotalInCents,
-                'payment_gateway' => 'paybuddy',
-                'user_id'         => $userid,
-            ]);
+        return $this->databaseManager->transaction(function () use ($items, $userId, $paymentProvider, $paymentToken) {
+            $order = Order::startForUser($userId);
+            $order->addLinesToOrder($items);
+            $order->fullfill();
             foreach ($items->items() as $cartItem) {
                 $this->productStockManager->decremnt($cartItem->product->id, $cartItem->quantity);
-
-                $order->lines()->create([
-                    'product_id'     => $cartItem->product->id,
-                    'quantity'       => $cartItem->quantity,
-                    'price_in_cents' => $cartItem->product->priceInCents,
-                ]);
             }
 
             $this->createPaymentForOrderAction->handle(
                 $order->id,
-                $userid,
-                $orderTotalInCents,
+                $userId,
+                $items->totalInCents(),
                 $paymentProvider,
                 $paymentToken
             );

@@ -52,4 +52,9 @@ final class Order extends Model
     {
         return $this->payments()->one()->latest();
     }
+
+    public function url(): string
+    {
+        return route('orders.show', $this);
+    }
 }

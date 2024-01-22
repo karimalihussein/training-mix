@@ -4,6 +4,8 @@ namespace Modules\Order\Tests\Http\Controllers;
 
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\Sequence;
+use Illuminate\Support\Facades\Event;
+use Modules\Order\Events\OrderCreated;
 use Modules\Order\Models\Order;
 use Modules\Payment\Services\PayBuddy;
 use Modules\Product\Database\Factories\ProductFactory;
@@ -30,9 +32,8 @@ final class CheckoutControllerTest extends TestCase
                 ['id' => $products->last()->id, 'quantity' => 1],
             ],
             'payment_token' => $paymentToken,
-        ]);
+        ])->assertCreated();
 
-        $response->assertCreated();
         $order = Order::query()->latest()->first();
         // order
         $this->assertTrue($order->user->is($user));

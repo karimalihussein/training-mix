@@ -3,7 +3,9 @@
 
 namespace Modules\Order\Actions;
 
+use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Database\DatabaseManager;
+use Modules\Order\Events\OrderCreated;
 use Modules\Payment\Services\PayBuddy;
 use Modules\Product\DTO\CartItemCollection;
 use Modules\Order\Models\Order;
@@ -14,19 +16,18 @@ final class PurchaseItemsAction
     public function __construct(
         protected ProductStockManager $productStockManager,
         protected CreatePaymentForOrderAction $createPaymentForOrderAction,
-        protected DatabaseManager $databaseManager
+        protected DatabaseManager $databaseManager,
+        protected Dispatcher $dispatcher
     ) {
     }
 
-    public function handle(CartItemCollection $items, PayBuddy $paymentProvider, string $paymentToken, int $userId): order
+    public function handle(CartItemCollection $items, PayBuddy $paymentProvider, string $paymentToken, int $userId, string $userEmail): order
     {
-        return $this->databaseManager->transaction(function () use ($items, $userId, $paymentProvider, $paymentToken) {
+        return $this->databaseManager->transaction(function () use ($items, $userId, $paymentProvider, $paymentToken, $userEmail) {
             $order = Order::startForUser($userId);
             $order->addLinesToOrder($items);
             $order->fullfill();
-            foreach ($items->items() as $cartItem) {
-                $this->productStockManager->decremnt($cartItem->product->id, $cartItem->quantity);
-            }
+
 
             $this->createPaymentForOrderAction->handle(
                 $order->id,
@@ -35,6 +36,17 @@ final class PurchaseItemsAction
                 $paymentProvider,
                 $paymentToken
             );
+
+
+            $this->dispatcher->dispatch(new OrderCreated(
+                userId: $userId,
+                orderId: $order->id,
+                userEmail: $userEmail,
+                localizedTotal: $order->localizedTotal(),
+                cartItems: $items,
+                totalInCents: $order->total_in_cents
+            ));
+
             return $order;
         });
     }

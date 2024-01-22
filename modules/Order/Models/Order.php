@@ -96,4 +96,9 @@ final class Order extends Model
         $this->save();
         $this->lines()->saveMany($this->lines);
     }
+
+    public function localizedTotal(): string
+    {
+        return number_format($this->total_in_cents / 100, 2);
+    }
 }

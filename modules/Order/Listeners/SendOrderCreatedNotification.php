@@ -9,6 +9,8 @@ final class SendOrderCreatedNotification
 {
     public function handle(OrderCreated $event): void
     {
-        Mail::to($event->userEmail)->send(new \Modules\Order\Mail\OrderCreated($event->orderId, $event->localizedTotal));
+        // Mail::to($event->userEmail)->send(new \Modules\Order\Mail\OrderCreated($event->orderId, $event->localizedTotal));
+
+        Mail::to($event->user->email)->queue(new \Modules\Order\Mail\OrderCreated($event->order->id, $event->order->localizedTotal));
     }
 }

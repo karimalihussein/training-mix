@@ -11,8 +11,10 @@ final class OrderCreated extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public function __construct()
-    {
+    public function __construct(
+        public int $orderId,
+        public string $localizedTotal,
+    ) {
         //
     }
 

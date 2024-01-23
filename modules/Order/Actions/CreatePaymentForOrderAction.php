@@ -2,9 +2,10 @@
 
 namespace Modules\Order\Actions;
 
-use Modules\Payment\Services\PayBuddy;
-use Modules\Order\Exceptions\PaymentFailedException;
+use Modules\Payment\Exceptions\PaymentFailedException;
+use Modules\Payment\DTO\PaymentDetails;
 use Modules\Payment\Models\Payment;
+use Modules\Payment\PaymentGatway;
 use RuntimeException;
 
 final class CreatePaymentForOrderAction
@@ -13,22 +14,23 @@ final class CreatePaymentForOrderAction
         int $orderId,
         int $userId,
         int $totalInCents,
-        PayBuddy $payBuddy,
+        PaymentGatway $paymentGatway,
         string $paymentToken
     ): Payment {
-        try {
-            $charge = $payBuddy->charge($paymentToken, $totalInCents, 'Laravel Shop');
-        } catch (RuntimeException) {
-            throw PaymentFailedException::dueToInvalidToken();
-        }
-
+        $charge = $paymentGatway->charge(
+            new PaymentDetails(
+                token: $paymentToken,
+                amountInCents: $totalInCents,
+                statementDescription: 'Laravel Shop',
+            )
+        );
         return Payment::query()->create([
-            'total_in_cents' => $totalInCents,
-            'status'         => 'paid',
-            'payment_id'     => $charge['id'],
-            'payment_gateway' => 'paybuddy',
+            'total_in_cents'  => $totalInCents,
+            'status'          => 'paid',
+            'payment_id'      => $charge->id,
+            'payment_gateway' => $charge->paymentProvider,
             'user_id'         => $userId,
-            'order_id'         => $orderId,
+            'order_id'        => $orderId,
         ]);
     }
 }

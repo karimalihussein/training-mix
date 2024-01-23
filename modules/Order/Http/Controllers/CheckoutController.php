@@ -19,7 +19,7 @@ final class CheckoutController
     ) {
     }
 
-    public function __invoke(CheckoutRequest $request)
+    public function __invoke(CheckoutRequest $request): \Illuminate\Http\JsonResponse
     {
         $cartItems = CartItemCollection::fromArray($request->input('products'));
         $pendingPayment = new PendingPayment($this->paymentGetway, $request->input('payment_token'));

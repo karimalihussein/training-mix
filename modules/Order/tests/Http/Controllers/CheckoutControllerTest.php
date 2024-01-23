@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Support\Facades\Event;
 use Modules\Order\Events\OrderCreated;
 use Modules\Order\Models\Order;
+use Modules\Payment\Enums\PaymentProvider;
+use Modules\Payment\PayBuddySDK;
 use Modules\Payment\Services\PayBuddy;
 use Modules\Product\Database\Factories\ProductFactory;
 use Tests\TestCase;
@@ -16,6 +18,7 @@ final class CheckoutControllerTest extends TestCase
     /** @test */
     public function it_successfuly_creates_an_order(): void
     {
+        $this->withoutExceptionHandling();
         $user = UserFactory::new()->create();
         $products = ProductFactory::new()->count(2)->create(
             new Sequence(
@@ -24,7 +27,7 @@ final class CheckoutControllerTest extends TestCase
             )
         );
 
-        $paymentToken = PayBuddy::validToken();
+        $paymentToken = PayBuddySDK::validToken();
 
         $response = $this->actingAs($user)->postJson(route('checkout.store'), [
             'products' => [
@@ -39,11 +42,10 @@ final class CheckoutControllerTest extends TestCase
         $this->assertTrue($order->user->is($user));
         $this->assertSame('completed', $order->status);
         $this->assertEquals(60000, $order->total_in_cents);
-        $this->assertSame('paybuddy', $order->payment_gateway);
         // payment
         $payment = $order->lastPayment;
         $this->assertSame('paid', $payment->status);
-        $this->assertSame('paybuddy', $payment->payment_gateway);
+        $this->assertEquals(PaymentProvider::PayBuddy->value, $payment->payment_gateway);
         $this->assertTrue($payment->user->is($user));
 
         $this->assertCount(2, $order->lines);
@@ -76,7 +78,7 @@ final class CheckoutControllerTest extends TestCase
                 ['id' => $product->first()->id, 'quantity' => 1],
                 ['id' => $product->last()->id, 'quantity' => 1],
             ],
-            'payment_token' => PayBuddy::invalidToken(),
+            'payment_token' => PayBuddySDK::invalidToken(),
         ])->assertUnprocessable();
         $response->assertJsonValidationErrors('payment_token');
         $this->assertEquals(0, Order::count());

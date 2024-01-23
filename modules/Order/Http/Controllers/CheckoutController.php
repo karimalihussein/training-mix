@@ -2,25 +2,27 @@
 
 namespace Modules\Order\Http\Controllers;
 
-use Modules\Order\Exceptions\PaymentFailedException;
+use Modules\Payment\Exceptions\PaymentFailedException;
 use Illuminate\Validation\ValidationException;
 use Modules\Order\Actions\PurchaseItemsAction;
 use Modules\Order\DTO\PendingPayment;
 use Modules\Order\Http\Requests\CheckoutRequest;
-use Modules\Payment\Services\PayBuddy;
+use Modules\Payment\PaymentGatway;
 use Modules\Product\DTO\CartItemCollection;
 use Modules\User\DTO\UserDto;
 
 final class CheckoutController
 {
-    public function __construct(protected PurchaseItemsAction $action)
-    {
+    public function __construct(
+        protected PurchaseItemsAction $action,
+        protected PaymentGatway $paymentGetway,
+    ) {
     }
 
     public function __invoke(CheckoutRequest $request)
     {
         $cartItems = CartItemCollection::fromArray($request->input('products'));
-        $pendingPayment = new PendingPayment(PayBuddy::make(), $request->input('payment_token'));
+        $pendingPayment = new PendingPayment($this->paymentGetway, $request->input('payment_token'));
         $userDto = UserDto::fromEloquentModel($request->user());
         try {
             $order =  $this->action->handle(
@@ -28,7 +30,7 @@ final class CheckoutController
                 pendingPayment: $pendingPayment,
                 user: $userDto,
             );
-        } catch (PaymentFailedException $e) {
+        } catch (PaymentFailedException) {
             throw ValidationException::withMessages([
                 'payment_token' => 'we could not charge the payment method provided.',
             ]);

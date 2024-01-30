@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Cashier\Billable;
 use Laravel\Sanctum\HasApiTokens;
 use Rappasoft\LaravelAuthenticationLog\Traits\AuthenticationLoggable;
 use Spatie\Permission\Traits\HasPermissions;
@@ -25,6 +26,7 @@ class User extends Authenticatable implements Auditable
     use HasPermissions;
     use \OwenIt\Auditing\Auditable;
     use AuthenticationLoggable;
+    use Billable;
 
     /**
      * The attributes that are mass assignable.
@@ -154,15 +156,15 @@ class User extends Authenticatable implements Auditable
     public function lastLogin()
     {
         return $this->belongsTo(Login::class);
-
     }
 
     public function scopeWithLastLogin($query)
     {
-        $query->addSelect(['last_login_id' => Login::select('id')
-            ->whereColumn('user_id', 'users.id')
-            ->latest()
-            ->take(1),
+        $query->addSelect([
+            'last_login_id' => Login::select('id')
+                ->whereColumn('user_id', 'users.id')
+                ->latest()
+                ->take(1),
         ])->with('lastLogin');
     }
 

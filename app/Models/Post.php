@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\PostActiveEnum;
 use App\Models\Scopes\ActivePostScope;
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,15 +12,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Post extends Model
+final class Post extends Model
 {
     use HasFactory;
     use SoftDeletes;
     use Prunable;
-
-    public const ACTIVE_STATUS = 1;
-
-    public const INACTIVE_STATUS = 2;
 
     /**
      * The attributes that are mass assignable.
@@ -31,6 +28,16 @@ class Post extends Model
         'content',
         'active',
         'user_id',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'active' => PostActiveEnum::class,
+        'user_id' => 'integer',
     ];
 
     /**
@@ -83,6 +90,6 @@ class Post extends Model
 
     public function prunbable(): Builder
     {
-        return static::where('active', self::INACTIVE_STATUS);
+        return static::where('active', PostActiveEnum::INACTIVE->value);
     }
 }

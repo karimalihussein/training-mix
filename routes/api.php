@@ -27,6 +27,7 @@ use App\Http\Controllers\Integrations\TwilioPhoneCallController;
 use App\Http\Controllers\Integrations\Payments\HyperpayController;
 use App\Http\Controllers\PaymentDriverController;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Api\PostController as DTOPostController;
 
 Route::get('test', TestController::class);
 
@@ -46,6 +47,7 @@ Route::get('reservations', [UserReservationController::class, 'index'])->middlew
 Route::get('/host/reservations', [HostReservationController::class, 'index'])->middleware(['auth:sanctum', 'verified']);
 Route::post('reservations', [UserReservationController::class, 'store'])->middleware(['auth:sanctum', 'verified']);
 Route::post('posts', [PostController::class, 'store'])->middleware(['auth:sanctum', 'verified'])->name('posts.store');
+Route::post('posts-dto', [DTOPostController::class, 'store'])->middleware(['auth:sanctum', 'verified'])->name('posts-dto.store');
 /** test integrations endpoints  */
 Route::group(['prefix' => 'integrations'], function () {
     Route::group(['prefix' => 'payments'], function () {

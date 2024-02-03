@@ -6,25 +6,20 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Modules\Booking\Database\Seeders\BookingSeeder;
 
-class DatabaseSeeder extends Seeder
+final class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
-    public function run()
+    public function run(): void
     {
-
-        // create user
-        $user = \App\Models\User::factory()->create([
+        $user = User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('password'),
         ]);
         $this->call([
             RolesAndPermissionsSeeder::class,
+            BookingSeeder::class
         ]);
         User::factory()->times(5)->create();
     }

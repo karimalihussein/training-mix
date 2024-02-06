@@ -31,7 +31,7 @@ final class Employee extends Model
         return $this->hasMany(Schedule::class);
     }
 
-    public function exclusions(): HasMany
+    public function scheduleExclusion(): HasMany
     {
         return $this->hasMany(ScheduleExclusion::class);
     }

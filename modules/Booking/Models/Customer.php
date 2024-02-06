@@ -16,6 +16,7 @@ final class Customer extends Model
     protected $fillable = [
         'name',
         'email',
+        'phone_number',
     ];
 
     public function appointments(): HasMany

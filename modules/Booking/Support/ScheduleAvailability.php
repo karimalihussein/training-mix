@@ -15,13 +15,12 @@ use Spatie\Period\Precision;
 
 final class ScheduleAvailability
 {
-    private PeriodCollection $periods;
-    private Employee $employee;
-    private Service $service;
+    protected PeriodCollection $periods;
 
-    public function __construct(Employee $employee, Service $service)
+    public function __construct(protected Employee $employee, protected Service $service)
     {
         $this->employee = $employee;
+        $this->employee->load('schedules', 'scheduleExclusion');
         $this->service = $service;
         $this->periods = new PeriodCollection();
     }
@@ -40,11 +39,9 @@ final class ScheduleAvailability
     private function addAvailabilityFromSchedule(Carbon $date): void
     {
         $schedule = $this->getScheduleForDate($date);
-
         if (!$schedule || ![$start, $end] = $schedule->workingHoursFromDate($date)) {
             return;
         }
-
         $this->periods = $this->periods->add(
             Period::make(
                 $date->copy()->setTimeFromTimeString($start),
@@ -56,7 +53,7 @@ final class ScheduleAvailability
 
     private function subtractScheduleExclusions(Carbon $date): void
     {
-        $this->employee->exclusions()->each(function (ScheduleExclusion $exclusion) use ($date) {
+        $this->employee->scheduleExclusion()->each(function (ScheduleExclusion $exclusion) use ($date) {
             $this->periods = $this->periods->subtract(
                 Period::make(
                     $date->copy()->setTimeFromTimeString($exclusion->starts_at),
@@ -87,9 +84,6 @@ final class ScheduleAvailability
 
     private function getScheduleForDate(Carbon $date): ?Schedule
     {
-        return $this->employee->schedules()
-            ->where('starts_at', '<=', $date)
-            ->where('ends_at', '>=', $date)
-            ->first();
+        return $this->employee->schedules()->where('starts_at', '<=', $date)->where('ends_at', '>=', $date)->first();
     }
 }

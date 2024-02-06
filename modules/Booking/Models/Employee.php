@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Modules\Booking\Database\Factories\EmployeeFactory;
+use Rennokki\QueryCache\Traits\QueryCacheable;
 
 final class Employee extends Model
 {
-    use HasFactory;
+    use HasFactory, QueryCacheable;
 
     protected $table = 'modules_employees';
 

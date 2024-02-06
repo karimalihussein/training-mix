@@ -17,4 +17,13 @@ final class EmployeeFactory extends Factory
             'profile_picture_url' => $this->faker->imageUrl(),
         ];
     }
+
+    public function configure()
+    {
+        return $this->afterCreating(function (Employee $employee) {
+            Schedule::factory()->create([
+                'employee_id' => $employee->id,
+            ]);;
+        });
+    }
 }

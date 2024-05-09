@@ -111,3 +111,17 @@ Route::get('payment/{driver}', PaymentDriverController::class)->name('payment');
 Route::prefix('billing')->group(function () {
     RouteHelper::includeRouteFiles(__DIR__ . '/billing');
 });
+
+Route::middleware('auth:api')->group(function () {
+    Route::get('user', fn () => 'Hello World');
+});
+
+// Route::post('token', function(\Illuminate\Http\Request $request) {
+//     $http = new \GuzzleHttp\Client;
+//     $response = $http->post('http://localhost:8000/oauth/token', [
+//         'form_params' => [
+//             'grant_type' => 'password',
+//             'client_id' => '2',
+//             'client_secret' => 'z
+
+// });

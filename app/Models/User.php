@@ -4,24 +4,22 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use Devinweb\LaravelHyperpay\Traits\ManageUserTransactions;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Cashier\Billable;
 use Laravel\Sanctum\HasApiTokens;
 use Rappasoft\LaravelAuthenticationLog\Traits\AuthenticationLoggable;
 use Spatie\Permission\Traits\HasPermissions;
 use Spatie\Permission\Traits\HasRoles;
 use OwenIt\Auditing\Contracts\Auditable;
+use Laravel\Paddle\Billable;
 
 class User extends Authenticatable implements Auditable
 {
     use HasApiTokens;
     use HasFactory;
     use Notifiable;
-    use ManageUserTransactions;
     use HasRoles;
     use HasPermissions;
     use \OwenIt\Auditing\Auditable;

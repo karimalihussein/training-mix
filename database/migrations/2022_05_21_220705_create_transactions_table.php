@@ -13,7 +13,7 @@ class CreateTransactionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create('transactions_old', function (Blueprint $table) {
 
             $table->string('id')->primary();
             $table->integer('user_id');
@@ -38,6 +38,6 @@ class CreateTransactionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('transactions_old');
     }
 }

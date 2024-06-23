@@ -22,6 +22,7 @@
         "juststeveking/http-status-code": "*",
         "laravel-shift/blueprint": "^2.7",
         "laravel/cashier": "^14.14",
+        "laravel/cashier-paddle": "^2.4",
         "laravel/fortify": "^1.18.1",
         "laravel/framework": "^10.33",
         "laravel/helpers": "^1.6",

@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Arrays;
+
 declare(strict_types=1);
 
 // Array Destructuring in PHP

@@ -41,6 +41,7 @@
         "mjaschen/phpgeo": "^4.2",
         "mll-lab/laravel-graphiql": "^1.2.2",
         "netflie/whatsapp-cloud-api": "^1.4.1",
+        "nextapps/laravel-swagger-ui": "^0.10.1",
         "nuwave/lighthouse": "^6.22",
         "nwidart/laravel-modules": "^9.0.6",
         "owen-it/laravel-auditing": "^13.5.1",

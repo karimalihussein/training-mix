@@ -13,6 +13,7 @@
         "algolia/algoliasearch-client-php": "^3.4.1",
         "beyondcode/laravel-websockets": "^1.14.1",
         "codezero/laravel-localized-routes": "^2.10.2",
+        "devdojo/auth": "^1.0",
         "devinweb/laravel-hyperpay": "^1.2.1",
         "gender-api/client": "^1.0.4",
         "guzzlehttp/guzzle": "^7.8",

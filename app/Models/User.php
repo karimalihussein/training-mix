@@ -14,8 +14,9 @@ use Spatie\Permission\Traits\HasPermissions;
 use Spatie\Permission\Traits\HasRoles;
 use OwenIt\Auditing\Contracts\Auditable;
 use Laravel\Paddle\Billable;
+use Devdojo\Auth\Models\User as AuthUser;
 
-class User extends Authenticatable implements Auditable
+class User extends AuthUser implements Auditable
 {
     use HasApiTokens;
     use HasFactory;

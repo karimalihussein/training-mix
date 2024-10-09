@@ -15,6 +15,7 @@
         "codezero/laravel-localized-routes": "^2.10.2",
         "devdojo/auth": "^1.0",
         "devinweb/laravel-hyperpay": "^1.2.1",
+        "elasticsearch/elasticsearch": "^8.15",
         "gender-api/client": "^1.0.4",
         "guzzlehttp/guzzle": "^7.8",
         "http-interop/http-factory-guzzle": "^1.2",

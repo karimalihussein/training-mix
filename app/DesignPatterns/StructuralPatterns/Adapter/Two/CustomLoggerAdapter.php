@@ -5,7 +5,7 @@ namespace App\DesignPatterns\StructuralPatterns\Adapter\Two;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 
-class CustomLoggerAdapter implements LoggerInterface
+class CustomLoggerAdapter
 {
     protected $customLogger;
 

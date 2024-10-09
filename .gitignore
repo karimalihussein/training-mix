@@ -15,3 +15,5 @@ yarn-error.log
 .DS_Store
 public/.DS_Store
 public/json/.DS_Store
+/.history
+http_ca.crt

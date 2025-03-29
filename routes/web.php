@@ -90,3 +90,12 @@ Route::post('test', [TestController::class, 'store'])->name('test.store');
 Route::get('integrations/payments/paypal', function () {
     return view('integrations.payments.paypal.index');
 })->name('integrations.payments.paypal.index');
+
+
+Route::get('algolia', function () {
+    $query = 'laravel';
+
+    $posts = \App\Models\Post::search($query)->get();
+
+    return $posts;
+});

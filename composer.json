@@ -11,6 +11,7 @@
         "php": "^8.2",
         "abraham/twitteroauth": "^6.2",
         "algolia/algoliasearch-client-php": "^3.4.1",
+        "algolia/scout-extended": "^3.0",
         "beyondcode/laravel-websockets": "^1.14.1",
         "codezero/laravel-localized-routes": "^2.10.2",
         "devdojo/auth": "^1.0",

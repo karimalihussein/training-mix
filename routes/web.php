@@ -14,6 +14,7 @@ use App\Http\Controllers\SeriesIndexController;
 use App\Http\Controllers\SeriesShowController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\Games\TicTacToeController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\WebscrapingController;
 use Illuminate\Support\Facades\Route;
@@ -37,7 +38,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 Route::get('auth/github/redirect', [GihtubController::class, 'redirectToProvider']);
 Route::get('auth/github/callback', [GihtubController::class, 'handleProviderCallback']);
@@ -99,3 +100,9 @@ Route::get('algolia', function () {
 
     return $posts;
 });
+
+
+
+Route::get('/tic-tac-toe', [TicTacToeController::class, 'index'])->name('tic-tac-toe.index');
+Route::post('/tic-tac-toe/play', [TicTacToeController::class, 'play'])->name('tic.play');
+Route::post('/tic-tac-toe/reset', [TicTacToeController::class, 'reset'])->name('tic.reset');

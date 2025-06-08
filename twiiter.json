@@ -1,18 +1,7 @@
 {
     "twitter": {
-        "app": {
-            "app_id": "27572100",
-            "client_id": "dWlWdXROQUcwekxfQW1NUTB4NHc6MTpjaQ",
-            "client_secret": "x54fTQQUxEN1XOsoFSAVrq6jMOX8FbnjDJe5Fts8_-0a4gCeYf"
-        },
-        "consumer_keys": {
-            "api_key": "SNMn3p7a0LM3wAu29eHYU4cdb",
-            "api_secret": "2KVUUJ9JwCzKUzM1zNyErTL1sezSSkbhv8Cjr1xyznZgQJGM3c"
-        },
-        "authentication_tokens": {
-            "bearer_token": "AAAAAAAAAAAAAAAAAAAAAIS3pAEAAAAAoQGi68Lyio7%2BA3iI08GLn2lB%2F9o%3DOHuqnKfyvoc2qLJXr3GNubNSz6lchvLdrFK8SpUtiQlRyyqJ1K",
-            "access_token": "1169429898441740288-bTF5heOcvoAfxLWVTDqqpUXN7ufCvr",
-            "access_token_secret": "6LS0j5GWe8qMCH4ntwGsFfE2OfuoTmezdDtv4vYgVEJzr"
-        }
+        "app": {},
+        "consumer_keys": {},
+        "authentication_tokens": {}
     }
 }

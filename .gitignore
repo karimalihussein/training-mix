@@ -17,3 +17,4 @@ public/.DS_Store
 public/json/.DS_Store
 /.history
 http_ca.crt
+composer.lock

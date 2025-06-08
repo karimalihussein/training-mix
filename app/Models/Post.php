@@ -18,7 +18,7 @@ final class Post extends Model
     use HasFactory;
     use SoftDeletes;
     use Prunable;
-    use Searchable;
+    // use Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -92,6 +92,6 @@ final class Post extends Model
 
     public function prunbable(): Builder
     {
-        return static::where('active', PostActiveEnum::INACTIVE->value);
+        return $this->query()->where('active', PostActiveEnum::INACTIVE->value);
     }
 }

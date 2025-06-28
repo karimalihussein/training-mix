@@ -10,6 +10,10 @@ import UsersCreate from "./Pages/Admin/Users/Create";
 import ProductsIndex from "./Pages/Admin/Products/Index";
 import ProductsCreate from "./Pages/Admin/Products/Create";
 import ReportsIndex from "./Pages/Admin/Reports/Index";
+import App1 from "./Pages/LandingPage/App1";
+import App2 from "./Pages/LandingPage/App2";
+import App3 from "./Pages/LandingPage/App3";
+import App4 from "./Pages/LandingPage/App4";
 
 createInertiaApp({
     resolve: (name) => {
@@ -21,6 +25,10 @@ createInertiaApp({
             "Admin/Products/Index": ProductsIndex,
             "Admin/Products/Create": ProductsCreate,
             "Admin/Reports/Index": ReportsIndex,
+            "LandingPage/App1": App1,
+            "LandingPage/App2": App2,
+            "LandingPage/App3": App3,
+            "LandingPage/App4": App4,
         };
         return pages[name];
     },

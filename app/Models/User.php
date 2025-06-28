@@ -39,6 +39,7 @@ class User extends AuthUser implements Auditable
         'employee_type',
         'start_date',
         'is_admin',
+        'balance',
     ];
 
     /**
@@ -82,8 +83,8 @@ class User extends AuthUser implements Auditable
     public function name(): Attribute
     {
         return new Attribute(
-            get: fn ($value) => strtoupper($value),
-            set: fn ($value) => $value,
+            get: fn($value) => strtoupper($value),
+            set: fn($value) => $value,
         );
     }
 

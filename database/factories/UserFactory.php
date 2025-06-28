@@ -30,6 +30,7 @@ class UserFactory extends Factory
             'employee_type' => $this->faker->randomElement(['developer', 'sales', 'manager']),
             'start_date' => $this->faker->dateTimeBetween('-30 years', '-1 years'),
             'is_admin' => true,
+            'balance' => 100,
         ];
     }
 

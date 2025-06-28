@@ -29,6 +29,22 @@ class HandleInertiaRequests extends Middleware
     }
 
     /**
+     * Determines the template to use for the given request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return string
+     */
+    public function rootView(Request $request): string
+    {
+        // Use landing template for landing page routes
+        if ($request->is('public/leading-page/*')) {
+            return 'landing';
+        }
+
+        return $this->rootView;
+    }
+
+    /**
      * Defines the props that are shared by default.
      *
      * @see https://inertiajs.com/shared-data

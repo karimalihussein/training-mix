@@ -18,6 +18,7 @@ use App\Http\Controllers\Games\TicTacToeController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\WebscrapingController;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -106,3 +107,23 @@ Route::get('algolia', function () {
 Route::get('/tic-tac-toe', [TicTacToeController::class, 'index'])->name('tic-tac-toe.index');
 Route::post('/tic-tac-toe/play', [TicTacToeController::class, 'play'])->name('tic.play');
 Route::post('/tic-tac-toe/reset', [TicTacToeController::class, 'reset'])->name('tic.reset');
+
+// Landing Page Route
+Route::get('/public/leading-page/app1', function () {
+    return Inertia::render('LandingPage/App1');
+})->name('landing.app1');
+
+Route::get('/public/leading-page/app2', function () {
+    return Inertia::render('LandingPage/App2');
+})->name('landing.app2');
+
+Route::get('/public/leading-page/app3', function () {
+    return Inertia::render('LandingPage/App3');
+})->name('landing.app3');
+
+Route::get('/public/leading-page/app4', function () {
+    return Inertia::render('LandingPage/App4');
+})->name('landing.app4');
+
+// Admin routes
+require __DIR__ . '/admin.php';

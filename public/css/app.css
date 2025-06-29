@@ -617,6 +617,12 @@ select{
 .right-6{
   right: 1.5rem;
 }
+.top-20{
+  top: 5rem;
+}
+.right-4{
+  right: 1rem;
+}
 .z-0{
   z-index: 0;
 }
@@ -782,6 +788,9 @@ select{
 .inline-block{
   display: inline-block;
 }
+.inline{
+  display: inline;
+}
 .flex{
   display: flex;
 }
@@ -850,6 +859,9 @@ select{
 }
 .h-96{
   height: 24rem;
+}
+.h-24{
+  height: 6rem;
 }
 .max-h-128{
   max-height: 32rem;
@@ -938,11 +950,17 @@ select{
 .w-96{
   width: 24rem;
 }
+.w-24{
+  width: 6rem;
+}
 .min-w-full{
   min-width: 100%;
 }
 .min-w-0{
   min-width: 0px;
+}
+.min-w-\[80px\]{
+  min-width: 80px;
 }
 .max-w-xl{
   max-width: 36rem;
@@ -967,6 +985,9 @@ select{
 }
 .max-w-3xl{
   max-width: 48rem;
+}
+.max-w-2xl{
+  max-width: 42rem;
 }
 .flex-1{
   flex: 1 1 0%;
@@ -1412,6 +1433,10 @@ select{
   --tw-border-opacity: 1;
   border-color: rgb(38 38 38 / var(--tw-border-opacity));
 }
+.border-gray-700{
+  --tw-border-opacity: 1;
+  border-color: rgb(64 64 64 / var(--tw-border-opacity));
+}
 .bg-white{
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -1497,6 +1522,16 @@ select{
 .bg-white\/95{
   background-color: rgb(255 255 255 / 0.95);
 }
+.bg-gray-900\/95{
+  background-color: rgb(23 23 23 / 0.95);
+}
+.bg-gray-800\/50{
+  background-color: rgb(38 38 38 / 0.5);
+}
+.bg-gray-700{
+  --tw-bg-opacity: 1;
+  background-color: rgb(64 64 64 / var(--tw-bg-opacity));
+}
 .bg-opacity-75{
   --tw-bg-opacity: 0.75;
 }
@@ -1521,6 +1556,10 @@ select{
 .from-indigo-500{
   --tw-gradient-from: #6366f1;
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(99 102 241 / 0));
+}
+.from-gray-900{
+  --tw-gradient-from: #171717;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(23 23 23 / 0));
 }
 .via-white{
   --tw-gradient-stops: var(--tw-gradient-from), #fff, var(--tw-gradient-to, rgb(255 255 255 / 0));
@@ -1654,6 +1693,10 @@ select{
   padding-top: 4rem;
   padding-bottom: 4rem;
 }
+.px-12{
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
 .pt-8{
   padding-top: 2rem;
 }
@@ -1720,6 +1763,9 @@ select{
 .font-sans{
   font-family: Open Sans, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
+.font-mono{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
 .text-sm{
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -1784,6 +1830,9 @@ select{
 }
 .uppercase{
   text-transform: uppercase;
+}
+.capitalize{
+  text-transform: capitalize;
 }
 .leading-5{
   line-height: 1.25rem;
@@ -2793,6 +2842,11 @@ select{
     margin-right: calc(1.5rem * var(--tw-space-x-reverse));
     margin-left: calc(1.5rem * calc(1 - var(--tw-space-x-reverse)));
   }
+  .md\:space-x-8 > :not([hidden]) ~ :not([hidden]){
+    --tw-space-x-reverse: 0;
+    margin-right: calc(2rem * var(--tw-space-x-reverse));
+    margin-left: calc(2rem * calc(1 - var(--tw-space-x-reverse)));
+  }
   .md\:border-t-0{
     border-top-width: 0px;
   }
@@ -2824,6 +2878,10 @@ select{
   }
   .md\:text-5xl{
     font-size: 3rem;
+    line-height: 1;
+  }
+  .md\:text-8xl{
+    font-size: 6rem;
     line-height: 1;
   }
 }

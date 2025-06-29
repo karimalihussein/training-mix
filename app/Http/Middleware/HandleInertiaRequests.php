@@ -36,10 +36,18 @@ class HandleInertiaRequests extends Middleware
      */
     public function rootView(Request $request): string
     {
+        // Use admin template for admin routes
+        if ($request->is('public/leading-page/mr-egypt-token')) {
+            return 'mr-egypt-token';
+        }
+
+
         // Use landing template for landing page routes
         if ($request->is('public/leading-page/*')) {
             return 'landing';
         }
+
+
 
         return $this->rootView;
     }

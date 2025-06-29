@@ -14,6 +14,7 @@ import App1 from "./Pages/LandingPage/App1";
 import App2 from "./Pages/LandingPage/App2";
 import App3 from "./Pages/LandingPage/App3";
 import App4 from "./Pages/LandingPage/App4";
+import MREgyptToken from "./Pages/LandingPage/MREgyptToken";
 
 createInertiaApp({
     resolve: (name) => {
@@ -29,6 +30,7 @@ createInertiaApp({
             "LandingPage/App2": App2,
             "LandingPage/App3": App3,
             "LandingPage/App4": App4,
+            "LandingPage/MREgyptToken": MREgyptToken,
         };
         return pages[name];
     },

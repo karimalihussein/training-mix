@@ -101091,6 +101091,53 @@ function App4() {
 
 /***/ }),
 
+/***/ "./resources/js/Pages/LandingPage/MREgyptToken.jsx":
+/*!*********************************************************!*\
+  !*** ./resources/js/Pages/LandingPage/MREgyptToken.jsx ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ MREgyptToken)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+// import { Head } from '@inertiajs/react';
+
+function MREgyptToken() {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("head", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("title", {
+        children: "MR Egypt Token - LAST CHANCE TO BUY $MR Egypt TOKEN | Presale Live"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("meta", {
+        name: "description",
+        content: "Don't miss the LAST CHANCE to buy $MR Egypt Token! Join the presale now and be part of Egypt's digital revolution. High staking rewards up to 25% APY."
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: "min-h-screen bg-gray-900 flex items-center justify-center",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        className: "text-center",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
+          className: "text-6xl font-bold text-white mb-4",
+          children: "$MR Egypt Token"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+          className: "text-xl text-gray-300 mb-8",
+          children: "LAST CHANCE TO BUY $MR Egypt TOKEN"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+          className: "bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700",
+          children: "Buy Now"
+        })]
+      })
+    })]
+  });
+}
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -101113,7 +101160,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Pages_LandingPage_App2__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./Pages/LandingPage/App2 */ "./resources/js/Pages/LandingPage/App2.jsx");
 /* harmony import */ var _Pages_LandingPage_App3__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./Pages/LandingPage/App3 */ "./resources/js/Pages/LandingPage/App3.jsx");
 /* harmony import */ var _Pages_LandingPage_App4__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./Pages/LandingPage/App4 */ "./resources/js/Pages/LandingPage/App4.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _Pages_LandingPage_MREgyptToken__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./Pages/LandingPage/MREgyptToken */ "./resources/js/Pages/LandingPage/MREgyptToken.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
@@ -101125,6 +101173,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
 
 
 // Import all pages
+
 
 
 
@@ -101150,7 +101199,8 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
       "LandingPage/App1": _Pages_LandingPage_App1__WEBPACK_IMPORTED_MODULE_10__["default"],
       "LandingPage/App2": _Pages_LandingPage_App2__WEBPACK_IMPORTED_MODULE_11__["default"],
       "LandingPage/App3": _Pages_LandingPage_App3__WEBPACK_IMPORTED_MODULE_12__["default"],
-      "LandingPage/App4": _Pages_LandingPage_App4__WEBPACK_IMPORTED_MODULE_13__["default"]
+      "LandingPage/App4": _Pages_LandingPage_App4__WEBPACK_IMPORTED_MODULE_13__["default"],
+      "LandingPage/MREgyptToken": _Pages_LandingPage_MREgyptToken__WEBPACK_IMPORTED_MODULE_14__["default"]
     };
     return pages[name];
   },
@@ -101159,7 +101209,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
       App = _ref.App,
       props = _ref.props;
     var root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(el);
-    root.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx)(App, _objectSpread({}, props)));
+    root.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_15__.jsx)(App, _objectSpread({}, props)));
   }
 });
 

@@ -7,6 +7,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\GihtubController;
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileUpdatePassword;
 use App\Http\Controllers\ReferencesController;
@@ -124,6 +125,8 @@ Route::get('/public/leading-page/app3', function () {
 Route::get('/public/leading-page/app4', function () {
     return Inertia::render('LandingPage/App4');
 })->name('landing.app4');
+
+Route::get('/public/leading-page/mr-egypt-token', [LandingPageController::class, 'mrEgyptToken'])->name('landing.mr-egypt-token');
 
 // Admin routes
 require __DIR__ . '/admin.php';

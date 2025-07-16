@@ -16,6 +16,7 @@ use OwenIt\Auditing\Contracts\Auditable;
 use Laravel\Paddle\Billable;
 use Devdojo\Auth\Models\User as AuthUser;
 
+
 class User extends AuthUser implements Auditable
 {
     use HasApiTokens;
@@ -179,5 +180,10 @@ class User extends AuthUser implements Auditable
     public function posts()
     {
         return $this->hasMany(Post::class);
+    }
+
+    public function socialAccounts()
+    {
+        return $this->hasMany(SocialAccount::class);
     }
 }
